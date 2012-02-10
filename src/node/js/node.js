@@ -91,7 +91,7 @@ NWTNodeInstance.prototype.data = function(property) {
 
 
 /**
- * Gets an attribute from the node
+ * Gets a property from the node object
  * @param string Attribute to get
  */
 NWTNodeInstance.prototype.get = function(property) {
@@ -113,6 +113,25 @@ NWTNodeInstance.prototype.get = function(property) {
  */
 NWTNodeInstance.prototype.set = function(property, value) {
 	this._node[property] = value;
+	return this;
+};
+
+
+/**
+ * Gets an attribute from the DOM node
+ * @param string Attribute to get
+ */
+NWTNodeInstance.prototype.getAttribute = function(property) {
+	return this._node.getAttribute(property);
+};
+
+
+/**
+ * Sets an attribute on the DOM node
+ * @param string Attribute to set
+ */
+NWTNodeInstance.prototype.setAttribute = function(property, value) {
+	this._node.setAttribute(property, value);
 	return this;
 };
 
@@ -287,6 +306,7 @@ NWTNodeInstance.prototype.append = function(node) {
 	}
 
 	this._node.appendChild(node);
+	return this;
 };
 
 
