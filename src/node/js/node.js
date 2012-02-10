@@ -9,32 +9,46 @@ function NWTNodeInstance(node) {
 
 /**
  * Returns the ancestor that matches the css selector
- * Implements Sizzle.matches
  * @param string CSS Selector
  */
 NWTNodeInstance.prototype.ancestor = function(selector) {
 
-	var testNode = this._node,
-		ancestor = null;
+	var allMatches = nwt.all(selector),
+		testNode = this._node,
+		ancestor = null,
+		maxDepth = 0;
+
+	if( allMatches.size() == 0 ) {
+		return null;
+	}
 
 	while( true ) {
 
-		var ancestor = Sizzle.matches(selector, [testNode]);
-		if( ancestor.length > 0 ) { break; }
+		// Iterate through all matches for each parent, and exit as soon as we have a match
+		// Pretty bad performance, but super small. TODO: Omtimize
+		allMatches.each(function (el) {
+			if (el._node == testNode) {
+				ancestor = el;
+			}
+		});
 
 		var parentNode = testNode.parentNode;
 
-		if( !parentNode ) { break; }
+		if( ancestor || !parentNode) { break; }
 		testNode = parentNode;
 	}
 
-	if( ancestor[0] ) {
-		return new NWTNodeInstance(ancestor[0]);
+	if( ancestor ) {
+		return ancestor;
 	} else {
 		return null;
 	}
 };
 
+NWTNodeInstance.prototype.parent = function() {
+	this._node = this._node.parentNode;
+	return this;
+};
 
 /**
  * Returns true if the class exists on the node, false if not
@@ -243,22 +257,22 @@ NWTNodeInstance.prototype.previous = function() {
 
 /**
  * Returns a child node instance based on a selector
- * Implements Sizzle
+ * Implements querySelector
  * @param string CSS Selector
  */
 NWTNodeInstance.prototype.one = function(selector) {
-	var node = Sizzle(selector, this._node);
-	return new NWTNodeInstance(node[0]);
+	var node = this._node.querySelector(selector);
+	return new NWTNodeInstance(node);
 };
 
 
 /**
  * Returns a child nodelist based on a selector
- * Implements Sizzle
+ * Implements querySelector
  * @param string CSS Selector
  */
 NWTNodeInstance.prototype.all = function(selector) {
-	var nodelist = Sizzle(selector, this._node);
+	var nodelist = this._node.querySelectorAll(selector);
 	return new NWTNodeList(nodelist);
 };
 
@@ -302,7 +316,6 @@ NWTNodeInstance.prototype.insert = function(node, position) {
  * Simulates a click event on a node
  */
 NWTNodeInstance.prototype.click = function() {
-
 	var evt = document.createEvent("HTMLEvents");
 	evt.initEvent('click', true, true ); // event type,bubbling,cancelable
 	return !this._node.dispatchEvent(evt);
@@ -337,9 +350,10 @@ NWTNode.prototype.create = function(markup) {
  * @constructor
  */
 NWTNode.prototype.one = function(selector) {
+
 	if( typeof selector == 'string' ) {
-		var node = Sizzle(selector);
-		
+		var node = document.querySelectorAll(selector);
+
 		if( node.length == 0 ) {
 			return null;
 		}
@@ -356,7 +370,7 @@ NWTNode.prototype.one = function(selector) {
  * @constructor
  */
 NWTNode.prototype.all = function(selector) {
-	var nodelist = Sizzle(selector);
+	var nodelist = document.querySelectorAll(selector);
 	return new NWTNodeList(nodelist);
 };
 

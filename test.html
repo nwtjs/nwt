@@ -4,7 +4,14 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	<title>NWTui</title>
 	<script type="text/javascript" src="nwt.main.min.js"></script>
+	<script type="text/javascript" src="src/nwtunit/js/nwtunit.js"></script>
 </head>
 <body>
+	<div id="root"></div>
+<script type="text/javascript" src="src/node/test/node.test.js"></script>
+<script type="text/javascript" src="src/nodelist/test/nodelist.test.js"></script>
+<script type="text/javascript">
+	nwt.unit.report();
+</script>
 </body>
 </html>
