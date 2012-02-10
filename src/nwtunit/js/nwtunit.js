@@ -70,4 +70,39 @@ NWTUnitTestFramework.prototype.equal = function() {
 	return this.pass();
 };
 
+/**
+ * Validates that all arguments results are true
+ */
+NWTUnitTestFramework.prototype.true = function() {
+	var numArgs = arguments.length,
+		i;
+
+	this.assertionCount += arguments.length;
+
+	for (i = 0; i < numArgs; i += 1) {
+		if( !arguments[i]() ) {
+			return this.addError('Arguments not true.', arguments);
+		}
+	}
+	return this.pass();
+};
+
+/**
+ * Validates that all arguments results are false
+ */
+NWTUnitTestFramework.prototype.false = function() {
+	var numArgs = arguments.length,
+		i;
+
+	this.assertionCount += arguments.length;
+
+	for (i = 0; i < numArgs; i += 1) {
+		console.log('Result:', arguments[i]());
+		if( arguments[i]() ) {
+			return this.addError('Arguments not false.', arguments);
+		}
+	}
+	return this.pass();
+};
+
 nwt.unit = new NWTUnitTestFramework();
