@@ -8,7 +8,9 @@ packages = {
 	main: [
 		'base/js/base.js',
 		'node/js/node.js',
-		'nodelist/js/nodelist.js'
+		'nodelist/js/nodelist.js',
+
+		'io/js/io.js',
 	]
 },
 

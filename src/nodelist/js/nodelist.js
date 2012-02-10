@@ -18,7 +18,6 @@ function NWTNodeList(nodes) {
 
 	function getIteratedCallback(method) {
 		return function() {
-			console.log(method, 'called', mythis.nodes);
 			for( var j = 0 , node ; node = mythis.nodes[j] ; j++ ) {
 				node[method].apply(node, arguments);
 			}

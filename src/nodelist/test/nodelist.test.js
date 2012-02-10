@@ -1,6 +1,6 @@
 nwt.unit
 .describe('Tests nwt.all().size against native methods.')
-.setup('<ul id="testlist"><li>First</li><li>Second</li><li>Third</li></ul>')
+.setup('<ul id="testlist"><li class="set1">First</li><li class="set1">Second</li><li>Third</li></ul>')
 .equal(
 	function () {
 		return nwt.all('ul li').size();
@@ -37,6 +37,19 @@ nwt.unit
 		return nwt.one('ul').getContent();
 	},
 	function () {
-		return '<li>First1</li><li>Second2</li><li>Third</li>';
+		return '<li class="set1">First1</li><li class="set1">Second2</li><li>Third</li>';
 	}
 );
+
+nwt.unit
+.describe('Tests NodeList iterated functions.')
+.equal(
+	function () {
+		nwt.all('.set1').removeClass('set1');
+		return nwt.all('.set1').size();
+	},
+	function () {
+		return 0;
+	}
+);
+

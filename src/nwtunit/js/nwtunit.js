@@ -97,7 +97,6 @@ NWTUnitTestFramework.prototype.false = function() {
 	this.assertionCount += arguments.length;
 
 	for (i = 0; i < numArgs; i += 1) {
-		console.log('Result:', arguments[i]());
 		if( arguments[i]() ) {
 			return this.addError('Arguments not false.', arguments);
 		}
