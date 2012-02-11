@@ -1,6 +1,8 @@
 ## NWTui
 
-NWTui is a modern approach at a javascript framework. NWTui combines the best practices of leading JS frameworks, along with some personal touches that make for an extremely familiar environment which you will be able to develop rapidly in.### NWTAnimate
+NWTui is a modern approach at a javascript framework. NWTui combines the best practices of leading JS frameworks, along with some personal touches that make for an extremely familiar environment which you will be able to develop rapidly in.
+
+### NWTAnimate
 <p>Animation utility</p>
 
 @constructor - 

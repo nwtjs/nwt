@@ -27,7 +27,7 @@ var parsedObj = dox.parseComments(scriptContent.join('')),
 
 
 
-readmeContent = ["## NWTui\n\nNWTui is a modern approach at a javascript framework. NWTui combines the best practices of leading JS frameworks, along with some personal touches that make for an extremely familiar environment which you will be able to develop rapidly in."];
+readmeContent = ["## NWTui\n\nNWTui is a modern approach at a javascript framework. NWTui combines the best practices of leading JS frameworks, along with some personal touches that make for an extremely familiar environment which you will be able to develop rapidly in.\n\n"];
 
 
 
