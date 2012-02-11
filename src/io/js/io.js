@@ -2,9 +2,9 @@
  * Provides ajax communication methods
  * Chainable methods
  * The folllowing methods are chainable:
- *  success - success handler
- *  failure - failure handler
- *  serialize - serialize a form, selector, array, or object to send
+ * success - success handler
+ * failure - failure handler
+ * serialize - serialize a form, selector, array, or object to send
  * @constructor
  */
 function NWTIO(args) {

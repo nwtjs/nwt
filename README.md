@@ -24,7 +24,7 @@ NWTui is a modern approach at a javascript framework. NWTui combines the best pr
 
 <h2>The folllowing methods are chainable</h2>
 
-<p>success - success handler<br /> failure - failure handler<br /> serialize - serialize a form, selector, array, or object to send</p>
+<p>success - success handler<br />failure - failure handler<br />serialize - serialize a form, selector, array, or object to send</p>
 
 @constructor - 
 
@@ -290,7 +290,7 @@ NWTui is a modern approach at a javascript framework. NWTui combines the best pr
 
 <h2>The folllowing methods are chainable</h2>
 
-<p>success - success handler<br /> failure - failure handler<br /> serialize - serialize a form, selector, array, or object to send</p>
+<p>success - success handler<br />failure - failure handler<br />serialize - serialize a form, selector, array, or object to send</p>
 
 @constructor - 
 
@@ -556,7 +556,7 @@ NWTui is a modern approach at a javascript framework. NWTui combines the best pr
 
 <h2>The folllowing methods are chainable</h2>
 
-<p>success - success handler<br /> failure - failure handler<br /> serialize - serialize a form, selector, array, or object to send</p>
+<p>success - success handler<br />failure - failure handler<br />serialize - serialize a form, selector, array, or object to send</p>
 
 @constructor - 
 
@@ -822,7 +822,7 @@ NWTui is a modern approach at a javascript framework. NWTui combines the best pr
 
 <h2>The folllowing methods are chainable</h2>
 
-<p>success - success handler<br /> failure - failure handler<br /> serialize - serialize a form, selector, array, or object to send</p>
+<p>success - success handler<br />failure - failure handler<br />serialize - serialize a form, selector, array, or object to send</p>
 
 @constructor - 
 
@@ -1088,7 +1088,7 @@ NWTui is a modern approach at a javascript framework. NWTui combines the best pr
 
 <h2>The folllowing methods are chainable</h2>
 
-<p>success - success handler<br /> failure - failure handler<br /> serialize - serialize a form, selector, array, or object to send</p>
+<p>success - success handler<br />failure - failure handler<br />serialize - serialize a form, selector, array, or object to send</p>
 
 @constructor - 
 
