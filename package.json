@@ -1,0 +1,18 @@
+{
+	"name": "nwtui",
+	"version": "0.0.1",
+	"description": "Node Web Toolkit UI - A modern approach at a UI framework.",
+	"keywords": ["nwtui"],
+	"homepage": "http://nwtjs.org",
+	"author": "Kevin Grandon <kevingrandon@yahoo.com> (https://github.com/KevinGrandon/)",
+	"dependencies": {
+		"uglify-js" : "*"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git://github.com/nwtjs/nwtui.git"
+	},
+	"engines": {
+		"node": ">=0.6.0"
+	}
+}

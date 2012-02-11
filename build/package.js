@@ -17,14 +17,14 @@ packages = {
 
 scriptContent,
 
-uglify = require(__dirname + "/UglifyJS/uglify-js");
+uglify = require("uglify-js");
 
 for( var i in packages ) {
 
 	scriptContent = [];
 
 	for( var j = 0, file; file = packages[i][j] ; j++ ) {
-		console.log('got file', file);
+		console.log('Compressing file file:', file);
 		scriptContent.push(fs.readFileSync(__dirname + '/../src/' + file, 'utf8'));
 	}
 
