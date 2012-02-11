@@ -14,13 +14,18 @@ function NWTIO(args) {
 	var chainableSetters = ['success', 'failure', 'serialize'],
 		i,
 		setter,
-		mythis = this;
+		mythis = this,
+
+		// Returns the setter function
+		getSetter = function (setter) {
+			return function (value) {
+				mythis.config[setter] = value;
+				return this;
+			}
+		};
 
 	for (i = 0, setter; setter = chainableSetters[i]; i++) {
-		this[setter] = function (value) {
-			mythis.config[setter] = value;
-			return this;
-		};
+		this[setter] = getSetter(setter);
 	}
 }
 
@@ -41,8 +46,8 @@ NWTIO.prototype._run = function(method) {
 			callback = 'failure';
 		}
 
-		if (callback && mythis[callback]) {
-			mythis[callback](mythis.req.responseText);
+		if (callback && mythis.config[callback]) {
+			mythis.config[callback](mythis.req);
 		}
 	};
 	this.req.send();

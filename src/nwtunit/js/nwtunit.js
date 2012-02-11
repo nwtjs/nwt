@@ -55,14 +55,14 @@ NWTUnitTestFramework.prototype.report = function() {
  * Validates that all arguments are equal
  */
 NWTUnitTestFramework.prototype.equal = function() {
-	var firstTest = arguments[0](),
+	var firstTest = typeof arguments[0] == 'function' ? arguments[0]() : arguments[0],
 		numArgs = arguments.length,
 		i;
 
 	this.assertionCount += arguments.length;
 
 	for (i = 1; i < numArgs; i += 1) {
-		var result = arguments[i]();
+		var result = typeof arguments[i] == 'function' ? arguments[i]() : arguments[i];
 		if( result != firstTest ) {
 			return this.addError('Arguments not equal.', result, firstTest);
 		}
@@ -102,6 +102,16 @@ NWTUnitTestFramework.prototype.false = function() {
 		}
 	}
 	return this.pass();
+};
+
+
+/**
+ * Alternative way to run a test
+ * Passes in the unit framework refrence and allows async assertions
+ */
+NWTUnitTestFramework.prototype.run = function(callback) {
+	callback(this);
+	return this;
 };
 
 nwt.unit = new NWTUnitTestFramework();

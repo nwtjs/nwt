@@ -7,6 +7,8 @@
 	"author": "Kevin Grandon <kevingrandon@yahoo.com> (https://github.com/KevinGrandon/)",
 	"dependencies": {
 		"dox" : "0.1.3",
+		"ejs" : "*",
+		"express" : "*",
 		"uglify-js" : "*"
 	},
 	"repository": {
