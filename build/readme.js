@@ -67,7 +67,7 @@ for (i = 0; i < numDefines; i += 1) {
 			if( tag.name ) tagContent.push(tag.name);
 			if( tag.description ) tagContent.push(tag.description);
 
-			tagContent.push("\n");
+			tagContent.push("<br>");
 		}
 	}
 	tagContent = tagContent.join('');

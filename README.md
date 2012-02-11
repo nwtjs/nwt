@@ -5,25 +5,19 @@ NWTui is a modern approach at a javascript framework. NWTui combines the best pr
 ## NWTAnimate
 <p>Animation utility</p>
 
-@constructor - 
-
+@constructor - <br>
 
 
 ### NWTAnimate::anim
 <p>Method to animate a node</p>
 
-@param (object) - NWTNodeinstance
-@param (object) - Objectof styles to animate. E.g., {top: 10}
-@param (integer) - Durationin seconds to animate
-@param (string) - Easingtype. One of: linear|ease|ease-in|ease-out|ease-in-out|cubic-bezier(n,n,n,n);
-
+@param (object) - NWTNodeinstance<br>@param (object) - Objectof styles to animate. E.g., {top: 10}<br>@param (integer) - Durationin seconds to animate<br>@param (string) - Easingtype. One of: linear|ease|ease-in|ease-out|ease-in-out|cubic-bezier(n,n,n,n);<br>
 
 
 ## NWTIO
 <p>Provides ajax communication methods<br />The folllowing methods are chainable<br />success - success handler<br />failure - failure handler<br />serialize - serialize a form, selector, array, or object to send</p>
 
-@constructor - 
-
+@constructor - <br>
 
 
 ### NWTIO::post
@@ -45,15 +39,13 @@ NWTui is a modern approach at a javascript framework. NWTui combines the best pr
 ## NWTNodeInstance
 <p>Individually wrapped NWTNode</p>
 
-@constructor - 
-
+@constructor - <br>
 
 
 ### NWTNodeInstance::ancestor
 <p>Returns the ancestor that matches the css selector</p>
 
-@param (string) - CSSSelector
-
+@param (string) - CSSSelector<br>
 
 
 ### NWTNodeInstance::hasClass
@@ -71,81 +63,67 @@ NWTui is a modern approach at a javascript framework. NWTui combines the best pr
 ### NWTNodeInstance::data
 <p>Gets a data attribute from the node<br />Pass just whatever comes after data-<br />If the attribute were data-user-id,<br />you should pass 'user-id' to this function</p>
 
-@param (string) - Dataattribute to get
-
+@param (string) - Dataattribute to get<br>
 
 
 ### NWTNodeInstance::get
 <p>Gets a property from the node object</p>
 
-@param (string) - Attributeto get
-
+@param (string) - Attributeto get<br>
 
 
 ### NWTNodeInstance::set
 <p>Sets an attribute on the node</p>
 
-@param (string) - Attributeto set
-@param (string) - Valueto set
-
+@param (string) - Attributeto set<br>@param (string) - Valueto set<br>
 
 
 ### NWTNodeInstance::getAttribute
 <p>Gets an attribute from the DOM node</p>
 
-@param (string) - Attributeto get
-
+@param (string) - Attributeto get<br>
 
 
 ### NWTNodeInstance::setAttribute
 <p>Sets an attribute on the DOM node</p>
 
-@param (string) - Attributeto set
-
+@param (string) - Attributeto set<br>
 
 
 ### NWTNodeInstance::getStyle
 <p>Gets a style attribute set on the node</p>
 
-@param (string) - Styleattribute to get
-
+@param (string) - Styleattribute to get<br>
 
 
 ### NWTNodeInstance::removeStyle
 <p>Removes a style attribute</p>
 
-@param (string) - Styleattribute to remove
-
+@param (string) - Styleattribute to remove<br>
 
 
 ### NWTNodeInstance::removeStyles
 <p>Removes an array of styles from a node</p>
 
-@param (array) - Arrayof styles to remove
-
+@param (array) - Arrayof styles to remove<br>
 
 
 ### NWTNodeInstance::setStyle
 <p>Sets a style attribute</p>
 
-@param (string) - Styleattribute to set
-@param (string) - Valueto set
-
+@param (string) - Styleattribute to set<br>@param (string) - Valueto set<br>
 
 
 ### NWTNodeInstance::setStyles
 <p>Sets multiple styles</p>
 
-@param (object) - Objectmap of styles to set
-
+@param (object) - Objectmap of styles to set<br>
 
 
 ### NWTNodeInstance::on
 <p>Adds an event listener tot he node</p>
 
-@param (string) - Eventto listen for
-@param (function) - Eventcallback function
-
+@param (string) - Eventto listen for<br>@param (function) - Eventcallback function<br>
 
 
 ### NWTNodeInstance::serialize
@@ -159,8 +137,7 @@ NWTui is a modern approach at a javascript framework. NWTui combines the best pr
 ### NWTNodeInstance::setContent
 <p>Sets the content of the node</p>
 
-@param (string) - Contentto set
-
+@param (string) - Contentto set<br>
 
 
 ### NWTNodeInstance::next
@@ -174,15 +151,13 @@ NWTui is a modern approach at a javascript framework. NWTui combines the best pr
 ### NWTNodeInstance::one
 <p>Returns a child node instance based on a selector<br />Implements querySelector</p>
 
-@param (string) - cssselector
-
+@param (string) - cssselector<br>
 
 
 ### NWTNodeInstance::all
 <p>Returns a child nodelist based on a selector<br />Implements querySelector</p>
 
-@param (string) - CSSSelector
-
+@param (string) - CSSSelector<br>
 
 
 ### NWTNodeInstance::append
@@ -204,88 +179,73 @@ NWTui is a modern approach at a javascript framework. NWTui combines the best pr
 ### NWTNodeInstance::wait
 <p>Waits a certain amount of time before running<br />chained callbacks</p>
 
-@param (integer) - Amountof time in seconds to wait
-
+@param (integer) - Amountof time in seconds to wait<br>
 
 
 ## NWTNode
 <p>NWTNode Class<br />Used for getting elements</p>
 
-@constructor - 
-
+@constructor - <br>
 
 
 ### NWTNode::create
 <p>Creates a node from markup</p>
 
-@param (string) - Nodemarkup
-
+@param (string) - Nodemarkup<br>
 
 
 ## one
 <p>Returns a NWTNodeInstance class</p>
 
-@constructor - 
-
+@constructor - <br>
 
 
 ## all
 <p>Returns a NWTNodeList class</p>
 
-@constructor - 
-
+@constructor - <br>
 
 
 ## NWTNodeList
 <p>A node iterator</p>
 
-@constructor - 
-
+@constructor - <br>
 
 
 ### NWTNodeList::each
 <p>Node iterator</p>
 
-@param (function) - Callbackfor each node
-
+@param (function) - Callbackfor each node<br>
 
 
 ### NWTNodeList::item
 <p>Returns a node specified by an offset</p>
 
-@param (integer) - Offsetof the item
-
+@param (integer) - Offsetof the item<br>
 
 
 ### NWTNodeList::size
 <p>Returns the size of the current nodelist</p>
 
-@return (integer) - 
-
+@return (integer) - <br>
 
 
 ## NWTAnimate
 <p>Animation utility</p>
 
-@constructor - 
-
+@constructor - <br>
 
 
 ### NWTAnimate::anim
 <p>Method to animate a node</p>
 
-@param (object) - NWTNodeinstance
-@param (object) - Objectof styles to animate. E.g., {top: 10}
-@param (integer) - Durationin seconds to animate
-@param (string) - Easingtype. One of: linear|ease|ease-in|ease-out|ease-in-out|cubic-bezier(n,n,n,n);
-
+@param (object) - NWTNodeinstance<br>@param (object) - Objectof styles to animate. E.g., {top: 10}<br>@param (integer) - Durationin seconds to animate<br>@param (string) - Easingtype. One of: linear|ease|ease-in|ease-out|ease-in-out|cubic-bezier(n,n,n,n);<br>
 
 
 ## NWTIO
 <p>Provides ajax communication methods<br />The folllowing methods are chainable<br />success - success handler<br />failure - failure handler<br />serialize - serialize a form, selector, array, or object to send</p>
 
-@constructor - 
-
+@constructor - <br>
 
 
 ### NWTIO::post
@@ -307,15 +267,13 @@ NWTui is a modern approach at a javascript framework. NWTui combines the best pr
 ## NWTNodeInstance
 <p>Individually wrapped NWTNode</p>
 
-@constructor - 
-
+@constructor - <br>
 
 
 ### NWTNodeInstance::ancestor
 <p>Returns the ancestor that matches the css selector</p>
 
-@param (string) - CSSSelector
-
+@param (string) - CSSSelector<br>
 
 
 ### NWTNodeInstance::hasClass
@@ -333,81 +291,67 @@ NWTui is a modern approach at a javascript framework. NWTui combines the best pr
 ### NWTNodeInstance::data
 <p>Gets a data attribute from the node<br />Pass just whatever comes after data-<br />If the attribute were data-user-id,<br />you should pass 'user-id' to this function</p>
 
-@param (string) - Dataattribute to get
-
+@param (string) - Dataattribute to get<br>
 
 
 ### NWTNodeInstance::get
 <p>Gets a property from the node object</p>
 
-@param (string) - Attributeto get
-
+@param (string) - Attributeto get<br>
 
 
 ### NWTNodeInstance::set
 <p>Sets an attribute on the node</p>
 
-@param (string) - Attributeto set
-@param (string) - Valueto set
-
+@param (string) - Attributeto set<br>@param (string) - Valueto set<br>
 
 
 ### NWTNodeInstance::getAttribute
 <p>Gets an attribute from the DOM node</p>
 
-@param (string) - Attributeto get
-
+@param (string) - Attributeto get<br>
 
 
 ### NWTNodeInstance::setAttribute
 <p>Sets an attribute on the DOM node</p>
 
-@param (string) - Attributeto set
-
+@param (string) - Attributeto set<br>
 
 
 ### NWTNodeInstance::getStyle
 <p>Gets a style attribute set on the node</p>
 
-@param (string) - Styleattribute to get
-
+@param (string) - Styleattribute to get<br>
 
 
 ### NWTNodeInstance::removeStyle
 <p>Removes a style attribute</p>
 
-@param (string) - Styleattribute to remove
-
+@param (string) - Styleattribute to remove<br>
 
 
 ### NWTNodeInstance::removeStyles
 <p>Removes an array of styles from a node</p>
 
-@param (array) - Arrayof styles to remove
-
+@param (array) - Arrayof styles to remove<br>
 
 
 ### NWTNodeInstance::setStyle
 <p>Sets a style attribute</p>
 
-@param (string) - Styleattribute to set
-@param (string) - Valueto set
-
+@param (string) - Styleattribute to set<br>@param (string) - Valueto set<br>
 
 
 ### NWTNodeInstance::setStyles
 <p>Sets multiple styles</p>
 
-@param (object) - Objectmap of styles to set
-
+@param (object) - Objectmap of styles to set<br>
 
 
 ### NWTNodeInstance::on
 <p>Adds an event listener tot he node</p>
 
-@param (string) - Eventto listen for
-@param (function) - Eventcallback function
-
+@param (string) - Eventto listen for<br>@param (function) - Eventcallback function<br>
 
 
 ### NWTNodeInstance::serialize
@@ -421,8 +365,7 @@ NWTui is a modern approach at a javascript framework. NWTui combines the best pr
 ### NWTNodeInstance::setContent
 <p>Sets the content of the node</p>
 
-@param (string) - Contentto set
-
+@param (string) - Contentto set<br>
 
 
 ### NWTNodeInstance::next
@@ -436,15 +379,13 @@ NWTui is a modern approach at a javascript framework. NWTui combines the best pr
 ### NWTNodeInstance::one
 <p>Returns a child node instance based on a selector<br />Implements querySelector</p>
 
-@param (string) - cssselector
-
+@param (string) - cssselector<br>
 
 
 ### NWTNodeInstance::all
 <p>Returns a child nodelist based on a selector<br />Implements querySelector</p>
 
-@param (string) - CSSSelector
-
+@param (string) - CSSSelector<br>
 
 
 ### NWTNodeInstance::append
@@ -466,88 +407,73 @@ NWTui is a modern approach at a javascript framework. NWTui combines the best pr
 ### NWTNodeInstance::wait
 <p>Waits a certain amount of time before running<br />chained callbacks</p>
 
-@param (integer) - Amountof time in seconds to wait
-
+@param (integer) - Amountof time in seconds to wait<br>
 
 
 ## NWTNode
 <p>NWTNode Class<br />Used for getting elements</p>
 
-@constructor - 
-
+@constructor - <br>
 
 
 ### NWTNode::create
 <p>Creates a node from markup</p>
 
-@param (string) - Nodemarkup
-
+@param (string) - Nodemarkup<br>
 
 
 ## one
 <p>Returns a NWTNodeInstance class</p>
 
-@constructor - 
-
+@constructor - <br>
 
 
 ## all
 <p>Returns a NWTNodeList class</p>
 
-@constructor - 
-
+@constructor - <br>
 
 
 ## NWTNodeList
 <p>A node iterator</p>
 
-@constructor - 
-
+@constructor - <br>
 
 
 ### NWTNodeList::each
 <p>Node iterator</p>
 
-@param (function) - Callbackfor each node
-
+@param (function) - Callbackfor each node<br>
 
 
 ### NWTNodeList::item
 <p>Returns a node specified by an offset</p>
 
-@param (integer) - Offsetof the item
-
+@param (integer) - Offsetof the item<br>
 
 
 ### NWTNodeList::size
 <p>Returns the size of the current nodelist</p>
 
-@return (integer) - 
-
+@return (integer) - <br>
 
 
 ## NWTAnimate
 <p>Animation utility</p>
 
-@constructor - 
-
+@constructor - <br>
 
 
 ### NWTAnimate::anim
 <p>Method to animate a node</p>
 
-@param (object) - NWTNodeinstance
-@param (object) - Objectof styles to animate. E.g., {top: 10}
-@param (integer) - Durationin seconds to animate
-@param (string) - Easingtype. One of: linear|ease|ease-in|ease-out|ease-in-out|cubic-bezier(n,n,n,n);
-
+@param (object) - NWTNodeinstance<br>@param (object) - Objectof styles to animate. E.g., {top: 10}<br>@param (integer) - Durationin seconds to animate<br>@param (string) - Easingtype. One of: linear|ease|ease-in|ease-out|ease-in-out|cubic-bezier(n,n,n,n);<br>
 
 
 ## NWTIO
 <p>Provides ajax communication methods<br />The folllowing methods are chainable<br />success - success handler<br />failure - failure handler<br />serialize - serialize a form, selector, array, or object to send</p>
 
-@constructor - 
-
+@constructor - <br>
 
 
 ### NWTIO::post
@@ -569,15 +495,13 @@ NWTui is a modern approach at a javascript framework. NWTui combines the best pr
 ## NWTNodeInstance
 <p>Individually wrapped NWTNode</p>
 
-@constructor - 
-
+@constructor - <br>
 
 
 ### NWTNodeInstance::ancestor
 <p>Returns the ancestor that matches the css selector</p>
 
-@param (string) - CSSSelector
-
+@param (string) - CSSSelector<br>
 
 
 ### NWTNodeInstance::hasClass
@@ -595,81 +519,67 @@ NWTui is a modern approach at a javascript framework. NWTui combines the best pr
 ### NWTNodeInstance::data
 <p>Gets a data attribute from the node<br />Pass just whatever comes after data-<br />If the attribute were data-user-id,<br />you should pass 'user-id' to this function</p>
 
-@param (string) - Dataattribute to get
-
+@param (string) - Dataattribute to get<br>
 
 
 ### NWTNodeInstance::get
 <p>Gets a property from the node object</p>
 
-@param (string) - Attributeto get
-
+@param (string) - Attributeto get<br>
 
 
 ### NWTNodeInstance::set
 <p>Sets an attribute on the node</p>
 
-@param (string) - Attributeto set
-@param (string) - Valueto set
-
+@param (string) - Attributeto set<br>@param (string) - Valueto set<br>
 
 
 ### NWTNodeInstance::getAttribute
 <p>Gets an attribute from the DOM node</p>
 
-@param (string) - Attributeto get
-
+@param (string) - Attributeto get<br>
 
 
 ### NWTNodeInstance::setAttribute
 <p>Sets an attribute on the DOM node</p>
 
-@param (string) - Attributeto set
-
+@param (string) - Attributeto set<br>
 
 
 ### NWTNodeInstance::getStyle
 <p>Gets a style attribute set on the node</p>
 
-@param (string) - Styleattribute to get
-
+@param (string) - Styleattribute to get<br>
 
 
 ### NWTNodeInstance::removeStyle
 <p>Removes a style attribute</p>
 
-@param (string) - Styleattribute to remove
-
+@param (string) - Styleattribute to remove<br>
 
 
 ### NWTNodeInstance::removeStyles
 <p>Removes an array of styles from a node</p>
 
-@param (array) - Arrayof styles to remove
-
+@param (array) - Arrayof styles to remove<br>
 
 
 ### NWTNodeInstance::setStyle
 <p>Sets a style attribute</p>
 
-@param (string) - Styleattribute to set
-@param (string) - Valueto set
-
+@param (string) - Styleattribute to set<br>@param (string) - Valueto set<br>
 
 
 ### NWTNodeInstance::setStyles
 <p>Sets multiple styles</p>
 
-@param (object) - Objectmap of styles to set
-
+@param (object) - Objectmap of styles to set<br>
 
 
 ### NWTNodeInstance::on
 <p>Adds an event listener tot he node</p>
 
-@param (string) - Eventto listen for
-@param (function) - Eventcallback function
-
+@param (string) - Eventto listen for<br>@param (function) - Eventcallback function<br>
 
 
 ### NWTNodeInstance::serialize
@@ -683,8 +593,7 @@ NWTui is a modern approach at a javascript framework. NWTui combines the best pr
 ### NWTNodeInstance::setContent
 <p>Sets the content of the node</p>
 
-@param (string) - Contentto set
-
+@param (string) - Contentto set<br>
 
 
 ### NWTNodeInstance::next
@@ -698,15 +607,13 @@ NWTui is a modern approach at a javascript framework. NWTui combines the best pr
 ### NWTNodeInstance::one
 <p>Returns a child node instance based on a selector<br />Implements querySelector</p>
 
-@param (string) - cssselector
-
+@param (string) - cssselector<br>
 
 
 ### NWTNodeInstance::all
 <p>Returns a child nodelist based on a selector<br />Implements querySelector</p>
 
-@param (string) - CSSSelector
-
+@param (string) - CSSSelector<br>
 
 
 ### NWTNodeInstance::append
@@ -728,88 +635,73 @@ NWTui is a modern approach at a javascript framework. NWTui combines the best pr
 ### NWTNodeInstance::wait
 <p>Waits a certain amount of time before running<br />chained callbacks</p>
 
-@param (integer) - Amountof time in seconds to wait
-
+@param (integer) - Amountof time in seconds to wait<br>
 
 
 ## NWTNode
 <p>NWTNode Class<br />Used for getting elements</p>
 
-@constructor - 
-
+@constructor - <br>
 
 
 ### NWTNode::create
 <p>Creates a node from markup</p>
 
-@param (string) - Nodemarkup
-
+@param (string) - Nodemarkup<br>
 
 
 ## one
 <p>Returns a NWTNodeInstance class</p>
 
-@constructor - 
-
+@constructor - <br>
 
 
 ## all
 <p>Returns a NWTNodeList class</p>
 
-@constructor - 
-
+@constructor - <br>
 
 
 ## NWTNodeList
 <p>A node iterator</p>
 
-@constructor - 
-
+@constructor - <br>
 
 
 ### NWTNodeList::each
 <p>Node iterator</p>
 
-@param (function) - Callbackfor each node
-
+@param (function) - Callbackfor each node<br>
 
 
 ### NWTNodeList::item
 <p>Returns a node specified by an offset</p>
 
-@param (integer) - Offsetof the item
-
+@param (integer) - Offsetof the item<br>
 
 
 ### NWTNodeList::size
 <p>Returns the size of the current nodelist</p>
 
-@return (integer) - 
-
+@return (integer) - <br>
 
 
 ## NWTAnimate
 <p>Animation utility</p>
 
-@constructor - 
-
+@constructor - <br>
 
 
 ### NWTAnimate::anim
 <p>Method to animate a node</p>
 
-@param (object) - NWTNodeinstance
-@param (object) - Objectof styles to animate. E.g., {top: 10}
-@param (integer) - Durationin seconds to animate
-@param (string) - Easingtype. One of: linear|ease|ease-in|ease-out|ease-in-out|cubic-bezier(n,n,n,n);
-
+@param (object) - NWTNodeinstance<br>@param (object) - Objectof styles to animate. E.g., {top: 10}<br>@param (integer) - Durationin seconds to animate<br>@param (string) - Easingtype. One of: linear|ease|ease-in|ease-out|ease-in-out|cubic-bezier(n,n,n,n);<br>
 
 
 ## NWTIO
 <p>Provides ajax communication methods<br />The folllowing methods are chainable<br />success - success handler<br />failure - failure handler<br />serialize - serialize a form, selector, array, or object to send</p>
 
-@constructor - 
-
+@constructor - <br>
 
 
 ### NWTIO::post
@@ -831,15 +723,13 @@ NWTui is a modern approach at a javascript framework. NWTui combines the best pr
 ## NWTNodeInstance
 <p>Individually wrapped NWTNode</p>
 
-@constructor - 
-
+@constructor - <br>
 
 
 ### NWTNodeInstance::ancestor
 <p>Returns the ancestor that matches the css selector</p>
 
-@param (string) - CSSSelector
-
+@param (string) - CSSSelector<br>
 
 
 ### NWTNodeInstance::hasClass
@@ -857,81 +747,67 @@ NWTui is a modern approach at a javascript framework. NWTui combines the best pr
 ### NWTNodeInstance::data
 <p>Gets a data attribute from the node<br />Pass just whatever comes after data-<br />If the attribute were data-user-id,<br />you should pass 'user-id' to this function</p>
 
-@param (string) - Dataattribute to get
-
+@param (string) - Dataattribute to get<br>
 
 
 ### NWTNodeInstance::get
 <p>Gets a property from the node object</p>
 
-@param (string) - Attributeto get
-
+@param (string) - Attributeto get<br>
 
 
 ### NWTNodeInstance::set
 <p>Sets an attribute on the node</p>
 
-@param (string) - Attributeto set
-@param (string) - Valueto set
-
+@param (string) - Attributeto set<br>@param (string) - Valueto set<br>
 
 
 ### NWTNodeInstance::getAttribute
 <p>Gets an attribute from the DOM node</p>
 
-@param (string) - Attributeto get
-
+@param (string) - Attributeto get<br>
 
 
 ### NWTNodeInstance::setAttribute
 <p>Sets an attribute on the DOM node</p>
 
-@param (string) - Attributeto set
-
+@param (string) - Attributeto set<br>
 
 
 ### NWTNodeInstance::getStyle
 <p>Gets a style attribute set on the node</p>
 
-@param (string) - Styleattribute to get
-
+@param (string) - Styleattribute to get<br>
 
 
 ### NWTNodeInstance::removeStyle
 <p>Removes a style attribute</p>
 
-@param (string) - Styleattribute to remove
-
+@param (string) - Styleattribute to remove<br>
 
 
 ### NWTNodeInstance::removeStyles
 <p>Removes an array of styles from a node</p>
 
-@param (array) - Arrayof styles to remove
-
+@param (array) - Arrayof styles to remove<br>
 
 
 ### NWTNodeInstance::setStyle
 <p>Sets a style attribute</p>
 
-@param (string) - Styleattribute to set
-@param (string) - Valueto set
-
+@param (string) - Styleattribute to set<br>@param (string) - Valueto set<br>
 
 
 ### NWTNodeInstance::setStyles
 <p>Sets multiple styles</p>
 
-@param (object) - Objectmap of styles to set
-
+@param (object) - Objectmap of styles to set<br>
 
 
 ### NWTNodeInstance::on
 <p>Adds an event listener tot he node</p>
 
-@param (string) - Eventto listen for
-@param (function) - Eventcallback function
-
+@param (string) - Eventto listen for<br>@param (function) - Eventcallback function<br>
 
 
 ### NWTNodeInstance::serialize
@@ -945,8 +821,7 @@ NWTui is a modern approach at a javascript framework. NWTui combines the best pr
 ### NWTNodeInstance::setContent
 <p>Sets the content of the node</p>
 
-@param (string) - Contentto set
-
+@param (string) - Contentto set<br>
 
 
 ### NWTNodeInstance::next
@@ -960,15 +835,13 @@ NWTui is a modern approach at a javascript framework. NWTui combines the best pr
 ### NWTNodeInstance::one
 <p>Returns a child node instance based on a selector<br />Implements querySelector</p>
 
-@param (string) - cssselector
-
+@param (string) - cssselector<br>
 
 
 ### NWTNodeInstance::all
 <p>Returns a child nodelist based on a selector<br />Implements querySelector</p>
 
-@param (string) - CSSSelector
-
+@param (string) - CSSSelector<br>
 
 
 ### NWTNodeInstance::append
@@ -990,88 +863,73 @@ NWTui is a modern approach at a javascript framework. NWTui combines the best pr
 ### NWTNodeInstance::wait
 <p>Waits a certain amount of time before running<br />chained callbacks</p>
 
-@param (integer) - Amountof time in seconds to wait
-
+@param (integer) - Amountof time in seconds to wait<br>
 
 
 ## NWTNode
 <p>NWTNode Class<br />Used for getting elements</p>
 
-@constructor - 
-
+@constructor - <br>
 
 
 ### NWTNode::create
 <p>Creates a node from markup</p>
 
-@param (string) - Nodemarkup
-
+@param (string) - Nodemarkup<br>
 
 
 ## one
 <p>Returns a NWTNodeInstance class</p>
 
-@constructor - 
-
+@constructor - <br>
 
 
 ## all
 <p>Returns a NWTNodeList class</p>
 
-@constructor - 
-
+@constructor - <br>
 
 
 ## NWTNodeList
 <p>A node iterator</p>
 
-@constructor - 
-
+@constructor - <br>
 
 
 ### NWTNodeList::each
 <p>Node iterator</p>
 
-@param (function) - Callbackfor each node
-
+@param (function) - Callbackfor each node<br>
 
 
 ### NWTNodeList::item
 <p>Returns a node specified by an offset</p>
 
-@param (integer) - Offsetof the item
-
+@param (integer) - Offsetof the item<br>
 
 
 ### NWTNodeList::size
 <p>Returns the size of the current nodelist</p>
 
-@return (integer) - 
-
+@return (integer) - <br>
 
 
 ## NWTAnimate
 <p>Animation utility</p>
 
-@constructor - 
-
+@constructor - <br>
 
 
 ### NWTAnimate::anim
 <p>Method to animate a node</p>
 
-@param (object) - NWTNodeinstance
-@param (object) - Objectof styles to animate. E.g., {top: 10}
-@param (integer) - Durationin seconds to animate
-@param (string) - Easingtype. One of: linear|ease|ease-in|ease-out|ease-in-out|cubic-bezier(n,n,n,n);
-
+@param (object) - NWTNodeinstance<br>@param (object) - Objectof styles to animate. E.g., {top: 10}<br>@param (integer) - Durationin seconds to animate<br>@param (string) - Easingtype. One of: linear|ease|ease-in|ease-out|ease-in-out|cubic-bezier(n,n,n,n);<br>
 
 
 ## NWTIO
 <p>Provides ajax communication methods<br />The folllowing methods are chainable<br />success - success handler<br />failure - failure handler<br />serialize - serialize a form, selector, array, or object to send</p>
 
-@constructor - 
-
+@constructor - <br>
 
 
 ### NWTIO::post
@@ -1093,15 +951,13 @@ NWTui is a modern approach at a javascript framework. NWTui combines the best pr
 ## NWTNodeInstance
 <p>Individually wrapped NWTNode</p>
 
-@constructor - 
-
+@constructor - <br>
 
 
 ### NWTNodeInstance::ancestor
 <p>Returns the ancestor that matches the css selector</p>
 
-@param (string) - CSSSelector
-
+@param (string) - CSSSelector<br>
 
 
 ### NWTNodeInstance::hasClass
@@ -1119,81 +975,67 @@ NWTui is a modern approach at a javascript framework. NWTui combines the best pr
 ### NWTNodeInstance::data
 <p>Gets a data attribute from the node<br />Pass just whatever comes after data-<br />If the attribute were data-user-id,<br />you should pass 'user-id' to this function</p>
 
-@param (string) - Dataattribute to get
-
+@param (string) - Dataattribute to get<br>
 
 
 ### NWTNodeInstance::get
 <p>Gets a property from the node object</p>
 
-@param (string) - Attributeto get
-
+@param (string) - Attributeto get<br>
 
 
 ### NWTNodeInstance::set
 <p>Sets an attribute on the node</p>
 
-@param (string) - Attributeto set
-@param (string) - Valueto set
-
+@param (string) - Attributeto set<br>@param (string) - Valueto set<br>
 
 
 ### NWTNodeInstance::getAttribute
 <p>Gets an attribute from the DOM node</p>
 
-@param (string) - Attributeto get
-
+@param (string) - Attributeto get<br>
 
 
 ### NWTNodeInstance::setAttribute
 <p>Sets an attribute on the DOM node</p>
 
-@param (string) - Attributeto set
-
+@param (string) - Attributeto set<br>
 
 
 ### NWTNodeInstance::getStyle
 <p>Gets a style attribute set on the node</p>
 
-@param (string) - Styleattribute to get
-
+@param (string) - Styleattribute to get<br>
 
 
 ### NWTNodeInstance::removeStyle
 <p>Removes a style attribute</p>
 
-@param (string) - Styleattribute to remove
-
+@param (string) - Styleattribute to remove<br>
 
 
 ### NWTNodeInstance::removeStyles
 <p>Removes an array of styles from a node</p>
 
-@param (array) - Arrayof styles to remove
-
+@param (array) - Arrayof styles to remove<br>
 
 
 ### NWTNodeInstance::setStyle
 <p>Sets a style attribute</p>
 
-@param (string) - Styleattribute to set
-@param (string) - Valueto set
-
+@param (string) - Styleattribute to set<br>@param (string) - Valueto set<br>
 
 
 ### NWTNodeInstance::setStyles
 <p>Sets multiple styles</p>
 
-@param (object) - Objectmap of styles to set
-
+@param (object) - Objectmap of styles to set<br>
 
 
 ### NWTNodeInstance::on
 <p>Adds an event listener tot he node</p>
 
-@param (string) - Eventto listen for
-@param (function) - Eventcallback function
-
+@param (string) - Eventto listen for<br>@param (function) - Eventcallback function<br>
 
 
 ### NWTNodeInstance::serialize
@@ -1207,8 +1049,7 @@ NWTui is a modern approach at a javascript framework. NWTui combines the best pr
 ### NWTNodeInstance::setContent
 <p>Sets the content of the node</p>
 
-@param (string) - Contentto set
-
+@param (string) - Contentto set<br>
 
 
 ### NWTNodeInstance::next
@@ -1222,15 +1063,13 @@ NWTui is a modern approach at a javascript framework. NWTui combines the best pr
 ### NWTNodeInstance::one
 <p>Returns a child node instance based on a selector<br />Implements querySelector</p>
 
-@param (string) - cssselector
-
+@param (string) - cssselector<br>
 
 
 ### NWTNodeInstance::all
 <p>Returns a child nodelist based on a selector<br />Implements querySelector</p>
 
-@param (string) - CSSSelector
-
+@param (string) - CSSSelector<br>
 
 
 ### NWTNodeInstance::append
@@ -1252,63 +1091,54 @@ NWTui is a modern approach at a javascript framework. NWTui combines the best pr
 ### NWTNodeInstance::wait
 <p>Waits a certain amount of time before running<br />chained callbacks</p>
 
-@param (integer) - Amountof time in seconds to wait
-
+@param (integer) - Amountof time in seconds to wait<br>
 
 
 ## NWTNode
 <p>NWTNode Class<br />Used for getting elements</p>
 
-@constructor - 
-
+@constructor - <br>
 
 
 ### NWTNode::create
 <p>Creates a node from markup</p>
 
-@param (string) - Nodemarkup
-
+@param (string) - Nodemarkup<br>
 
 
 ## one
 <p>Returns a NWTNodeInstance class</p>
 
-@constructor - 
-
+@constructor - <br>
 
 
 ## all
 <p>Returns a NWTNodeList class</p>
 
-@constructor - 
-
+@constructor - <br>
 
 
 ## NWTNodeList
 <p>A node iterator</p>
 
-@constructor - 
-
+@constructor - <br>
 
 
 ### NWTNodeList::each
 <p>Node iterator</p>
 
-@param (function) - Callbackfor each node
-
+@param (function) - Callbackfor each node<br>
 
 
 ### NWTNodeList::item
 <p>Returns a node specified by an offset</p>
 
-@param (integer) - Offsetof the item
-
+@param (integer) - Offsetof the item<br>
 
 
 ### NWTNodeList::size
 <p>Returns the size of the current nodelist</p>
 
-@return (integer) - 
-
+@return (integer) - <br>
 
 
