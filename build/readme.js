@@ -64,8 +64,8 @@ for (i = 0; i < numDefines; i += 1) {
 
 			tagContent.push(' - ');
 
-			if( tag.name ) readmeContent.push(tag.name);
-			if( tag.description ) readmeContent.push(tag.description);
+			if( tag.name ) tagContent.push(tag.name);
+			if( tag.description ) tagContent.push(tag.description);
 
 			tagContent.push("\n");
 		}

@@ -9,7 +9,7 @@ function NWTNodeInstance(node) {
 
 /**
  * Returns the ancestor that matches the css selector
- * @param string css selector
+ * @param string CSS Selector
  */
 NWTNodeInstance.prototype.ancestor = function(selector) {
 
@@ -366,7 +366,7 @@ NWTNodeInstance.prototype.one = function(selector) {
 /**
  * Returns a child nodelist based on a selector
  * Implements querySelector
- * @param string css selector
+ * @param string CSS Selector
  */
 NWTNodeInstance.prototype.all = function(selector) {
 	var nodelist = this._node.querySelectorAll(selector);
