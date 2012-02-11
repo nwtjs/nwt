@@ -33,33 +33,55 @@ readmeContent = ["<h2>NWTui</h2>\n\nNWTui is a modern approach at a javascript f
 
 for (i = 0; i < numDefines; i += 1) {
 
-	var define = parsedObj[i];
+	var define = parsedObj[i],
+		currClass = "";
 
 	// Skip private functions (functions with underscores at the start)
 	if (define.ctx.name.indexOf('_') === 0 || define.isPrivate || define.ignore) { continue; }
 
-	readmeContent.push('### ' + define.ctx.name);
-	readmeContent.push("\n");
-	readmeContent.push(define.description.full);
 
-	var numTags = define.tags.length;
+	var headerMd = '###';
+
+	// First handle tag content
+	var numTags = define.tags.length,
+		tagContent = [];
 	if (numTags > 0) {
-		readmeContent.push("\n\n");
+		tagContent.push("\n\n");
 
 		for (var j = 0; j < numTags; j += 1) {
 			var tag = define.tags[j];
-			readmeContent.push('@' + tag.type);
 
-			if( tag.types ) readmeContent.push(' (' + tag.types + ')');
+			// Special header for constructors
+			if( tag.type == 'constructor' ) {
+				headerMd = '##';
+				currClass = define.ctx.name;
+			}
 
-			readmeContent.push(' - ');
+			tagContent.push('@' + tag.type);
+
+			if( tag.types ) tagContent.push(' (' + tag.types + ')');
+
+			tagContent.push(' - ');
 
 			if( tag.name ) readmeContent.push(tag.name);
 			if( tag.description ) readmeContent.push(tag.description);
 
-			readmeContent.push("\n");
+			tagContent.push("\n");
 		}
 	}
+	tagContent = tagContent.join('');
+
+
+
+	readmeContent.push(headerMd + ' ');
+
+	if( currClass ) readmeContent.push(currClass + '::');
+
+	readmeContent.push(define.ctx.name);
+	readmeContent.push("\n");
+	readmeContent.push(define.description.full);
+
+	readmeContent.push(tagContent);
 
 	readmeContent.push("\n\n\n");
 }
