@@ -35,7 +35,7 @@ NWTIO.prototype._run = function(method) {
 	this.req.open(method, this.url);
 	this.req.onreadystatechange = function() {		
 		var callback;
-console.log('state change', mythis.req.readyState);
+
 		if (mythis.req.readyState == 4 && mythis.req.status == 200) {
 			callback = 'success';
 		} else if (mythis.req.readyState == 4) {

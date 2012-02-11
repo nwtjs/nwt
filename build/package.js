@@ -7,10 +7,11 @@ var fs = require('fs'),
 packages = {
 	main: [
 		'base/js/base.js',
-		'node/js/node.js',
-		'nodelist/js/nodelist.js',
 
+		'anim/js/anim.js',
 		'io/js/io.js',
+		'node/js/node.js',
+		'nodelist/js/nodelist.js'
 	]
 },
 

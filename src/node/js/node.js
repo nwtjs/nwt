@@ -142,11 +142,11 @@ NWTNodeInstance.prototype.setAttribute = function(property, value) {
  */
 NWTNodeInstance.prototype.getStyle = function(property) {
 
-	if( !this._node.getAttribute('style') ) {
+	if( !this.getAttribute('style') ) {
 		return '';
 	}
 
-	var matchedStyle = this._node.getAttribute('style').match(new RegExp(property + ':([a-zA-Z0-9\-\.]*);'), '');
+	var matchedStyle = this.getAttribute('style').match(new RegExp(property + ':([a-zA-Z0-9\-\.]*);'), '');
 
 	if( matchedStyle && matchedStyle[1] ) {
 		return matchedStyle[1];
@@ -157,21 +157,99 @@ NWTNodeInstance.prototype.getStyle = function(property) {
 
 
 /**
+ * Gets the style string of a node after removing styles
+ * Does not update the node style
+ * @param array Array of styles to remove
+ */
+NWTNodeInstance.prototype._getRemainingStyles = function(styles) {
+	var i,
+		styleRegex = [],
+		stylesLen = styles.length;
+
+	for (i = 0; i < stylesLen; i += 1) {
+		styleRegex.push(styles[i]);
+	}
+
+	return this.getAttribute('style').replace(new RegExp('(' + styleRegex.join('|') + '):[a-zA-Z0-9\-]*;'), '');
+};
+
+
+/**
+ * Removes a style attribute
+ * @param string Style attribute to remove
+ */
+NWTNodeInstance.prototype.removeStyle = function(property) {
+	return this.removeStyles(property);
+};
+
+
+/**
+ * Removes an array of styles from a node
+ * @param array Array of styles to remove
+ */
+NWTNodeInstance.prototype.removeStyles = function(props) {
+	// Default properties to an array
+	if (typeof props == 'string') {
+		props = [props];
+	}
+
+	return this.setAttribute('style', this._getRemainingStyles(props));
+};
+
+
+/**
  * Sets a style attribute
  * @param string Style attribute to set
  * @param string Value to set
  */
 NWTNodeInstance.prototype.setStyle = function(property, value) {
+	var newStyle = {};
+	newStyle[property] = value;
+	return this.setStyles(newStyle);
+};
 
-	if( !this._node.getAttribute('style') ) {
-		this._node.setAttribute('style', '');
+
+/**
+ * Sets multiple styles
+ * @param object Object map of styles to set
+ */
+NWTNodeInstance.prototype.setStyles = function(newStyles) {
+	if( !this.getAttribute('style') ) {
+		this.setAttribute('style', '');
 	}
 
-	var newStyle = this._node.getAttribute('style').replace(new RegExp(property + ':[a-zA-Z0-9\-]*;'), '');
+	var newStyle = '',
 
-	newStyle += property + ':' + value + ';';
+		// If the style matches one of the following, and we pass in an integer, default the unit
+		// E.g., 10 becomes 10px
+		defaultToUnit = {
+			top: 'px',
+			left: 'px',
+			width: 'px',
+			height: 'px'
+		},
 
-	this._node.setAttribute('style', newStyle);
+		i,
+
+		eachStyleValue,
+
+		// Keep track of an array of styles that we need to remove
+		newStyleKeys = [];
+
+	for( i in newStyles ) {
+		eachStyleVal = newStyles[i];
+
+		// Default the unit if necessary
+		if (defaultToUnit[i] && !isNaN(eachStyleVal)) {
+			eachStyleVal += defaultToUnit[i];
+		}
+
+		newStyle += i + ':' + eachStyleVal + ';';
+		newStyleKeys.push(i);
+	}
+
+	this.setAttribute('style', this._getRemainingStyles(newStyleKeys) + newStyle);
+
 	return this;
 };
 
@@ -339,6 +417,25 @@ NWTNodeInstance.prototype.click = function() {
 	var evt = document.createEvent("HTMLEvents");
 	evt.initEvent('click', true, true ); // event type,bubbling,cancelable
 	return !this._node.dispatchEvent(evt);
+};
+
+
+/**
+ * Waits a certain amount of time before running
+ * chained callbacks
+ * @param integer Amount of time in seconds to wait
+ */
+NWTNodeInstance.prototype.wait = function(seconds) {
+
+	function DelayableTask() {
+		
+	}
+
+	setTimeout(function () {
+		runChain();
+	}, seconds * 1000);
+
+	return new DelayableTask();
 };
 
 

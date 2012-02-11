@@ -127,7 +127,7 @@ nwt.unit
 );
 
 nwt.unit
-.describe('Tests Node.getStyle/setStyle.')
+.describe('Tests Node.getStyle.')
 .setup('<span id="id1" style="float:left; position:absolute;"></span>')
 .equal(
 	function() {
@@ -245,5 +245,32 @@ nwt.unit
 	},
 	function() {
 		return '<div id="wtf" class="bbq" data-omg="wee">aaa</div>';
+	}
+);
+
+nwt.unit
+.describe('Tests Node.removeStyle.')
+.setup('<div id="id1"><div style="top:0px;left:0px;"></div></div>')
+.equal(
+	function() {
+		nwt.one('#id1 div').removeStyle('top');
+		return nwt.one('#id1').getContent();
+	},
+	function() {
+		return '<div style="left:0px;"></div>';
+	}
+);
+
+
+nwt.unit
+.describe('Tests Node.removeStyles.')
+.setup('<div id="id1"><div style="top:0px;left:0px;"></div></div>')
+.equal(
+	function() {
+		nwt.one('#id1 div').removeStyles(['top', 'left']);
+		return nwt.one('#id1').getContent();
+	},
+	function() {
+		return '<div style="left:0px;"></div>';
 	}
 );
