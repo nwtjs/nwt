@@ -1,6 +1,5 @@
 /**
  * Provides ajax communication methods
- * Chainable methods
  * The folllowing methods are chainable
  * success - success handler
  * failure - failure handler

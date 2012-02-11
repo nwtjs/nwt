@@ -20,11 +20,7 @@ NWTui is a modern approach at a javascript framework. NWTui combines the best pr
 
 
 ### NWTIO
-<p>Provides ajax communication methods<br />Chainable methods</p>
-
-<h2>The folllowing methods are chainable</h2>
-
-<p>success - success handler<br />failure - failure handler<br />serialize - serialize a form, selector, array, or object to send</p>
+<p>Provides ajax communication methods<br />The folllowing methods are chainable<br />success - success handler<br />failure - failure handler<br />serialize - serialize a form, selector, array, or object to send</p>
 
 @constructor - 
 
@@ -286,11 +282,7 @@ NWTui is a modern approach at a javascript framework. NWTui combines the best pr
 
 
 ### NWTIO
-<p>Provides ajax communication methods<br />Chainable methods</p>
-
-<h2>The folllowing methods are chainable</h2>
-
-<p>success - success handler<br />failure - failure handler<br />serialize - serialize a form, selector, array, or object to send</p>
+<p>Provides ajax communication methods<br />The folllowing methods are chainable<br />success - success handler<br />failure - failure handler<br />serialize - serialize a form, selector, array, or object to send</p>
 
 @constructor - 
 
@@ -552,11 +544,7 @@ NWTui is a modern approach at a javascript framework. NWTui combines the best pr
 
 
 ### NWTIO
-<p>Provides ajax communication methods<br />Chainable methods</p>
-
-<h2>The folllowing methods are chainable</h2>
-
-<p>success - success handler<br />failure - failure handler<br />serialize - serialize a form, selector, array, or object to send</p>
+<p>Provides ajax communication methods<br />The folllowing methods are chainable<br />success - success handler<br />failure - failure handler<br />serialize - serialize a form, selector, array, or object to send</p>
 
 @constructor - 
 
@@ -818,11 +806,7 @@ NWTui is a modern approach at a javascript framework. NWTui combines the best pr
 
 
 ### NWTIO
-<p>Provides ajax communication methods<br />Chainable methods</p>
-
-<h2>The folllowing methods are chainable</h2>
-
-<p>success - success handler<br />failure - failure handler<br />serialize - serialize a form, selector, array, or object to send</p>
+<p>Provides ajax communication methods<br />The folllowing methods are chainable<br />success - success handler<br />failure - failure handler<br />serialize - serialize a form, selector, array, or object to send</p>
 
 @constructor - 
 
@@ -1084,11 +1068,7 @@ NWTui is a modern approach at a javascript framework. NWTui combines the best pr
 
 
 ### NWTIO
-<p>Provides ajax communication methods<br />Chainable methods</p>
-
-<h2>The folllowing methods are chainable</h2>
-
-<p>success - success handler<br />failure - failure handler<br />serialize - serialize a form, selector, array, or object to send</p>
+<p>Provides ajax communication methods<br />The folllowing methods are chainable<br />success - success handler<br />failure - failure handler<br />serialize - serialize a form, selector, array, or object to send</p>
 
 @constructor - 
 
