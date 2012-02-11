@@ -49,7 +49,7 @@ NWTNodeinstanceObjectof styles to animate. E.g., {top: 10}Durationin seconds to 
 
 
 
-CSSSelector### NWTNodeInstance::ancestor
+cssselector### NWTNodeInstance::ancestor
 <p>Returns the ancestor that matches the css selector</p>
 
 @param (string) - 
@@ -171,14 +171,14 @@ Contentto set### NWTNodeInstance::setContent
 <p>Returns the previous node</p>
 
 
-CSSSelector### NWTNodeInstance::one
+cssselector### NWTNodeInstance::one
 <p>Returns a child node instance based on a selector<br />Implements querySelector</p>
 
 @param (string) - 
 
 
 
-CSSSelector### NWTNodeInstance::all
+cssselector### NWTNodeInstance::all
 <p>Returns a child nodelist based on a selector<br />Implements querySelector</p>
 
 @param (string) - 
@@ -311,7 +311,7 @@ NWTNodeinstanceObjectof styles to animate. E.g., {top: 10}Durationin seconds to 
 
 
 
-CSSSelector### NWTNodeInstance::ancestor
+cssselector### NWTNodeInstance::ancestor
 <p>Returns the ancestor that matches the css selector</p>
 
 @param (string) - 
@@ -433,14 +433,14 @@ Contentto set### NWTNodeInstance::setContent
 <p>Returns the previous node</p>
 
 
-CSSSelector### NWTNodeInstance::one
+cssselector### NWTNodeInstance::one
 <p>Returns a child node instance based on a selector<br />Implements querySelector</p>
 
 @param (string) - 
 
 
 
-CSSSelector### NWTNodeInstance::all
+cssselector### NWTNodeInstance::all
 <p>Returns a child nodelist based on a selector<br />Implements querySelector</p>
 
 @param (string) - 
@@ -573,7 +573,7 @@ NWTNodeinstanceObjectof styles to animate. E.g., {top: 10}Durationin seconds to 
 
 
 
-CSSSelector### NWTNodeInstance::ancestor
+cssselector### NWTNodeInstance::ancestor
 <p>Returns the ancestor that matches the css selector</p>
 
 @param (string) - 
@@ -695,14 +695,14 @@ Contentto set### NWTNodeInstance::setContent
 <p>Returns the previous node</p>
 
 
-CSSSelector### NWTNodeInstance::one
+cssselector### NWTNodeInstance::one
 <p>Returns a child node instance based on a selector<br />Implements querySelector</p>
 
 @param (string) - 
 
 
 
-CSSSelector### NWTNodeInstance::all
+cssselector### NWTNodeInstance::all
 <p>Returns a child nodelist based on a selector<br />Implements querySelector</p>
 
 @param (string) - 
@@ -835,7 +835,7 @@ NWTNodeinstanceObjectof styles to animate. E.g., {top: 10}Durationin seconds to 
 
 
 
-CSSSelector### NWTNodeInstance::ancestor
+cssselector### NWTNodeInstance::ancestor
 <p>Returns the ancestor that matches the css selector</p>
 
 @param (string) - 
@@ -957,14 +957,14 @@ Contentto set### NWTNodeInstance::setContent
 <p>Returns the previous node</p>
 
 
-CSSSelector### NWTNodeInstance::one
+cssselector### NWTNodeInstance::one
 <p>Returns a child node instance based on a selector<br />Implements querySelector</p>
 
 @param (string) - 
 
 
 
-CSSSelector### NWTNodeInstance::all
+cssselector### NWTNodeInstance::all
 <p>Returns a child nodelist based on a selector<br />Implements querySelector</p>
 
 @param (string) - 
@@ -1097,7 +1097,7 @@ NWTNodeinstanceObjectof styles to animate. E.g., {top: 10}Durationin seconds to 
 
 
 
-CSSSelector### NWTNodeInstance::ancestor
+cssselector### NWTNodeInstance::ancestor
 <p>Returns the ancestor that matches the css selector</p>
 
 @param (string) - 
@@ -1219,14 +1219,14 @@ Contentto set### NWTNodeInstance::setContent
 <p>Returns the previous node</p>
 
 
-CSSSelector### NWTNodeInstance::one
+cssselector### NWTNodeInstance::one
 <p>Returns a child node instance based on a selector<br />Implements querySelector</p>
 
 @param (string) - 
 
 
 
-CSSSelector### NWTNodeInstance::all
+cssselector### NWTNodeInstance::all
 <p>Returns a child nodelist based on a selector<br />Implements querySelector</p>
 
 @param (string) - 
