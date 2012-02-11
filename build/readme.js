@@ -30,11 +30,11 @@ var parsedObj = dox.parseComments(scriptContent.join('')),
 readmeContent = ["<h2>NWTui</h2>\n\nNWTui is a modern approach at a javascript framework. NWTui combines the best practices of leading JS frameworks, along with some personal touches that make for an extremely familiar environment which you will be able to develop rapidly in.\n\n"];
 
 
-
+var currClass = "";
 for (i = 0; i < numDefines; i += 1) {
 
 	var define = parsedObj[i],
-		currClass = "";
+		isConstructor = false;
 
 	// Skip private functions (functions with underscores at the start)
 	if (define.ctx.name.indexOf('_') === 0 || define.isPrivate || define.ignore) { continue; }
@@ -54,6 +54,7 @@ for (i = 0; i < numDefines; i += 1) {
 			// Special header for constructors
 			if( tag.type == 'constructor' ) {
 				headerMd = '##';
+				isConstructor = true;
 				currClass = define.ctx.name;
 			}
 
@@ -72,10 +73,9 @@ for (i = 0; i < numDefines; i += 1) {
 	tagContent = tagContent.join('');
 
 
-
 	readmeContent.push(headerMd + ' ');
 
-	if( currClass ) readmeContent.push(currClass + '::');
+	if (currClass && !isConstructor) readmeContent.push(currClass + '::');
 
 	readmeContent.push(define.ctx.name);
 	readmeContent.push("\n");

@@ -2,14 +2,14 @@
 
 NWTui is a modern approach at a javascript framework. NWTui combines the best practices of leading JS frameworks, along with some personal touches that make for an extremely familiar environment which you will be able to develop rapidly in.
 
-## NWTAnimate::NWTAnimate
+## NWTAnimate
 <p>Animation utility</p>
 
 @constructor - 
 
 
 
-NWTNodeinstanceObjectof styles to animate. E.g., {top: 10}Durationin seconds to animateEasingtype. One of: linear|ease|ease-in|ease-out|ease-in-out|cubic-bezier(n,n,n,n);### anim
+NWTNodeinstanceObjectof styles to animate. E.g., {top: 10}Durationin seconds to animateEasingtype. One of: linear|ease|ease-in|ease-out|ease-in-out|cubic-bezier(n,n,n,n);### NWTAnimate::anim
 <p>Method to animate a node</p>
 
 @param (object) - 
@@ -19,70 +19,70 @@ NWTNodeinstanceObjectof styles to animate. E.g., {top: 10}Durationin seconds to 
 
 
 
-## NWTIO::NWTIO
+## NWTIO
 <p>Provides ajax communication methods<br />The folllowing methods are chainable<br />success - success handler<br />failure - failure handler<br />serialize - serialize a form, selector, array, or object to send</p>
 
 @constructor - 
 
 
 
-### post
+### NWTIO::post
 <p>Runs IO POST</p>
 
 
-### get
+### NWTIO::get
 <p>Runs IO GET</p>
 
 
-### put
+### NWTIO::put
 <p>Runs IO PUT</p>
 
 
-### delete
+### NWTIO::delete
 <p>Runs IO DELETE</p>
 
 
-## NWTNodeInstance::NWTNodeInstance
+## NWTNodeInstance
 <p>Individually wrapped NWTNode</p>
 
 @constructor - 
 
 
 
-CSSSelector### ancestor
+CSSSelector### NWTNodeInstance::ancestor
 <p>Returns the ancestor that matches the css selector</p>
 
 @param (string) - 
 
 
 
-### hasClass
+### NWTNodeInstance::hasClass
 <p>Returns true if the class exists on the node, false if not</p>
 
 
-### addClass
+### NWTNodeInstance::addClass
 <p>Adds a class to the node</p>
 
 
-### removeClass
+### NWTNodeInstance::removeClass
 <p>Removes a class from the node.</p>
 
 
-Dataattribute to get### data
+Dataattribute to get### NWTNodeInstance::data
 <p>Gets a data attribute from the node<br />Pass just whatever comes after data-<br />If the attribute were data-user-id,<br />you should pass 'user-id' to this function</p>
 
 @param (string) - 
 
 
 
-Attributeto get### get
+Attributeto get### NWTNodeInstance::get
 <p>Gets a property from the node object</p>
 
 @param (string) - 
 
 
 
-Attributeto setValueto set### set
+Attributeto setValueto set### NWTNodeInstance::set
 <p>Sets an attribute on the node</p>
 
 @param (string) - 
@@ -90,42 +90,42 @@ Attributeto setValueto set### set
 
 
 
-Attributeto get### getAttribute
+Attributeto get### NWTNodeInstance::getAttribute
 <p>Gets an attribute from the DOM node</p>
 
 @param (string) - 
 
 
 
-Attributeto set### setAttribute
+Attributeto set### NWTNodeInstance::setAttribute
 <p>Sets an attribute on the DOM node</p>
 
 @param (string) - 
 
 
 
-Styleattribute to get### getStyle
+Styleattribute to get### NWTNodeInstance::getStyle
 <p>Gets a style attribute set on the node</p>
 
 @param (string) - 
 
 
 
-Styleattribute to remove### removeStyle
+Styleattribute to remove### NWTNodeInstance::removeStyle
 <p>Removes a style attribute</p>
 
 @param (string) - 
 
 
 
-Arrayof styles to remove### removeStyles
+Arrayof styles to remove### NWTNodeInstance::removeStyles
 <p>Removes an array of styles from a node</p>
 
 @param (array) - 
 
 
 
-Styleattribute to setValueto set### setStyle
+Styleattribute to setValueto set### NWTNodeInstance::setStyle
 <p>Sets a style attribute</p>
 
 @param (string) - 
@@ -133,14 +133,14 @@ Styleattribute to setValueto set### setStyle
 
 
 
-Objectmap of styles to set### setStyles
+Objectmap of styles to set### NWTNodeInstance::setStyles
 <p>Sets multiple styles</p>
 
 @param (object) - 
 
 
 
-Eventto listen forEventcallback function### on
+Eventto listen forEventcallback function### NWTNodeInstance::on
 <p>Adds an event listener tot he node</p>
 
 @param (string) - 
@@ -148,130 +148,130 @@ Eventto listen forEventcallback function### on
 
 
 
-### serialize
+### NWTNodeInstance::serialize
 <p>Serializes sub children of the current node into post data</p>
 
 
-### getContent
+### NWTNodeInstance::getContent
 <p>Gets the content of the node</p>
 
 
-Contentto set### setContent
+Contentto set### NWTNodeInstance::setContent
 <p>Sets the content of the node</p>
 
 @param (string) - 
 
 
 
-### next
+### NWTNodeInstance::next
 <p>Returns the next node</p>
 
 
-### previous
+### NWTNodeInstance::previous
 <p>Returns the previous node</p>
 
 
-CSSSelector### one
+CSSSelector### NWTNodeInstance::one
 <p>Returns a child node instance based on a selector<br />Implements querySelector</p>
 
 @param (string) - 
 
 
 
-CSSSelector### all
+CSSSelector### NWTNodeInstance::all
 <p>Returns a child nodelist based on a selector<br />Implements querySelector</p>
 
 @param (string) - 
 
 
 
-### append
+### NWTNodeInstance::append
 <p>Appends a node instance to this node</p>
 
 
-### remove
+### NWTNodeInstance::remove
 <p>Removes a node instance from the dom</p>
 
 
-### insert
+### NWTNodeInstance::insert
 <p>Inserts a given node into this node at the proper position</p>
 
 
-### click
+### NWTNodeInstance::click
 <p>Simulates a click event on a node</p>
 
 
-Amountof time in seconds to wait### wait
+Amountof time in seconds to wait### NWTNodeInstance::wait
 <p>Waits a certain amount of time before running<br />chained callbacks</p>
 
 @param (integer) - 
 
 
 
-## NWTNode::NWTNode
+## NWTNode
 <p>NWTNode Class<br />Used for getting elements</p>
 
 @constructor - 
 
 
 
-Nodemarkup### create
+Nodemarkup### NWTNode::create
 <p>Creates a node from markup</p>
 
 @param (string) - 
 
 
 
-## one::one
+## one
 <p>Returns a NWTNodeInstance class</p>
 
 @constructor - 
 
 
 
-## all::all
+## all
 <p>Returns a NWTNodeList class</p>
 
 @constructor - 
 
 
 
-## NWTNodeList::NWTNodeList
+## NWTNodeList
 <p>A node iterator</p>
 
 @constructor - 
 
 
 
-Callbackfor each node### each
+Callbackfor each node### NWTNodeList::each
 <p>Node iterator</p>
 
 @param (function) - 
 
 
 
-Offsetof the item### item
+Offsetof the item### NWTNodeList::item
 <p>Returns a node specified by an offset</p>
 
 @param (integer) - 
 
 
 
-### size
+### NWTNodeList::size
 <p>Returns the size of the current nodelist</p>
 
 @return (integer) - 
 
 
 
-## NWTAnimate::NWTAnimate
+## NWTAnimate
 <p>Animation utility</p>
 
 @constructor - 
 
 
 
-NWTNodeinstanceObjectof styles to animate. E.g., {top: 10}Durationin seconds to animateEasingtype. One of: linear|ease|ease-in|ease-out|ease-in-out|cubic-bezier(n,n,n,n);### anim
+NWTNodeinstanceObjectof styles to animate. E.g., {top: 10}Durationin seconds to animateEasingtype. One of: linear|ease|ease-in|ease-out|ease-in-out|cubic-bezier(n,n,n,n);### NWTAnimate::anim
 <p>Method to animate a node</p>
 
 @param (object) - 
@@ -281,70 +281,70 @@ NWTNodeinstanceObjectof styles to animate. E.g., {top: 10}Durationin seconds to 
 
 
 
-## NWTIO::NWTIO
+## NWTIO
 <p>Provides ajax communication methods<br />The folllowing methods are chainable<br />success - success handler<br />failure - failure handler<br />serialize - serialize a form, selector, array, or object to send</p>
 
 @constructor - 
 
 
 
-### post
+### NWTIO::post
 <p>Runs IO POST</p>
 
 
-### get
+### NWTIO::get
 <p>Runs IO GET</p>
 
 
-### put
+### NWTIO::put
 <p>Runs IO PUT</p>
 
 
-### delete
+### NWTIO::delete
 <p>Runs IO DELETE</p>
 
 
-## NWTNodeInstance::NWTNodeInstance
+## NWTNodeInstance
 <p>Individually wrapped NWTNode</p>
 
 @constructor - 
 
 
 
-CSSSelector### ancestor
+CSSSelector### NWTNodeInstance::ancestor
 <p>Returns the ancestor that matches the css selector</p>
 
 @param (string) - 
 
 
 
-### hasClass
+### NWTNodeInstance::hasClass
 <p>Returns true if the class exists on the node, false if not</p>
 
 
-### addClass
+### NWTNodeInstance::addClass
 <p>Adds a class to the node</p>
 
 
-### removeClass
+### NWTNodeInstance::removeClass
 <p>Removes a class from the node.</p>
 
 
-Dataattribute to get### data
+Dataattribute to get### NWTNodeInstance::data
 <p>Gets a data attribute from the node<br />Pass just whatever comes after data-<br />If the attribute were data-user-id,<br />you should pass 'user-id' to this function</p>
 
 @param (string) - 
 
 
 
-Attributeto get### get
+Attributeto get### NWTNodeInstance::get
 <p>Gets a property from the node object</p>
 
 @param (string) - 
 
 
 
-Attributeto setValueto set### set
+Attributeto setValueto set### NWTNodeInstance::set
 <p>Sets an attribute on the node</p>
 
 @param (string) - 
@@ -352,42 +352,42 @@ Attributeto setValueto set### set
 
 
 
-Attributeto get### getAttribute
+Attributeto get### NWTNodeInstance::getAttribute
 <p>Gets an attribute from the DOM node</p>
 
 @param (string) - 
 
 
 
-Attributeto set### setAttribute
+Attributeto set### NWTNodeInstance::setAttribute
 <p>Sets an attribute on the DOM node</p>
 
 @param (string) - 
 
 
 
-Styleattribute to get### getStyle
+Styleattribute to get### NWTNodeInstance::getStyle
 <p>Gets a style attribute set on the node</p>
 
 @param (string) - 
 
 
 
-Styleattribute to remove### removeStyle
+Styleattribute to remove### NWTNodeInstance::removeStyle
 <p>Removes a style attribute</p>
 
 @param (string) - 
 
 
 
-Arrayof styles to remove### removeStyles
+Arrayof styles to remove### NWTNodeInstance::removeStyles
 <p>Removes an array of styles from a node</p>
 
 @param (array) - 
 
 
 
-Styleattribute to setValueto set### setStyle
+Styleattribute to setValueto set### NWTNodeInstance::setStyle
 <p>Sets a style attribute</p>
 
 @param (string) - 
@@ -395,14 +395,14 @@ Styleattribute to setValueto set### setStyle
 
 
 
-Objectmap of styles to set### setStyles
+Objectmap of styles to set### NWTNodeInstance::setStyles
 <p>Sets multiple styles</p>
 
 @param (object) - 
 
 
 
-Eventto listen forEventcallback function### on
+Eventto listen forEventcallback function### NWTNodeInstance::on
 <p>Adds an event listener tot he node</p>
 
 @param (string) - 
@@ -410,130 +410,130 @@ Eventto listen forEventcallback function### on
 
 
 
-### serialize
+### NWTNodeInstance::serialize
 <p>Serializes sub children of the current node into post data</p>
 
 
-### getContent
+### NWTNodeInstance::getContent
 <p>Gets the content of the node</p>
 
 
-Contentto set### setContent
+Contentto set### NWTNodeInstance::setContent
 <p>Sets the content of the node</p>
 
 @param (string) - 
 
 
 
-### next
+### NWTNodeInstance::next
 <p>Returns the next node</p>
 
 
-### previous
+### NWTNodeInstance::previous
 <p>Returns the previous node</p>
 
 
-CSSSelector### one
+CSSSelector### NWTNodeInstance::one
 <p>Returns a child node instance based on a selector<br />Implements querySelector</p>
 
 @param (string) - 
 
 
 
-CSSSelector### all
+CSSSelector### NWTNodeInstance::all
 <p>Returns a child nodelist based on a selector<br />Implements querySelector</p>
 
 @param (string) - 
 
 
 
-### append
+### NWTNodeInstance::append
 <p>Appends a node instance to this node</p>
 
 
-### remove
+### NWTNodeInstance::remove
 <p>Removes a node instance from the dom</p>
 
 
-### insert
+### NWTNodeInstance::insert
 <p>Inserts a given node into this node at the proper position</p>
 
 
-### click
+### NWTNodeInstance::click
 <p>Simulates a click event on a node</p>
 
 
-Amountof time in seconds to wait### wait
+Amountof time in seconds to wait### NWTNodeInstance::wait
 <p>Waits a certain amount of time before running<br />chained callbacks</p>
 
 @param (integer) - 
 
 
 
-## NWTNode::NWTNode
+## NWTNode
 <p>NWTNode Class<br />Used for getting elements</p>
 
 @constructor - 
 
 
 
-Nodemarkup### create
+Nodemarkup### NWTNode::create
 <p>Creates a node from markup</p>
 
 @param (string) - 
 
 
 
-## one::one
+## one
 <p>Returns a NWTNodeInstance class</p>
 
 @constructor - 
 
 
 
-## all::all
+## all
 <p>Returns a NWTNodeList class</p>
 
 @constructor - 
 
 
 
-## NWTNodeList::NWTNodeList
+## NWTNodeList
 <p>A node iterator</p>
 
 @constructor - 
 
 
 
-Callbackfor each node### each
+Callbackfor each node### NWTNodeList::each
 <p>Node iterator</p>
 
 @param (function) - 
 
 
 
-Offsetof the item### item
+Offsetof the item### NWTNodeList::item
 <p>Returns a node specified by an offset</p>
 
 @param (integer) - 
 
 
 
-### size
+### NWTNodeList::size
 <p>Returns the size of the current nodelist</p>
 
 @return (integer) - 
 
 
 
-## NWTAnimate::NWTAnimate
+## NWTAnimate
 <p>Animation utility</p>
 
 @constructor - 
 
 
 
-NWTNodeinstanceObjectof styles to animate. E.g., {top: 10}Durationin seconds to animateEasingtype. One of: linear|ease|ease-in|ease-out|ease-in-out|cubic-bezier(n,n,n,n);### anim
+NWTNodeinstanceObjectof styles to animate. E.g., {top: 10}Durationin seconds to animateEasingtype. One of: linear|ease|ease-in|ease-out|ease-in-out|cubic-bezier(n,n,n,n);### NWTAnimate::anim
 <p>Method to animate a node</p>
 
 @param (object) - 
@@ -543,70 +543,70 @@ NWTNodeinstanceObjectof styles to animate. E.g., {top: 10}Durationin seconds to 
 
 
 
-## NWTIO::NWTIO
+## NWTIO
 <p>Provides ajax communication methods<br />The folllowing methods are chainable<br />success - success handler<br />failure - failure handler<br />serialize - serialize a form, selector, array, or object to send</p>
 
 @constructor - 
 
 
 
-### post
+### NWTIO::post
 <p>Runs IO POST</p>
 
 
-### get
+### NWTIO::get
 <p>Runs IO GET</p>
 
 
-### put
+### NWTIO::put
 <p>Runs IO PUT</p>
 
 
-### delete
+### NWTIO::delete
 <p>Runs IO DELETE</p>
 
 
-## NWTNodeInstance::NWTNodeInstance
+## NWTNodeInstance
 <p>Individually wrapped NWTNode</p>
 
 @constructor - 
 
 
 
-CSSSelector### ancestor
+CSSSelector### NWTNodeInstance::ancestor
 <p>Returns the ancestor that matches the css selector</p>
 
 @param (string) - 
 
 
 
-### hasClass
+### NWTNodeInstance::hasClass
 <p>Returns true if the class exists on the node, false if not</p>
 
 
-### addClass
+### NWTNodeInstance::addClass
 <p>Adds a class to the node</p>
 
 
-### removeClass
+### NWTNodeInstance::removeClass
 <p>Removes a class from the node.</p>
 
 
-Dataattribute to get### data
+Dataattribute to get### NWTNodeInstance::data
 <p>Gets a data attribute from the node<br />Pass just whatever comes after data-<br />If the attribute were data-user-id,<br />you should pass 'user-id' to this function</p>
 
 @param (string) - 
 
 
 
-Attributeto get### get
+Attributeto get### NWTNodeInstance::get
 <p>Gets a property from the node object</p>
 
 @param (string) - 
 
 
 
-Attributeto setValueto set### set
+Attributeto setValueto set### NWTNodeInstance::set
 <p>Sets an attribute on the node</p>
 
 @param (string) - 
@@ -614,42 +614,42 @@ Attributeto setValueto set### set
 
 
 
-Attributeto get### getAttribute
+Attributeto get### NWTNodeInstance::getAttribute
 <p>Gets an attribute from the DOM node</p>
 
 @param (string) - 
 
 
 
-Attributeto set### setAttribute
+Attributeto set### NWTNodeInstance::setAttribute
 <p>Sets an attribute on the DOM node</p>
 
 @param (string) - 
 
 
 
-Styleattribute to get### getStyle
+Styleattribute to get### NWTNodeInstance::getStyle
 <p>Gets a style attribute set on the node</p>
 
 @param (string) - 
 
 
 
-Styleattribute to remove### removeStyle
+Styleattribute to remove### NWTNodeInstance::removeStyle
 <p>Removes a style attribute</p>
 
 @param (string) - 
 
 
 
-Arrayof styles to remove### removeStyles
+Arrayof styles to remove### NWTNodeInstance::removeStyles
 <p>Removes an array of styles from a node</p>
 
 @param (array) - 
 
 
 
-Styleattribute to setValueto set### setStyle
+Styleattribute to setValueto set### NWTNodeInstance::setStyle
 <p>Sets a style attribute</p>
 
 @param (string) - 
@@ -657,14 +657,14 @@ Styleattribute to setValueto set### setStyle
 
 
 
-Objectmap of styles to set### setStyles
+Objectmap of styles to set### NWTNodeInstance::setStyles
 <p>Sets multiple styles</p>
 
 @param (object) - 
 
 
 
-Eventto listen forEventcallback function### on
+Eventto listen forEventcallback function### NWTNodeInstance::on
 <p>Adds an event listener tot he node</p>
 
 @param (string) - 
@@ -672,130 +672,130 @@ Eventto listen forEventcallback function### on
 
 
 
-### serialize
+### NWTNodeInstance::serialize
 <p>Serializes sub children of the current node into post data</p>
 
 
-### getContent
+### NWTNodeInstance::getContent
 <p>Gets the content of the node</p>
 
 
-Contentto set### setContent
+Contentto set### NWTNodeInstance::setContent
 <p>Sets the content of the node</p>
 
 @param (string) - 
 
 
 
-### next
+### NWTNodeInstance::next
 <p>Returns the next node</p>
 
 
-### previous
+### NWTNodeInstance::previous
 <p>Returns the previous node</p>
 
 
-CSSSelector### one
+CSSSelector### NWTNodeInstance::one
 <p>Returns a child node instance based on a selector<br />Implements querySelector</p>
 
 @param (string) - 
 
 
 
-CSSSelector### all
+CSSSelector### NWTNodeInstance::all
 <p>Returns a child nodelist based on a selector<br />Implements querySelector</p>
 
 @param (string) - 
 
 
 
-### append
+### NWTNodeInstance::append
 <p>Appends a node instance to this node</p>
 
 
-### remove
+### NWTNodeInstance::remove
 <p>Removes a node instance from the dom</p>
 
 
-### insert
+### NWTNodeInstance::insert
 <p>Inserts a given node into this node at the proper position</p>
 
 
-### click
+### NWTNodeInstance::click
 <p>Simulates a click event on a node</p>
 
 
-Amountof time in seconds to wait### wait
+Amountof time in seconds to wait### NWTNodeInstance::wait
 <p>Waits a certain amount of time before running<br />chained callbacks</p>
 
 @param (integer) - 
 
 
 
-## NWTNode::NWTNode
+## NWTNode
 <p>NWTNode Class<br />Used for getting elements</p>
 
 @constructor - 
 
 
 
-Nodemarkup### create
+Nodemarkup### NWTNode::create
 <p>Creates a node from markup</p>
 
 @param (string) - 
 
 
 
-## one::one
+## one
 <p>Returns a NWTNodeInstance class</p>
 
 @constructor - 
 
 
 
-## all::all
+## all
 <p>Returns a NWTNodeList class</p>
 
 @constructor - 
 
 
 
-## NWTNodeList::NWTNodeList
+## NWTNodeList
 <p>A node iterator</p>
 
 @constructor - 
 
 
 
-Callbackfor each node### each
+Callbackfor each node### NWTNodeList::each
 <p>Node iterator</p>
 
 @param (function) - 
 
 
 
-Offsetof the item### item
+Offsetof the item### NWTNodeList::item
 <p>Returns a node specified by an offset</p>
 
 @param (integer) - 
 
 
 
-### size
+### NWTNodeList::size
 <p>Returns the size of the current nodelist</p>
 
 @return (integer) - 
 
 
 
-## NWTAnimate::NWTAnimate
+## NWTAnimate
 <p>Animation utility</p>
 
 @constructor - 
 
 
 
-NWTNodeinstanceObjectof styles to animate. E.g., {top: 10}Durationin seconds to animateEasingtype. One of: linear|ease|ease-in|ease-out|ease-in-out|cubic-bezier(n,n,n,n);### anim
+NWTNodeinstanceObjectof styles to animate. E.g., {top: 10}Durationin seconds to animateEasingtype. One of: linear|ease|ease-in|ease-out|ease-in-out|cubic-bezier(n,n,n,n);### NWTAnimate::anim
 <p>Method to animate a node</p>
 
 @param (object) - 
@@ -805,70 +805,70 @@ NWTNodeinstanceObjectof styles to animate. E.g., {top: 10}Durationin seconds to 
 
 
 
-## NWTIO::NWTIO
+## NWTIO
 <p>Provides ajax communication methods<br />The folllowing methods are chainable<br />success - success handler<br />failure - failure handler<br />serialize - serialize a form, selector, array, or object to send</p>
 
 @constructor - 
 
 
 
-### post
+### NWTIO::post
 <p>Runs IO POST</p>
 
 
-### get
+### NWTIO::get
 <p>Runs IO GET</p>
 
 
-### put
+### NWTIO::put
 <p>Runs IO PUT</p>
 
 
-### delete
+### NWTIO::delete
 <p>Runs IO DELETE</p>
 
 
-## NWTNodeInstance::NWTNodeInstance
+## NWTNodeInstance
 <p>Individually wrapped NWTNode</p>
 
 @constructor - 
 
 
 
-CSSSelector### ancestor
+CSSSelector### NWTNodeInstance::ancestor
 <p>Returns the ancestor that matches the css selector</p>
 
 @param (string) - 
 
 
 
-### hasClass
+### NWTNodeInstance::hasClass
 <p>Returns true if the class exists on the node, false if not</p>
 
 
-### addClass
+### NWTNodeInstance::addClass
 <p>Adds a class to the node</p>
 
 
-### removeClass
+### NWTNodeInstance::removeClass
 <p>Removes a class from the node.</p>
 
 
-Dataattribute to get### data
+Dataattribute to get### NWTNodeInstance::data
 <p>Gets a data attribute from the node<br />Pass just whatever comes after data-<br />If the attribute were data-user-id,<br />you should pass 'user-id' to this function</p>
 
 @param (string) - 
 
 
 
-Attributeto get### get
+Attributeto get### NWTNodeInstance::get
 <p>Gets a property from the node object</p>
 
 @param (string) - 
 
 
 
-Attributeto setValueto set### set
+Attributeto setValueto set### NWTNodeInstance::set
 <p>Sets an attribute on the node</p>
 
 @param (string) - 
@@ -876,42 +876,42 @@ Attributeto setValueto set### set
 
 
 
-Attributeto get### getAttribute
+Attributeto get### NWTNodeInstance::getAttribute
 <p>Gets an attribute from the DOM node</p>
 
 @param (string) - 
 
 
 
-Attributeto set### setAttribute
+Attributeto set### NWTNodeInstance::setAttribute
 <p>Sets an attribute on the DOM node</p>
 
 @param (string) - 
 
 
 
-Styleattribute to get### getStyle
+Styleattribute to get### NWTNodeInstance::getStyle
 <p>Gets a style attribute set on the node</p>
 
 @param (string) - 
 
 
 
-Styleattribute to remove### removeStyle
+Styleattribute to remove### NWTNodeInstance::removeStyle
 <p>Removes a style attribute</p>
 
 @param (string) - 
 
 
 
-Arrayof styles to remove### removeStyles
+Arrayof styles to remove### NWTNodeInstance::removeStyles
 <p>Removes an array of styles from a node</p>
 
 @param (array) - 
 
 
 
-Styleattribute to setValueto set### setStyle
+Styleattribute to setValueto set### NWTNodeInstance::setStyle
 <p>Sets a style attribute</p>
 
 @param (string) - 
@@ -919,14 +919,14 @@ Styleattribute to setValueto set### setStyle
 
 
 
-Objectmap of styles to set### setStyles
+Objectmap of styles to set### NWTNodeInstance::setStyles
 <p>Sets multiple styles</p>
 
 @param (object) - 
 
 
 
-Eventto listen forEventcallback function### on
+Eventto listen forEventcallback function### NWTNodeInstance::on
 <p>Adds an event listener tot he node</p>
 
 @param (string) - 
@@ -934,130 +934,130 @@ Eventto listen forEventcallback function### on
 
 
 
-### serialize
+### NWTNodeInstance::serialize
 <p>Serializes sub children of the current node into post data</p>
 
 
-### getContent
+### NWTNodeInstance::getContent
 <p>Gets the content of the node</p>
 
 
-Contentto set### setContent
+Contentto set### NWTNodeInstance::setContent
 <p>Sets the content of the node</p>
 
 @param (string) - 
 
 
 
-### next
+### NWTNodeInstance::next
 <p>Returns the next node</p>
 
 
-### previous
+### NWTNodeInstance::previous
 <p>Returns the previous node</p>
 
 
-CSSSelector### one
+CSSSelector### NWTNodeInstance::one
 <p>Returns a child node instance based on a selector<br />Implements querySelector</p>
 
 @param (string) - 
 
 
 
-CSSSelector### all
+CSSSelector### NWTNodeInstance::all
 <p>Returns a child nodelist based on a selector<br />Implements querySelector</p>
 
 @param (string) - 
 
 
 
-### append
+### NWTNodeInstance::append
 <p>Appends a node instance to this node</p>
 
 
-### remove
+### NWTNodeInstance::remove
 <p>Removes a node instance from the dom</p>
 
 
-### insert
+### NWTNodeInstance::insert
 <p>Inserts a given node into this node at the proper position</p>
 
 
-### click
+### NWTNodeInstance::click
 <p>Simulates a click event on a node</p>
 
 
-Amountof time in seconds to wait### wait
+Amountof time in seconds to wait### NWTNodeInstance::wait
 <p>Waits a certain amount of time before running<br />chained callbacks</p>
 
 @param (integer) - 
 
 
 
-## NWTNode::NWTNode
+## NWTNode
 <p>NWTNode Class<br />Used for getting elements</p>
 
 @constructor - 
 
 
 
-Nodemarkup### create
+Nodemarkup### NWTNode::create
 <p>Creates a node from markup</p>
 
 @param (string) - 
 
 
 
-## one::one
+## one
 <p>Returns a NWTNodeInstance class</p>
 
 @constructor - 
 
 
 
-## all::all
+## all
 <p>Returns a NWTNodeList class</p>
 
 @constructor - 
 
 
 
-## NWTNodeList::NWTNodeList
+## NWTNodeList
 <p>A node iterator</p>
 
 @constructor - 
 
 
 
-Callbackfor each node### each
+Callbackfor each node### NWTNodeList::each
 <p>Node iterator</p>
 
 @param (function) - 
 
 
 
-Offsetof the item### item
+Offsetof the item### NWTNodeList::item
 <p>Returns a node specified by an offset</p>
 
 @param (integer) - 
 
 
 
-### size
+### NWTNodeList::size
 <p>Returns the size of the current nodelist</p>
 
 @return (integer) - 
 
 
 
-## NWTAnimate::NWTAnimate
+## NWTAnimate
 <p>Animation utility</p>
 
 @constructor - 
 
 
 
-NWTNodeinstanceObjectof styles to animate. E.g., {top: 10}Durationin seconds to animateEasingtype. One of: linear|ease|ease-in|ease-out|ease-in-out|cubic-bezier(n,n,n,n);### anim
+NWTNodeinstanceObjectof styles to animate. E.g., {top: 10}Durationin seconds to animateEasingtype. One of: linear|ease|ease-in|ease-out|ease-in-out|cubic-bezier(n,n,n,n);### NWTAnimate::anim
 <p>Method to animate a node</p>
 
 @param (object) - 
@@ -1067,70 +1067,70 @@ NWTNodeinstanceObjectof styles to animate. E.g., {top: 10}Durationin seconds to 
 
 
 
-## NWTIO::NWTIO
+## NWTIO
 <p>Provides ajax communication methods<br />The folllowing methods are chainable<br />success - success handler<br />failure - failure handler<br />serialize - serialize a form, selector, array, or object to send</p>
 
 @constructor - 
 
 
 
-### post
+### NWTIO::post
 <p>Runs IO POST</p>
 
 
-### get
+### NWTIO::get
 <p>Runs IO GET</p>
 
 
-### put
+### NWTIO::put
 <p>Runs IO PUT</p>
 
 
-### delete
+### NWTIO::delete
 <p>Runs IO DELETE</p>
 
 
-## NWTNodeInstance::NWTNodeInstance
+## NWTNodeInstance
 <p>Individually wrapped NWTNode</p>
 
 @constructor - 
 
 
 
-CSSSelector### ancestor
+CSSSelector### NWTNodeInstance::ancestor
 <p>Returns the ancestor that matches the css selector</p>
 
 @param (string) - 
 
 
 
-### hasClass
+### NWTNodeInstance::hasClass
 <p>Returns true if the class exists on the node, false if not</p>
 
 
-### addClass
+### NWTNodeInstance::addClass
 <p>Adds a class to the node</p>
 
 
-### removeClass
+### NWTNodeInstance::removeClass
 <p>Removes a class from the node.</p>
 
 
-Dataattribute to get### data
+Dataattribute to get### NWTNodeInstance::data
 <p>Gets a data attribute from the node<br />Pass just whatever comes after data-<br />If the attribute were data-user-id,<br />you should pass 'user-id' to this function</p>
 
 @param (string) - 
 
 
 
-Attributeto get### get
+Attributeto get### NWTNodeInstance::get
 <p>Gets a property from the node object</p>
 
 @param (string) - 
 
 
 
-Attributeto setValueto set### set
+Attributeto setValueto set### NWTNodeInstance::set
 <p>Sets an attribute on the node</p>
 
 @param (string) - 
@@ -1138,42 +1138,42 @@ Attributeto setValueto set### set
 
 
 
-Attributeto get### getAttribute
+Attributeto get### NWTNodeInstance::getAttribute
 <p>Gets an attribute from the DOM node</p>
 
 @param (string) - 
 
 
 
-Attributeto set### setAttribute
+Attributeto set### NWTNodeInstance::setAttribute
 <p>Sets an attribute on the DOM node</p>
 
 @param (string) - 
 
 
 
-Styleattribute to get### getStyle
+Styleattribute to get### NWTNodeInstance::getStyle
 <p>Gets a style attribute set on the node</p>
 
 @param (string) - 
 
 
 
-Styleattribute to remove### removeStyle
+Styleattribute to remove### NWTNodeInstance::removeStyle
 <p>Removes a style attribute</p>
 
 @param (string) - 
 
 
 
-Arrayof styles to remove### removeStyles
+Arrayof styles to remove### NWTNodeInstance::removeStyles
 <p>Removes an array of styles from a node</p>
 
 @param (array) - 
 
 
 
-Styleattribute to setValueto set### setStyle
+Styleattribute to setValueto set### NWTNodeInstance::setStyle
 <p>Sets a style attribute</p>
 
 @param (string) - 
@@ -1181,14 +1181,14 @@ Styleattribute to setValueto set### setStyle
 
 
 
-Objectmap of styles to set### setStyles
+Objectmap of styles to set### NWTNodeInstance::setStyles
 <p>Sets multiple styles</p>
 
 @param (object) - 
 
 
 
-Eventto listen forEventcallback function### on
+Eventto listen forEventcallback function### NWTNodeInstance::on
 <p>Adds an event listener tot he node</p>
 
 @param (string) - 
@@ -1196,116 +1196,116 @@ Eventto listen forEventcallback function### on
 
 
 
-### serialize
+### NWTNodeInstance::serialize
 <p>Serializes sub children of the current node into post data</p>
 
 
-### getContent
+### NWTNodeInstance::getContent
 <p>Gets the content of the node</p>
 
 
-Contentto set### setContent
+Contentto set### NWTNodeInstance::setContent
 <p>Sets the content of the node</p>
 
 @param (string) - 
 
 
 
-### next
+### NWTNodeInstance::next
 <p>Returns the next node</p>
 
 
-### previous
+### NWTNodeInstance::previous
 <p>Returns the previous node</p>
 
 
-CSSSelector### one
+CSSSelector### NWTNodeInstance::one
 <p>Returns a child node instance based on a selector<br />Implements querySelector</p>
 
 @param (string) - 
 
 
 
-CSSSelector### all
+CSSSelector### NWTNodeInstance::all
 <p>Returns a child nodelist based on a selector<br />Implements querySelector</p>
 
 @param (string) - 
 
 
 
-### append
+### NWTNodeInstance::append
 <p>Appends a node instance to this node</p>
 
 
-### remove
+### NWTNodeInstance::remove
 <p>Removes a node instance from the dom</p>
 
 
-### insert
+### NWTNodeInstance::insert
 <p>Inserts a given node into this node at the proper position</p>
 
 
-### click
+### NWTNodeInstance::click
 <p>Simulates a click event on a node</p>
 
 
-Amountof time in seconds to wait### wait
+Amountof time in seconds to wait### NWTNodeInstance::wait
 <p>Waits a certain amount of time before running<br />chained callbacks</p>
 
 @param (integer) - 
 
 
 
-## NWTNode::NWTNode
+## NWTNode
 <p>NWTNode Class<br />Used for getting elements</p>
 
 @constructor - 
 
 
 
-Nodemarkup### create
+Nodemarkup### NWTNode::create
 <p>Creates a node from markup</p>
 
 @param (string) - 
 
 
 
-## one::one
+## one
 <p>Returns a NWTNodeInstance class</p>
 
 @constructor - 
 
 
 
-## all::all
+## all
 <p>Returns a NWTNodeList class</p>
 
 @constructor - 
 
 
 
-## NWTNodeList::NWTNodeList
+## NWTNodeList
 <p>A node iterator</p>
 
 @constructor - 
 
 
 
-Callbackfor each node### each
+Callbackfor each node### NWTNodeList::each
 <p>Node iterator</p>
 
 @param (function) - 
 
 
 
-Offsetof the item### item
+Offsetof the item### NWTNodeList::item
 <p>Returns a node specified by an offset</p>
 
 @param (integer) - 
 
 
 
-### size
+### NWTNodeList::size
 <p>Returns the size of the current nodelist</p>
 
 @return (integer) - 
