@@ -1,3 +1,7 @@
+/**
+ * Animation utility
+ * @constructor
+ */
 function NWTAnimate () {
 
 }
