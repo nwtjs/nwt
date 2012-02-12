@@ -171,7 +171,7 @@ NWTNodeInstance.prototype._getRemainingStyles = function(styles) {
 		styleRegex.push(styles[i]);
 	}
 
-	return this.getAttribute('style').replace(new RegExp('(' + styleRegex.join('|') + '):[a-zA-Z0-9\-]*;'), '');
+	return this.getAttribute('style').replace(new RegExp('(' + styleRegex.join('|') + '):[a-zA-Z0-9\-]*;', 'g'), '');
 };
 
 
@@ -215,6 +215,7 @@ NWTNodeInstance.prototype.setStyle = function(property, value) {
  * @param object Object map of styles to set
  */
 NWTNodeInstance.prototype.setStyles = function(newStyles) {
+
 	if( !this.getAttribute('style') ) {
 		this.setAttribute('style', '');
 	}

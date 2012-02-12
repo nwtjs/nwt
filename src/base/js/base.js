@@ -15,50 +15,59 @@ NWT.prototype.implement = function(implClass, modClass) {
 	var impls = {
 		DelayableQueue : [
 			'wait', function () {
-				var queue = [],
 
-					inprogress = true;
+				var delay = 0;
 
-					getQueuedFunction = function (callback) {
-						return function () {
-							if( inprogress ) {
-								queue.push([callback, arguments, this]);
-								return this;
-							} else {
-								return callback.apply(this, arguments);
-							}
-						}
-					},
-	
+				return function (duration) {
+
+					delay += (duration*1000);
+
+					var self = this,
+
+					funcCache = {},
+
 					/**
-					 * Flushes the queue
-					 * Gets the queue entry, and makes the callback
-					 * Calls the next item to be flushed
+					 * Returns an executable function
+					 * uses setTimeout and the total queueTimer
 					 */
-					flushQueue = function(context) {
-						while (queue.length) {
-							var entry = queue.shift(),
-								result;
+					getQueuedFunction = function(func) {
 
-							result = entry[0].apply(context, entry[1]);
-							flushQueue(result);
+						funcCache[func] = self[func];
+
+						return function() {
+							//console.log('Queuing ', func, 'for ', delay, 'seconds')
+							var args = [],
+								i,
+								argLen = arguments.length;
+
+							for (i = 0; i < argLen ; i++ ) {
+								args.push(arguments[i]);
+							}
+
+							if( delay <= 0 ) {
+								return funcCache[func].apply(self, args);
+							}
+
+							setTimeout(function() {
+								delay -= (duration*1000);
+								funcCache[func].apply(self, args);
+								console.log('Timeout done', func, args)
+							}, delay);
+							return self;
 						}
 					};
-				
-				return function (duration) {
-					var self = this;
 
+					console.log('waiting for ', duration, delay)
+
+					/**
+					 * Wrap all class functions
+					 * We can unwrap at the end if the current wait is 0
+					 */
 					for( var i in self ) {
-						if (typeof self[i] != 'function') { continue; }
-						this[i] = getQueuedFunction.call(self, self[i]);
+						if (typeof self[i] != 'function' || i == 'wait' ) { continue; }
+						self[i] = getQueuedFunction(i);
 					}
-	
-					// Flush the delayed queue
-					setTimeout(function() {
-						inprogress = false;
-						flushQueue(self);
-					}, duration * 1000);
-	
+
 					return self;
 				}
 			}

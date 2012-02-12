@@ -152,6 +152,19 @@ nwt.unit
 );
 
 nwt.unit
+.describe('Tests Node.getStyle/setStyle.')
+.setup('<span id="id1"><span style="position:absolute;left:0px;top:0px;"></span></span>')
+.equal(
+	function() {
+		nwt.one('#id1 span').setStyles({left:100, top:100});
+		return nwt.one('#id1').getContent();
+	},
+	function() {
+		return '<span style="position:absolute;left:100px;top:100px;"></span>';
+	}
+);
+
+nwt.unit
 .describe('Tests Node.serialize.')
 .setup('<form id="theform"><input type="text" name="Some[name]" value="1"><input type="text" name="SomeOther" value="hello"></form>')
 .equal(
@@ -271,6 +284,6 @@ nwt.unit
 		return nwt.one('#id1').getContent();
 	},
 	function() {
-		return '<div style="left:0px;"></div>';
+		return '<div style=""></div>';
 	}
 );

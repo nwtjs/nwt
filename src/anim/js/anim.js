@@ -37,7 +37,10 @@ NWTAnimate.prototype.anim = function(node, styles, duration, easing) {
 		styles[i] = cssTransitionProperties[i];
 	}
 
-	node.setStyles(styles).wait(duration).removeStyles(cleanThese);
+	node.setStyles(styles);
+	setTimeout(function() {
+		node.removeStyles(cleanThese);
+	}, duration*1000);
 	return node;
 };
 
