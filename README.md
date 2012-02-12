@@ -68,7 +68,7 @@ el.setStyles({top:0, left:0});
 // Removes several styles
 el.removeStyles(['top', 'left']);
 
-// Gets the value of a styloe
+// Gets the value of a style
 el.getStyle('top')
 ```
 
@@ -128,6 +128,17 @@ var req = n.io('/backend').success(fn).post();
 
 // Abort if you want
 req.abort();
+
+// It's possible to make RESTFUL requests
+n.io('/backend?key=val').get();
+n.io('/backend').put();
+n.io('/backend').post();
+n.io('/backend').delete();
+
+// The put, delete, and post methods can take data to send to the backend
+// This data can come in the form of a string or node to serialize
+n.io('/backend').post('mypet=cat&name=snickers');
+n.io('/backend').post(n.one('form#theform'));
 ```
 
 IO callbacks receive a specially wrapped IO object. You can either use this object as a JSON response via the o.obj property, or static text. The original request object is available in the request key of the object.

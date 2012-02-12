@@ -29,9 +29,12 @@ NWTIOResponse.prototype.toString = function () {
  * @constructor
  */
 function NWTIO(args) {
-	this.req = null;
+	this.req = new XMLHttpRequest();
 	this.config = {};
 	this.url = args[0];
+
+	// Data to send as
+	this.ioData = '';
 
 	var chainableSetters = ['success', 'failure', 'serialize'],
 		i,
@@ -55,10 +58,8 @@ function NWTIO(args) {
  * Runs the IO call
  * @param string Type of call
  */
-NWTIO.prototype._run = function(method) {
+NWTIO.prototype._run = function() {
 	var mythis = this;
-	this.req = new XMLHttpRequest();
-	this.req.open(method, this.url);
 	this.req.onreadystatechange = function() {		
 		var callback;
 
@@ -73,16 +74,28 @@ NWTIO.prototype._run = function(method) {
 			mythis.config[callback](response);
 		}
 	};
-	this.req.send();
+
+	this.req.send(this.ioData ? this.ioData : null);
 	return this;
 };
 
 
 /**
  * Runs IO POST
+ * We also use post for PUT or DELETE requests
  */
-NWTIO.prototype.post = function() {
-	return this._run('POST');
+NWTIO.prototype.post = function(data, method) {
+	this.ioData = data;
+
+	var req = this.req,
+		method = method || 'POST';
+
+	req.open(method, this.url);
+	
+	//Send the proper header information along with the request
+	req.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+
+	return this._run();
 };
 
 
@@ -90,23 +103,24 @@ NWTIO.prototype.post = function() {
  * Runs IO GET
  */
 NWTIO.prototype.get = function() {
-	return this._run('GET');
+	this.req.open('GET', this.url);
+	return this._run();
 };
 
 
 /**
  * Runs IO PUT
  */
-NWTIO.prototype.put = function() {
-	return this._run('PUT');
+NWTIO.prototype.put = function(data) {
+	return this.post('?' + data, 'PUT');
 };
 
 
 /**
  * Runs IO DELETE
  */
-NWTIO.prototype['delete'] = function() {
-	
+NWTIO.prototype['delete'] = function(data) {
+	return this.post('?' + data, 'DELETE');	
 };
 
 
