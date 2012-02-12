@@ -43,29 +43,32 @@ nwt.unit
 	nwt.io('/testheader')
 		.success(
 			function(o) {
-				unit.equal(o.obj.header, 'get')
+				unit.equal(o.obj.header, 'get');
+				unit.report();
 			})
 		.get();
 
 	nwt.io('/testheader')
 	.success(
 		function(o) {
-			unit.equal(o.obj.header, 'post')
+			unit.equal(o.obj.header, 'post');
+			unit.report();
 		})
 	.post('asdf=bbq');
 
 	nwt.io('/testheader')
 	.success(
 		function(o) {
-			unit.equal(o.obj.header, 'put')
+			unit.equal(o.obj.header, 'put');
+			unit.report();
 		})
 	.put();
 
 	nwt.io('/testheader')
 	.success(
 		function(o) {
-			unit.equal(o.obj.header, 'delete')
-			unit.report()
+			unit.equal(o.obj.header, 'delete');
+			unit.report();
 		})
 	.delete();
 });
@@ -78,6 +81,7 @@ nwt.unit
 	.success(
 		function(o) {
 			unit.equal(o.obj.name, 'bbq')
+			unit.report();
 		})
 	.post('cat=bbq');
 

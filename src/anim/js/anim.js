@@ -46,3 +46,12 @@ NWTAnimate.prototype.anim = function(node, styles, duration, easing) {
 
 var animation = new NWTAnimate();
 nwt.anim = animation.anim;
+
+
+/**
+ * Implement a node API to animate
+ * @see NWTAnimate::anim
+ */
+NWTNodeInstance.prototype.anim = function(styles, duration, easing) {
+	return nwt.anim(this, styles, duration, easing);
+};

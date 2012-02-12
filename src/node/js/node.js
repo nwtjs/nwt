@@ -419,15 +419,6 @@ NWTNodeInstance.prototype.click = function() {
 
 
 /**
- * Implement an API to animate
- * @see NWTAnimate::anim
- */
-NWTNodeInstance.prototype.anim = function(styles, duration, easing) {
-	return nwt.anim(this, styles, duration, easing);
-};
-
-
-/**
  * NWTNode Class
  * Used for getting elements
  * @constructor

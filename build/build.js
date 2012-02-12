@@ -23,8 +23,8 @@ for( var i in packages ) {
 	scriptContent = '(function(){' + scriptContent.join('') + '}());';
 
 	// Finished a package
-	var minified = uglify(scriptContent, {mangle_options: {toplevel: true}});
-	fs.writeFileSync(__dirname + '/../nwt.' + i + '.min.js', minified);
-	
-	console.log(minified);
+	scriptContent = uglify(scriptContent, {mangle_options: {toplevel: true}});
+	fs.writeFileSync(__dirname + '/../nwt.' + i + '.min.js', scriptContent);
+
+	console.log(scriptContent);
 }

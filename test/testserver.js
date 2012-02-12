@@ -1,3 +1,13 @@
+/**
+ * The testserver loads the test script
+ * and provides various methods to test against
+ * 
+ * To run the testserver:
+ * 	Run:		node test/testserver.js
+ *  Navigate:	http://localhost:3000/test
+ *  
+ */
+
 var express = require("express"),
 
 	querystring = require('querystring'),
