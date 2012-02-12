@@ -69,3 +69,24 @@ nwt.unit
 		})
 	.delete();
 });
+
+nwt.unit
+.describe('Tests nwt.io() element serialization.')
+.setup('<form id="ajax" method="POST" enctype="multipart/form-data" action="#"><input type="text" name="cat" value="cheeseburger"><input type="text" name="dog" value="asdf"></form>').run(function(unit) {
+
+	nwt.io('/checkcat')
+	.success(
+		function(o) {
+			unit.equal(o.obj.name, 'bbq')
+		})
+	.post('cat=bbq');
+
+	nwt.io('/checkcat')
+	.success(
+		function(o) {
+			unit.equal(o.obj.name, 'cheeseburger')
+			unit.report();
+		})
+	.post(nwt.one('#ajax'));
+
+});

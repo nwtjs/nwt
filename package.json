@@ -9,6 +9,7 @@
 		"dox" : "0.1.3",
 		"ejs" : "*",
 		"express" : "*",
+		"formidable" : "*",
 		"uglify-js" : "*"
 	},
 	"repository": {

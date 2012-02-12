@@ -85,15 +85,30 @@ NWTIO.prototype._run = function() {
  * We also use post for PUT or DELETE requests
  */
 NWTIO.prototype.post = function(data, method) {
-	this.ioData = data;
+
+	var urlencodedForm = true;
+	
+	if (typeof data == 'string') {
+		this.ioData = data;
+	} else if (typeof data == 'object' && data._node) {
+
+		if (data.getAttribute('enctype')) {
+			urlencodedForm = false;
+		}
+		
+		this.ioData = new FormData(data._node);
+	}
 
 	var req = this.req,
 		method = method || 'POST';
 
 	req.open(method, this.url);
-	
+
 	//Send the proper header information along with the request
-	req.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+	// Send as form encoded if we do not have a file field
+	if (urlencodedForm) {
+		req.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+	}
 
 	return this._run();
 };
