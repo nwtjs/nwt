@@ -53,6 +53,9 @@ el.addClass('someclass');
 // Removes a class
 el.removeClass('someclass');
 
+// Swaps a class
+el.swapClass('oldclass', 'newclass');
+
 // Sets a style
 el.setStyle('top', 0);
 
@@ -74,6 +77,13 @@ Creating new node instances is easy using n.node.create().
 ```js
 var el = n.node.create('<div class="boringexample">Some HTML</div>');
 alert(el.hasClass('boringexample')); // Alerts true
+
+// Appending nodes
+n.one('body').append(el);
+
+// Can also use insert (before or after)
+n.one('.container').insert(el, 'before');
+n.one('.container').insert(el, 'after');
 ```
 
 

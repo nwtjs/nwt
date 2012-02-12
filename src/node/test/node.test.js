@@ -81,6 +81,18 @@ nwt.unit
 );
 
 nwt.unit
+.describe('Tests Node.swapClass.')
+.true(
+	function() {
+		nwt.one('#id1').addClass('bbq');
+		return nwt.one('#id1').swapClass('bbq', 'sauce').hasClass('sauce');
+	},
+	function() {
+		return !nwt.one('#id1').swapClass('bbq', 'sauce').hasClass('bbq');
+	}
+);
+
+nwt.unit
 .describe('Tests Node.data.')
 .equal(
 	function() {

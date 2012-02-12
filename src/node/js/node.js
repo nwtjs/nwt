@@ -74,7 +74,17 @@ NWTNodeInstance.prototype.addClass = function(className) {
  * Removes a class from the node.
  */
 NWTNodeInstance.prototype.removeClass = function(className) {
-	this._node.className = this._node.className.replace(className, '');
+	return this.swapClass(className, '');
+};
+
+
+/**
+ * Replaces a class on a node
+ * @param string oldClass Old class name
+ * @param string newClass New class name
+ */
+NWTNodeInstance.prototype.swapClass = function(oldClass, newClass) {
+	this._node.className = this._node.className.replace(oldClass, newClass);
 	return this;
 };
 
