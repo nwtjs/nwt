@@ -23,6 +23,59 @@ el.setContent('Hello Nodo');
 alert(el.getContent());
 ```
 
+A few useful methods
+
+```js
+// Accesses the parent node
+el.parent();
+
+// Access an ancestor node by selector
+el.ancestor('.someclass');
+
+// Gets the previous node
+el.previous();
+
+// Gets the next node
+el.next();
+
+// Returns a single element that is a child of this node based on selector
+el.one('#selector');
+
+// Returns a collection of elements based on selector
+el.all('.selector');
+
+// Checks if the el has a class
+el.hasClass('someclass');
+
+// Adds a class
+el.addClass('someclass');
+
+// Removes a class
+el.removeClass('someclass');
+
+// Sets a style
+el.setStyle('top', 0);
+
+// Removes a style
+el.removeStyle('top')
+
+// Sets several styles
+el.setStyles({top:0, left:0});
+
+// Removes several styles
+el.removeStyles(['top', 'left']);
+
+// Gets the value of a styloe
+el.getStyle('top')
+```
+
+Creating new node instances is easy using n.node.create().
+
+```js
+var el = n.node.create('<div class="boringexample">Some HTML</div>');
+alert(el.hasClass('boringexample')); // Alerts true
+```
+
 
 <h2>Node Collections</h2>
 
@@ -70,5 +123,32 @@ n.io('/backend').success(fn).post();
 The anim utility provides a wrapper for hardware accelerated CSS3 transforms.
 
 ```js
+// Animate #cat for 2 seconds
 n.one('#cat').anim({top:100, left:100}, 2);
+
+
+// The following easing functions are available:
+// linear|ease|ease-in|ease-out|ease-in-out|cubic-bezier(n,n,n,n);
+n.one('#cat').anim({top:100, left:100}, 2, 'ease-in');
 ```
+
+<h2>Chaining with Node</h2>
+
+Most node objects can be chained. 
+
+```js
+// Set the class and content of the node
+n.one('#cat').addClass('lolcat').setContent('cheezburger');
+```
+
+Using the wait method, you can set delays in chained methods. This is useful for performing multiple animations, starting one after the other, or removing an element after an animation.
+
+```js
+// Update the content after animation
+n.one('#cat').anim({left:100}).wait(2).setContent('cheezburger');
+
+// Update the content after animation, then remove it
+n.one('#cat').anim({left:100}).wait(2).setContent('cheezburger').wait(4).remove();
+```
+
+
