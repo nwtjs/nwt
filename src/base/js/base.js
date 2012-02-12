@@ -35,7 +35,6 @@ NWT.prototype.implement = function(implClass, modClass) {
 						funcCache[func] = self[func];
 
 						return function() {
-							//console.log('Queuing ', func, 'for ', delay, 'seconds')
 							var args = [],
 								i,
 								argLen = arguments.length;
@@ -51,20 +50,17 @@ NWT.prototype.implement = function(implClass, modClass) {
 							setTimeout(function() {
 								delay -= (duration*1000);
 								funcCache[func].apply(self, args);
-								console.log('Timeout done', func, args)
 							}, delay);
 							return self;
 						}
 					};
-
-					console.log('waiting for ', duration, delay)
 
 					/**
 					 * Wrap all class functions
 					 * We can unwrap at the end if the current wait is 0
 					 */
 					for( var i in self ) {
-						if (typeof self[i] != 'function' || i == 'wait' ) { continue; }
+						if (typeof self[i] != 'function' || i == 'wait' || funcCache[i] ) { continue; }
 						self[i] = getQueuedFunction(i);
 					}
 
