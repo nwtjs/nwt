@@ -204,3 +204,14 @@ n.one('#cat').anim({left:100}).wait(2).setContent('cheezburger').wait(4).remove(
 ```
 
 
+<h2>Additional Information</h2>
+
+<h3>Browser support</h3>
+
+NWTui works well in the latest version of all modern browsers (Firefox, Safari, Chrome, IE10). For full IE support, we recommend a conditional tag inclusion.
+
+```html
+<!--[if lte IE 9]>
+	<script type="text/javascript" src="/nwt.fallback.min.js"></script>
+<![endif]-->
+```

@@ -8,6 +8,7 @@ app.set('view options', {
 });
 
 app.use(express.static(__dirname + '/../src'));
+app.use(express.static(__dirname + '/../'));
 
 app.get('/test', function(req, res){
 	res.render('test.ejs');

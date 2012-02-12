@@ -157,31 +157,13 @@ NWTNodeInstance.prototype.getStyle = function(property) {
 		return '';
 	}
 
-	var matchedStyle = this.getAttribute('style').match(new RegExp(property + ':([a-zA-Z0-9\-\.]*);'), '');
+	var matchedStyle = this._node.style[property];
 
-	if( matchedStyle && matchedStyle[1] ) {
-		return matchedStyle[1];
+	if( matchedStyle ) {
+		return matchedStyle;
 	} else {
 		return null;
 	}
-};
-
-
-/**
- * Gets the style string of a node after removing styles
- * Does not update the node style
- * @param array Array of styles to remove
- */
-NWTNodeInstance.prototype._getRemainingStyles = function(styles) {
-	var i,
-		styleRegex = [],
-		stylesLen = styles.length;
-
-	for (i = 0; i < stylesLen; i += 1) {
-		styleRegex.push(styles[i]);
-	}
-
-	return this.getAttribute('style').replace(new RegExp('(' + styleRegex.join('|') + '):[a-zA-Z0-9\-]*;', 'g'), '');
 };
 
 
@@ -204,7 +186,13 @@ NWTNodeInstance.prototype.removeStyles = function(props) {
 		props = [props];
 	}
 
-	return this.setAttribute('style', this._getRemainingStyles(props));
+	var i,
+		propsLen = props.length;
+
+	for (i = 0; i < propsLen; i += 1) {
+		this._node.style[props[i]] = '';
+	}
+	return this;
 };
 
 
@@ -256,11 +244,8 @@ NWTNodeInstance.prototype.setStyles = function(newStyles) {
 			eachStyleVal += defaultToUnit[i];
 		}
 
-		newStyle += i + ':' + eachStyleVal + ';';
-		newStyleKeys.push(i);
+		this._node.style[i] = eachStyleVal;
 	}
-
-	this.setAttribute('style', this._getRemainingStyles(newStyleKeys) + newStyle);
 
 	return this;
 };

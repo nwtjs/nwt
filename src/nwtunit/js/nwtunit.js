@@ -73,7 +73,7 @@ NWTUnitTestFramework.prototype.equal = function() {
 /**
  * Validates that all arguments results are true
  */
-NWTUnitTestFramework.prototype.true = function() {
+NWTUnitTestFramework.prototype.isTrue = function() {
 	var numArgs = arguments.length,
 		i;
 
@@ -90,7 +90,7 @@ NWTUnitTestFramework.prototype.true = function() {
 /**
  * Validates that all arguments results are false
  */
-NWTUnitTestFramework.prototype.false = function() {
+NWTUnitTestFramework.prototype.isFalse = function() {
 	var numArgs = arguments.length,
 		i;
 

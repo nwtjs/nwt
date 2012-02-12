@@ -105,7 +105,7 @@ NWTIO.prototype.put = function() {
 /**
  * Runs IO DELETE
  */
-NWTIO.prototype.delete = function() {
+NWTIO.prototype['delete'] = function() {
 	
 };
 

@@ -61,7 +61,7 @@ nwt.unit
 
 nwt.unit
 .describe('Tests Node.hasClass/addClass.')
-.true(
+.isTrue(
 	function() {
 		return nwt.one('#id1').hasClass('myclass');
 	},
@@ -73,7 +73,7 @@ nwt.unit
 
 nwt.unit
 .describe('Tests Node.removeClass.')
-.false(
+.isFalse(
 	function() {
 		nwt.one('#id1').removeClass('anotherclass');
 		return nwt.one('#id1').hasClass('anotherclass');
@@ -82,7 +82,7 @@ nwt.unit
 
 nwt.unit
 .describe('Tests Node.swapClass.')
-.true(
+.isTrue(
 	function() {
 		nwt.one('#id1').addClass('bbq');
 		return nwt.one('#id1').swapClass('bbq', 'sauce').hasClass('sauce');
@@ -165,14 +165,17 @@ nwt.unit
 
 nwt.unit
 .describe('Tests Node.getStyle/setStyle.')
-.setup('<span id="id1"><span style="position:absolute;left:0px;top:0px;"></span></span>')
+.setup('<span id="id1"><span style="position: absolute; left: 0px; top: 0px;"></span></span>')
 .equal(
 	function() {
 		nwt.one('#id1 span').setStyles({left:100, top:100});
-		return nwt.one('#id1').getContent();
+		return nwt.one('#id1 span').getStyle('left');
 	},
 	function() {
-		return '<span style="position:absolute;left:100px;top:100px;"></span>';
+		return nwt.one('#id1 span').getStyle('top');
+	},
+	function() {
+		return '100px';
 	}
 );
 
@@ -282,7 +285,7 @@ nwt.unit
 		return nwt.one('#id1').getContent();
 	},
 	function() {
-		return '<div style="left:0px;"></div>';
+		return '<div style="left: 0px; "></div>';
 	}
 );
 

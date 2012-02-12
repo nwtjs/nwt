@@ -6,3 +6,8 @@ exports.main = [
 	'node/js/node.js',
 	'nodelist/js/nodelist.js'
 ];
+
+exports.fallback = [
+	'ie/js/sizzle.js',
+	'ie/js/node.js'
+];
