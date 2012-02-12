@@ -10,9 +10,9 @@ nwt.unit
         ].join(''))
 .equal(
 	function () {
-		nwt.one('#anim').anim({left:400}, 2, 'linear').wait(4).anim({left:0}, 2, 'linear');
-		nwt.one('#anim2').anim({left:400}, 2, 'ease').wait(4).anim({left:0}, 2, 'ease');
-		nwt.one('#anim3').anim({left:400}, 2, 'ease-in').wait(4).anim({left:0}, 2, 'ease-in');
+		nwt.one('#anim').anim({left:400, opacity:0}, 2, 'linear').wait(4).anim({left:0, opacity:1}, 2, 'linear');
+		nwt.one('#anim2').anim({left:400, color:'#FF0000'}, 2, 'ease').wait(4).anim({left:0, color:'#00FF00'}, 2, 'ease');
+		nwt.one('#anim3').anim({left:400, background:'#0000FF'}, 2, 'ease-in').wait(4).anim({left:0}, 2, 'ease-in');
 		nwt.one('#anim4').anim({left:400}, 2, 'ease-out').wait(4).anim({left:0}, 2, 'ease-out');
 		nwt.one('#anim5').anim({left:400}, 2, 'ease-in-out').wait(4).anim({left:0}, 2, 'ease-in-out');
 		nwt.one('#anim6').anim({left:400}, 2, 'cubic-bezier(1,0,1,0)').wait(4).anim({left:0}, 2, 'cubic-bezier(1,0,1,0)');

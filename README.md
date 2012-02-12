@@ -148,7 +148,7 @@ n.io('/test').success(function(o) {
 
 <h2>Anim (animation)</h2>
 
-The anim utility provides a wrapper for hardware accelerated CSS3 transforms.
+The anim utility provides a wrapper for easy CSS3 transitions. 
 
 ```js
 // Animate #cat for 2 seconds
@@ -159,6 +159,20 @@ n.one('#cat').anim({top:100, left:100}, 2);
 // linear|ease|ease-in|ease-out|ease-in-out|cubic-bezier(n,n,n,n);
 n.one('#cat').anim({top:100, left:100}, 2, 'ease-in');
 ```
+
+It's possible to animate most positioning and formating CSS attributes.
+
+```js
+// Animates the color to red
+n.one('#mydiv').anim({color:'#FF0000'});
+
+// Hides an element by removing opacity
+n.one('#mydiv').anim({opacity:0});
+
+// Animates the background color and opacity
+n.one('#mydiv').anim({background:'#00FF00', opacity:1});
+```
+
 
 <h2>Chaining with Node</h2>
 
