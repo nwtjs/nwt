@@ -18,7 +18,7 @@ NWTAnimate.prototype.anim = function(node, styles, duration, easing) {
 	easing = easing || '';
 	duration = duration || 1;
 
-	var trail = ' ' + duration + ' ' + easing,
+	var trail = ' ' + duration + 's ' + easing,
 
 		// Just support all browsers for now
 		cssTransitionProperties = {

@@ -3,6 +3,7 @@
  * @constructor
  */
 function NWTNodeInstance(node) {
+	nwt.implement('DelayableQueue', this);
 	this._node = node;
 }
 
@@ -331,6 +332,7 @@ NWTNodeInstance.prototype.getContent = function(content) {
  */
 NWTNodeInstance.prototype.setContent = function(content) {
 	this._node.innerHTML = content;
+	return this;
 };
 
 
@@ -421,21 +423,11 @@ NWTNodeInstance.prototype.click = function() {
 
 
 /**
- * Waits a certain amount of time before running
- * chained callbacks
- * @param integer Amount of time in seconds to wait
+ * Implement an API to animate
+ * @see NWTAnimate::anim
  */
-NWTNodeInstance.prototype.wait = function(seconds) {
-
-	function DelayableTask() {
-		
-	}
-
-	setTimeout(function () {
-		runChain();
-	}, seconds * 1000);
-
-	return new DelayableTask();
+NWTNodeInstance.prototype.anim = function(styles, duration, easing) {
+	return nwt.anim(this, styles, duration, easing);
 };
 
 
