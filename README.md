@@ -11,7 +11,7 @@ Include the script. We recommend namespacing window.nwt to window.n for easier a
 <script type="text/javascript">window.n = window.nwt;</script>
 ```
 
-<h2>Node Methods</h2>
+<h2>Node Methods (DOM methods)</h2>
 
 Accessing dom elements is easy and can be done with n.one() or n.all() for a collection.
 
@@ -62,4 +62,13 @@ req.post();
 
 // Or chain everything together:
 n.io('/backend').success(fn).post();
+```
+
+
+<h2>Anim (animation)</h2>
+
+The anim utility provides a wrapper for hardware accelerated CSS3 transforms.
+
+```js
+n.one('#cat').anim({top:100, left:100}, 2);
 ```
