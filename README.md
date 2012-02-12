@@ -114,7 +114,35 @@ req.post();
 
 
 // Or chain everything together:
-n.io('/backend').success(fn).post();
+var req = n.io('/backend').success(fn).post();
+
+// Abort if you want
+req.abort();
+```
+
+IO callbacks receive a specially wrapped IO object. You can either use this object as a JSON response via the o.obj property, or static text. The original request object is available in the request key of the object.
+
+```js
+// The server here responds with the following JSON: {"foo": "bar"}
+n.io('/test').success(function(o) {
+
+	// Alerts the string: {"foo": "bar"}
+	alert(o); 
+
+	// Alerts the string: bar
+	alert(o.obj.foo);
+}).post();
+
+
+// The server here responds with: <span>Hello NWTui</span>
+n.io('/test').success(function(o) {
+
+	// Sets the content of an element to the response text
+	n.one('#myid').setContent(o);
+
+	// In this case o.obj is undefined because we are not able to parse the JSON
+}).post();
+
 ```
 
 

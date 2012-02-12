@@ -1,4 +1,26 @@
 /**
+ * Wraps an XHR response object 
+ * This allows us to parse on demand with o.obj()
+ * The toString method will also spit out the flat response
+ * @param object XHR request
+ */
+function NWTIOResponse (request) {
+	this.request = request;
+	try {
+		this.obj = JSON.parse(request.responseText);
+	} catch(e) {}
+}
+
+
+/**
+ * Returns the non-parse responseText
+ */
+NWTIOResponse.prototype.toString = function () {
+	return this.request.responseText;
+};
+
+
+/**
  * Provides ajax communication methods
  * The folllowing methods are chainable
  * success - success handler
@@ -47,7 +69,8 @@ NWTIO.prototype._run = function(method) {
 		}
 
 		if (callback && mythis.config[callback]) {
-			mythis.config[callback](mythis.req);
+			var response = new NWTIOResponse(mythis.req);
+			mythis.config[callback](response);
 		}
 	};
 	this.req.send();
@@ -85,6 +108,16 @@ NWTIO.prototype.put = function() {
 NWTIO.prototype.delete = function() {
 	
 };
+
+
+/**
+ * Aborts this request
+ */
+NWTIO.prototype.abort = function() {
+	this.req.abort();
+	return this;
+};
+
 
 nwt.io = function() {
 	return new NWTIO(arguments);

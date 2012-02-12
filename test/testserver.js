@@ -14,7 +14,7 @@ app.get('/test', function(req, res){
 });
 
 function getSimpleJson(req, res) {
-	res.end('{result: 1}');
+	res.end('{"result": 1}');
 }
 
 app.get('/simplejson', getSimpleJson);
