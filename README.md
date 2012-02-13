@@ -218,6 +218,7 @@ n.one('#cat').anim({left:100}).wait(2).setContent('cheezburger').wait(4).remove(
 <h2>Events</h2>
 
 It's possible to chain most events off of the node instance using node.on, or node.once.
+
 ```js
 // Node.on fires an event every time that event happens
 n.one('#myid').on('click', function (e) {
