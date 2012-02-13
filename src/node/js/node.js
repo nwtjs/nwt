@@ -146,6 +146,16 @@ setAttribute: function(property, value) {
 	return this;
 },
 
+/**
+ * Resolves JS Styles
+ */
+_jsStyle: function (name) {
+	var lookupMap = {float: 'cssFloat'};
+
+	if (lookupMap[name]) name = lookupMap[name];
+	return name;
+},
+
 
 /**
  * Gets a style attribute set on the node
@@ -156,6 +166,8 @@ getStyle: function(property) {
 	if( !this.getAttribute('style') ) {
 		return '';
 	}
+
+	property = this._jsStyle(property);
 
 	var matchedStyle = this._node.style[property];
 
@@ -237,14 +249,15 @@ setStyles: function(newStyles) {
 		newStyleKeys = [];
 
 	for( i in newStyles ) {
+		var styleKey = this._jsStyle(i);
 		eachStyleVal = newStyles[i];
 
 		// Default the unit if necessary
-		if (defaultToUnit[i] && !isNaN(eachStyleVal)) {
-			eachStyleVal += defaultToUnit[i];
+		if (defaultToUnit[styleKey] && !isNaN(eachStyleVal)) {
+			eachStyleVal += defaultToUnit[styleKey];
 		}
 
-		this._node.style[i] = eachStyleVal;
+		this._node.style[styleKey] = eachStyleVal;
 	}
 
 	return this;

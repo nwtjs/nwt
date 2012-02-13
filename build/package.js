@@ -11,5 +11,6 @@ exports.main = [
 
 exports.fallback = [
 	'ie/js/sizzle.js',
-	'ie/js/node.js'
+	'ie/js/node.js',
+	'ie/js/anim.js'
 ];

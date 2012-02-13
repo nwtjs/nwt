@@ -164,7 +164,7 @@ nwt.unit
 );
 
 nwt.unit
-.describe('Tests Node.getStyle/setStyle.')
+.describe('Tests Node.getStyle/setStyle 2.')
 .setup('<span id="id1"><span style="position: absolute; left: 0px; top: 0px;"></span></span>')
 .equal(
 	function() {
