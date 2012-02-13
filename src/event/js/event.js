@@ -5,6 +5,7 @@
  */
 function NWTEventInstance (e) {
 	this._e = e;
+	this.target = new NWTNodeInstance(e.target);
 }
 
 NWTEventInstance.prototype = {

@@ -138,6 +138,15 @@ getAttribute: function(property) {
 
 
 /**
+ * Pass-thru to node.hasAttribute
+ * @param string Attribute to test for
+ */
+hasAttribute: function(property) {
+	return this._node.hasAttribute(property);
+},
+
+
+/**
  * Sets an attribute on the DOM node
  * @param string Attribute to set
  */
