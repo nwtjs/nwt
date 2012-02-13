@@ -215,6 +215,42 @@ n.one('#cat').anim({left:100}).wait(2).setContent('cheezburger').wait(4).remove(
 ```
 
 
+<h2>Events</h2>
+
+It's possible to chain most events off of the node instance using node.on, or node.once.
+```js
+// Node.on fires an event every time that event happens
+n.one('#myid').on('click', function (e) {
+    // Assert: this == n.one('#myid')
+});
+
+n.one('#myid').once('click', function (e) {
+    // Will only be called once
+    // Detaches the event listener after firing once
+});
+
+// Use off to remove events
+n.one('#myid').on('click', fn);
+n.one('#myid').off('click', fn); // Listener removed
+```
+
+Event callbacks receive a special NWTEventInstance object.
+
+```js
+n.one('#myid').on('click', function (e) {
+
+    // Prevents the event from bubbling up the dom
+    e.noBubble();
+
+    // Prevents the event from performing the default action
+    e.noDefault();
+
+    // Calls both e.noBubble and e.noDefault
+    e.stop();
+});
+```
+
+
 <h2>Additional Information</h2>
 
 <h3>Browser support</h3>

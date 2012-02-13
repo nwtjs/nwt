@@ -34,9 +34,10 @@ NWTAnimate.prototype.anim = function(node, styles, duration, easing) {
 
 	for (i in cssTransitionProperties) {
 		cleanThese.push(i);
-		styles[i] = cssTransitionProperties[i];
 	}
 
+	// Need to be sure to implement the transition function first
+	node.setStyles(cssTransitionProperties);
 	node.setStyles(styles);
 	setTimeout(function() {
 		node.removeStyles(cleanThese);
