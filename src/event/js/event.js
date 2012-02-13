@@ -7,31 +7,32 @@ function NWTEventInstance (e) {
 	this._e = e;
 }
 
-
+NWTEventInstance.prototype = {
 /**
  * Stops the event totally
  * Calls NWTEventInstance noDefault and noBubble
  */
-NWTEventInstance.prototype.stop = function() {
+stop: function() {
 	return this.noBubble().noDefault();
-};
+},
 
 
 /**
  * Prevents the default action of the event
  */
-NWTEventInstance.prototype.noDefault = function() {
+noDefault: function() {
 	this._e.preventDefault();
 	return this;
-};
+},
 
 
 /**
  * Stops the propagation of the event
  */
-NWTEventInstance.prototype.noBubble = function() {
+noBubble: function() {
 	this._e.stopPropagation();
 	return this;
+}
 };
 
 
@@ -44,6 +45,7 @@ function NWTEvent() {
 }
 
 
+NWTEvent.prototype = {
 /**
  * Adds an event listener
  * @param object toImplement Any object which can be evented.
@@ -52,7 +54,7 @@ function NWTEvent() {
  * @param object context Execution context
  * @param bool once If true, discards the event callback after is runs
  */
-NWTEvent.prototype.on = function (implementOn, event, callback, context, once) {
+on: function (implementOn, event, callback, context, once) {
 
 	var wrappedCallback = function (e){
 		var eventWrapper = new NWTEventInstance(e);
@@ -63,17 +65,18 @@ NWTEvent.prototype.on = function (implementOn, event, callback, context, once) {
 			implementOn.removeEventListener(event, wrappedCallback);
 		}
 	};
-	
+
 	implementOn.addEventListener(event, wrappedCallback);
-};
+},
 
 /**
  * Removes an event listener from an eventable object
  * @param string Name Event name
  * @param function Callback Event callback
  */
-NWTEvent.prototype.off = function (implementOn, event, callback) {
+off: function (implementOn, event, callback) {
 	implement.on.removeEventListener(event, callback);
+}
 };
 
 

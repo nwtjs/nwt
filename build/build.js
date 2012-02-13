@@ -16,7 +16,12 @@ for( var i in packages ) {
 
 	for( var j = 0, file; file = packages[i][j] ; j++ ) {
 		console.log('Compressing file file:', file);
-		scriptContent.push(fs.readFileSync(__dirname + '/../src/' + file, 'utf8'));
+		var thisScript = fs.readFileSync(__dirname + '/../src/' + file, 'utf8');
+		scriptContent.push(thisScript);
+
+		// Uncomment to see what's breaking the build
+		//uglify(thisScript, {mangle_options: {toplevel: true}});
+		
 	}
 
 	// Wrap every file in an anonymous function

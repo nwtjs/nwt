@@ -30,32 +30,34 @@ function NWTNodeList(nodes) {
 }
 
 
+NWTNodeList.prototype = {
 /**
  * Node iterator
  * @param function Callback for each node
  */
-NWTNodeList.prototype.each = function(callback) {
+each: function(callback) {
 	for( var i = 0 , node ; node = this.nodes[i] ; i++ ) {
 		callback(node);
 	}
-};
+},
 
 
 /**
  * Returns a node specified by an offset
  * @param integer Offset of the item
  */
-NWTNodeList.prototype.item = function(offset) {
+item: function(offset) {
 	return this.nodes[offset];
-}
+},
 
 
 /**
  * Returns the size of the current nodelist
  * @return integer
  */
-NWTNodeList.prototype.size = function() {
+size: function() {
 	return this.nodes.length;
 }
+};
 
 nwt.all = nwt.node.all;

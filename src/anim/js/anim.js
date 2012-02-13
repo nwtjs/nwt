@@ -6,6 +6,7 @@ function NWTAnimate () {
 
 }
 
+NWTAnimate.prototype = {
 /**
  * Method to animate a node
  * @param object NWTNode instance
@@ -13,7 +14,7 @@ function NWTAnimate () {
  * @param integer Duration in seconds to animate
  * @param string Easing type. One of: linear|ease|ease-in|ease-out|ease-in-out|cubic-bezier(n,n,n,n);
  */
-NWTAnimate.prototype.anim = function(node, styles, duration, easing) {
+anim: function(node, styles, duration, easing) {
 
 	easing = easing || 'ease-in-out';
 	duration = duration || 1;
@@ -43,6 +44,7 @@ NWTAnimate.prototype.anim = function(node, styles, duration, easing) {
 		node.removeStyles(cleanThese);
 	}, duration*1000);
 	return node;
+}
 };
 
 var animation = new NWTAnimate();

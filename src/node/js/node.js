@@ -7,12 +7,12 @@ function NWTNodeInstance(node) {
 	this._node = node;
 }
 
-
+NWTNodeInstance.prototype = {
 /**
  * Returns the ancestor that matches the css selector
  * @param string CSS Selector
  */
-NWTNodeInstance.prototype.ancestor = function(selector) {
+ancestor: function(selector) {
 
 	var allMatches = nwt.all(selector),
 		testNode = this._node,
@@ -44,38 +44,38 @@ NWTNodeInstance.prototype.ancestor = function(selector) {
 	} else {
 		return null;
 	}
-};
+},
 
-NWTNodeInstance.prototype.parent = function() {
+parent: function() {
 	this._node = this._node.parentNode;
 	return this;
-};
+},
 
 /**
  * Returns true if the class exists on the node, false if not
  */
-NWTNodeInstance.prototype.hasClass = function(className) {
+hasClass: function(className) {
 	return (this._node.className && this._node.className.indexOf(className) !== -1);
-};
+},
 
 
 /**
  * Adds a class to the node
  */
-NWTNodeInstance.prototype.addClass = function(className) {
+addClass: function(className) {
 	if( !this.hasClass(className)  ) {
 		this._node.className = this._node.className +  ' ' + className;
 	}
 	return this;
-};
+},
 
 
 /**
  * Removes a class from the node.
  */
-NWTNodeInstance.prototype.removeClass = function(className) {
+removeClass: function(className) {
 	return this.swapClass(className, '');
-};
+},
 
 
 /**
@@ -83,10 +83,10 @@ NWTNodeInstance.prototype.removeClass = function(className) {
  * @param string oldClass Old class name
  * @param string newClass New class name
  */
-NWTNodeInstance.prototype.swapClass = function(oldClass, newClass) {
+swapClass: function(oldClass, newClass) {
 	this._node.className = this._node.className.replace(oldClass, newClass);
 	return this;
-};
+},
 
 
 /**
@@ -96,16 +96,16 @@ NWTNodeInstance.prototype.swapClass = function(oldClass, newClass) {
  * you should pass 'user-id' to this function
  * @param string Data attribute to get
  */
-NWTNodeInstance.prototype.data = function(property) {
+data: function(property) {
 	return this._node.getAttribute('data-' + property);
-};
+},
 
 
 /**
  * Gets a property from the node object
  * @param string Attribute to get
  */
-NWTNodeInstance.prototype.get = function(property) {
+get: function(property) {
 
 	if( property === 'parentNode' ) {
 		var node = this._node[property];
@@ -114,7 +114,7 @@ NWTNodeInstance.prototype.get = function(property) {
 	}
 
 	return this._node[property];
-};
+},
 
 
 /**
@@ -122,36 +122,36 @@ NWTNodeInstance.prototype.get = function(property) {
  * @param string Attribute to set
  * @param string Value to set
  */
-NWTNodeInstance.prototype.set = function(property, value) {
+set: function(property, value) {
 	this._node[property] = value;
 	return this;
-};
+},
 
 
 /**
  * Gets an attribute from the DOM node
  * @param string Attribute to get
  */
-NWTNodeInstance.prototype.getAttribute = function(property) {
+getAttribute: function(property) {
 	return this._node.getAttribute(property);
-};
+},
 
 
 /**
  * Sets an attribute on the DOM node
  * @param string Attribute to set
  */
-NWTNodeInstance.prototype.setAttribute = function(property, value) {
+setAttribute: function(property, value) {
 	this._node.setAttribute(property, value);
 	return this;
-};
+},
 
 
 /**
  * Gets a style attribute set on the node
  * @param string Style attribute to get
  */
-NWTNodeInstance.prototype.getStyle = function(property) {
+getStyle: function(property) {
 
 	if( !this.getAttribute('style') ) {
 		return '';
@@ -164,23 +164,23 @@ NWTNodeInstance.prototype.getStyle = function(property) {
 	} else {
 		return null;
 	}
-};
+},
 
 
 /**
  * Removes a style attribute
  * @param string Style attribute to remove
  */
-NWTNodeInstance.prototype.removeStyle = function(property) {
+removeStyle: function(property) {
 	return this.removeStyles(property);
-};
+},
 
 
 /**
  * Removes an array of styles from a node
  * @param array Array of styles to remove
  */
-NWTNodeInstance.prototype.removeStyles = function(props) {
+removeStyles: function(props) {
 	// Default properties to an array
 	if (typeof props == 'string') {
 		props = [props];
@@ -193,7 +193,7 @@ NWTNodeInstance.prototype.removeStyles = function(props) {
 		this._node.style[props[i]] = '';
 	}
 	return this;
-};
+},
 
 
 /**
@@ -201,18 +201,18 @@ NWTNodeInstance.prototype.removeStyles = function(props) {
  * @param string Style attribute to set
  * @param string Value to set
  */
-NWTNodeInstance.prototype.setStyle = function(property, value) {
+setStyle: function(property, value) {
 	var newStyle = {};
 	newStyle[property] = value;
 	return this.setStyles(newStyle);
-};
+},
 
 
 /**
  * Sets multiple styles
  * @param object Object map of styles to set
  */
-NWTNodeInstance.prototype.setStyles = function(newStyles) {
+setStyles: function(newStyles) {
 
 	if( !this.getAttribute('style') ) {
 		this.setAttribute('style', '');
@@ -248,7 +248,7 @@ NWTNodeInstance.prototype.setStyles = function(newStyles) {
 	}
 
 	return this;
-};
+},
 
 
 /**
@@ -256,17 +256,17 @@ NWTNodeInstance.prototype.setStyles = function(newStyles) {
  * @param string Event to listen for
  * @param function Event callback function
  */
-NWTNodeInstance.prototype.on = function(event, callback) {
+on: function(event, callback) {
 	this._node.addEventListener(event, function(e) {
 		callback(new NWTEventWrapper(e));
 	}, false);
-};
+},
 
 
 /**
  * Serializes sub children of the current node into post data
  */
-NWTNodeInstance.prototype.serialize = function() {
+serialize: function() {
 
     var retVal = '',
 
@@ -311,43 +311,43 @@ NWTNodeInstance.prototype.serialize = function() {
       }
     }
     return retVal;
-};
+},
 
 
 /**
  * Gets the content of the node
  */
-NWTNodeInstance.prototype.getContent = function(content) {
+getContent: function(content) {
 	return this._node.innerHTML;
-};
+},
 
 
 /**
  * Sets the content of the node
  * @param string Content to set
  */
-NWTNodeInstance.prototype.setContent = function(content) {
+setContent: function(content) {
 	this._node.innerHTML = content;
 	return this;
-};
+},
 
 
 /**
  * Returns the next node
  */
-NWTNodeInstance.prototype.next = function() {
+next: function() {
 	var node = this._node.nextSibling;
 	return new NWTNodeInstance(node);
-};
+},
 
 
 /**
  * Returns the previous node
  */
-NWTNodeInstance.prototype.previous = function() {
+previous: function() {
 	var node = this._node.previousSibling;
 	return new NWTNodeInstance(node);
-};
+},
 
 
 /**
@@ -355,10 +355,10 @@ NWTNodeInstance.prototype.previous = function() {
  * Implements querySelector
  * @param string css selector
  */
-NWTNodeInstance.prototype.one = function(selector) {
+one: function(selector) {
 	var node = this._node.querySelector(selector);
 	return new NWTNodeInstance(node);
-};
+},
 
 
 /**
@@ -366,16 +366,16 @@ NWTNodeInstance.prototype.one = function(selector) {
  * Implements querySelector
  * @param string CSS Selector
  */
-NWTNodeInstance.prototype.all = function(selector) {
+all: function(selector) {
 	var nodelist = this._node.querySelectorAll(selector);
 	return new NWTNodeList(nodelist);
-};
+},
 
 
 /**
  * Appends a node instance to this node
  */
-NWTNodeInstance.prototype.append = function(node) {
+append: function(node) {
 
 	if( node instanceof NWTNodeInstance ) {
 		node = node._node;
@@ -383,21 +383,21 @@ NWTNodeInstance.prototype.append = function(node) {
 
 	this._node.appendChild(node);
 	return this;
-};
+},
 
 
 /**
  * Removes a node instance from the dom
  */
-NWTNodeInstance.prototype.remove = function() {
+remove: function() {
 	this._node.parentNode.removeChild(this._node);
-};
+},
 
 
 /**
  * Inserts a given node into this node at the proper position
  */
-NWTNodeInstance.prototype.insert = function(node, position) {
+insert: function(node, position) {
 	position = position || 'before';
 
 	if( position == 'before'  ) {
@@ -405,16 +405,17 @@ NWTNodeInstance.prototype.insert = function(node, position) {
 	} else if ( position == 'after' ) {
 		this._node.parentNode.insertBefore(node._node, this.next()._node);
 	}
-};
+},
 
 
 /**
  * Simulates a click event on a node
  */
-NWTNodeInstance.prototype.click = function() {
+click: function() {
 	var evt = document.createEvent("HTMLEvents");
 	evt.initEvent('click', true, true ); // event type,bubbling,cancelable
 	return !this._node.dispatchEvent(evt);
+}
 };
 
 
@@ -428,24 +429,25 @@ function NWTNode() {
 }
 
 
+NWTNode.prototype = {
 /**
  * Creates a node from markup
  * @param string Node markup
  */
-NWTNode.prototype.create = function(markup) {
+create: function(markup) {
 
 	var container = document.createElement('div');
 	container.innerHTML = markup;
 
 	return new NWTNodeInstance(container.childNodes[0]);
-};
+},
 
 
 /**
  * Returns a NWTNodeInstance class
  * @constructor
  */
-NWTNode.prototype.one = function(selector) {
+one: function(selector) {
 
 	if( typeof selector == 'string' ) {
 		var node = document.querySelectorAll(selector);
@@ -458,16 +460,17 @@ NWTNode.prototype.one = function(selector) {
 	} else {
 		return new NWTNodeInstance(selector);
 	}
-};
+},
 
 
 /**
  * Returns a NWTNodeList class
  * @constructor
  */
-NWTNode.prototype.all = function(selector) {
+all: function(selector) {
 	var nodelist = document.querySelectorAll(selector);
 	return new NWTNodeList(nodelist);
+}
 };
 
 

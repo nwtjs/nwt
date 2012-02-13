@@ -11,12 +11,13 @@ function NWTIOResponse (request) {
 	} catch(e) {}
 }
 
-
+NWTIOResponse.prototype = {
 /**
  * Returns the non-parse responseText
  */
-NWTIOResponse.prototype.toString = function () {
+toString: function () {
 	return this.request.responseText;
+}
 };
 
 
@@ -54,11 +55,12 @@ function NWTIO(args) {
 	}
 }
 
+NWTIO.prototype = {
 /**
  * Runs the IO call
  * @param string Type of call
  */
-NWTIO.prototype._run = function() {
+_run: function() {
 	var mythis = this;
 	this.req.onreadystatechange = function() {		
 		var callback;
@@ -77,14 +79,14 @@ NWTIO.prototype._run = function() {
 
 	this.req.send(this.ioData ? this.ioData : null);
 	return this;
-};
+},
 
 
 /**
  * Runs IO POST
  * We also use post for PUT or DELETE requests
  */
-NWTIO.prototype.post = function(data, method) {
+post: function(data, method) {
 
 	var urlencodedForm = true;
 	
@@ -111,40 +113,41 @@ NWTIO.prototype.post = function(data, method) {
 	}
 
 	return this._run();
-};
+},
 
 
 /**
  * Runs IO GET
  */
-NWTIO.prototype.get = function() {
+get: function() {
 	this.req.open('GET', this.url);
 	return this._run();
-};
+},
 
 
 /**
  * Runs IO PUT
  */
-NWTIO.prototype.put = function(data) {
+put: function(data) {
 	return this.post('?' + data, 'PUT');
-};
+},
 
 
 /**
  * Runs IO DELETE
  */
-NWTIO.prototype['delete'] = function(data) {
+'delete': function(data) {
 	return this.post('?' + data, 'DELETE');	
-};
+},
 
 
 /**
  * Aborts this request
  */
-NWTIO.prototype.abort = function() {
+abort: function() {
 	this.req.abort();
 	return this;
+}
 };
 
 
