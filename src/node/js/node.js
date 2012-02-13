@@ -237,6 +237,7 @@ NWTNodeInstance.prototype.setStyles = function(newStyles) {
 		newStyleKeys = [];
 
 	for( i in newStyles ) {
+		console.log('setting ', i)
 		eachStyleVal = newStyles[i];
 
 		// Default the unit if necessary

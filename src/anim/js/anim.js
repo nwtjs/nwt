@@ -15,17 +15,17 @@ function NWTAnimate () {
  */
 NWTAnimate.prototype.anim = function(node, styles, duration, easing) {
 
-	easing = easing || '';
+	easing = easing || 'ease-in-out';
 	duration = duration || 1;
 
 	var trail = ' ' + duration + 's ' + easing,
 
 		// Just support all browsers for now
 		cssTransitionProperties = {
-			'-webkit-transition': 'all' + trail,
-			'-moz-transition': ' all' + trail,
-			'-o-transition': ' all' + trail,
-			'-ms-transition': ' all' + trail,
+			'WebkitTransition': 'all' + trail,
+			'MozTransition': ' all' + trail,
+			'OTransition': ' all' + trail,
+			'MsTransition': ' all' + trail,
 			'transition': ' all' + trail
 		},
 
