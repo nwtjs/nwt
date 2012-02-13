@@ -282,10 +282,10 @@ nwt.unit
 .equal(
 	function() {
 		nwt.one('#id1 div').removeStyle('top');
-		return nwt.one('#id1').getContent();
+		return nwt.one('#id1').getStyle('top');
 	},
 	function() {
-		return '<div style="left: 0px; "></div>';
+		return '';
 	}
 );
 
