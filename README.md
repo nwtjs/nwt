@@ -254,6 +254,18 @@ n.one('#myid').on('click', function (e) {
 
 <h2>Additional Information</h2>
 
+<h3>Filesize</h3>
+
+```
+Library      Filesize      Gzipped
+------------------------------------
+jQuery       93,868        33,447
+NWTui         6,858
+```
+curl --compressed -so /dev/null http://localhost:3000/nwt.main.min.js -w '%{size_download}'
+curl --compressed -so /dev/null http://code.jquery.com/jquery-1.7.1.min.js -w '%{size_download}'
+
+
 <h3>Browser support</h3>
 
 NWTui works well in the latest version of all modern browsers (Firefox, Safari, Chrome, IE10). For full IE support, we recommend a conditional tag inclusion.

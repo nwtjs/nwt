@@ -3,10 +3,51 @@
  * @constructor
  */
 function NWTAnimate () {
-
+	this.animClass = 'nwt-anim-on';
 }
 
 NWTAnimate.prototype = {
+
+/**
+ * Initializes CSS for transforms
+ */
+init: function(duration, easing) {
+
+	if (nwt.one('#nwt-anim-styles')) {
+		nwt.one('#nwt-anim-styles').remove();
+	}
+	
+	var newStylesheet = nwt.node.create('<style type="text/css" id="nwt-anim-styles"></style>');
+
+	easing = easing || 'ease-in-out';
+	duration = duration || 1;
+
+	var trail = ' ' + duration + 's ' + easing,
+
+		// Just support all browsers for now
+		cssTransitionProperties = {
+			'-webkit-transition': 'all' + trail,
+			'-moz-transition': ' all' + trail,
+			'-o-ransition': ' all' + trail,
+			'ms-transition': ' all' + trail,
+			'transition': ' all' + trail
+		},
+
+		// Array of attributes to clean
+		cleanThese = [],
+
+		newContent = '';
+
+	for (i in cssTransitionProperties) {
+		cleanThese.push(i);
+		newContent += i + ': ' + cssTransitionProperties[i] + ';';
+	}
+	newStylesheet.setContent('.' + this.animClass + '{' + newContent + '}');
+
+	nwt.one('head').append(newStylesheet);
+},
+
+
 /**
  * Method to animate a node
  * @param object NWTNode instance
@@ -16,33 +57,12 @@ NWTAnimate.prototype = {
  */
 anim: function(node, styles, duration, easing) {
 
-	easing = easing || 'ease-in-out';
-	duration = duration || 1;
-
-	var trail = ' ' + duration + 's ' + easing,
-
-		// Just support all browsers for now
-		cssTransitionProperties = {
-			'WebkitTransition': 'all' + trail,
-			'MozTransition': ' all' + trail,
-			'OTransition': ' all' + trail,
-			'MsTransition': ' all' + trail,
-			'transition': ' all' + trail
-		},
-
-		// Array of attributes to clean
-		cleanThese = [];
-
-	for (i in cssTransitionProperties) {
-		cleanThese.push(i);
-	}
+	animation.init(duration, easing);
 
 	// Need to be sure to implement the transition function first
-	node.setStyles(cssTransitionProperties);
+	node.addClass(animation.animClass);
 	node.setStyles(styles);
-	setTimeout(function() {
-		node.removeStyles(cleanThese);
-	}, duration*1000);
+
 	return node;
 }
 };
