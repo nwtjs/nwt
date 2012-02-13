@@ -9,18 +9,18 @@ function NWTEventInstance (e) {
 
 
 /**
- * Halts the event
- * Calls NWTEventInstance stopDefault and stopBubble
+ * Stops the event totally
+ * Calls NWTEventInstance noDefault and noBubble
  */
-NWTEventInstance.prototype.halt = function() {
-	return this.stopBubble().stopDefault();
+NWTEventInstance.prototype.stop = function() {
+	return this.noBubble().noDefault();
 };
 
 
 /**
  * Prevents the default action of the event
  */
-NWTEventInstance.prototype.stopDefault = function() {
+NWTEventInstance.prototype.noDefault = function() {
 	this._e.preventDefault();
 	return this;
 };
@@ -29,7 +29,7 @@ NWTEventInstance.prototype.stopDefault = function() {
 /**
  * Stops the propagation of the event
  */
-NWTEventInstance.prototype.stopBubble = function() {
+NWTEventInstance.prototype.noBubble = function() {
 	this._e.stopPropagation();
 	return this;
 };
@@ -67,6 +67,16 @@ NWTEvent.prototype.on = function (implementOn, event, callback, context, once) {
 	implementOn.addEventListener(event, wrappedCallback);
 };
 
+/**
+ * Removes an event listener from an eventable object
+ * @param string Name Event name
+ * @param function Callback Event callback
+ */
+NWTEvent.prototype.off = function (implementOn, event, callback) {
+	implement.on.removeEventListener(event, callback);
+};
+
+
 nwt.event = new NWTEvent();
 
 /**
@@ -95,4 +105,13 @@ NWTNodeInstance.prototype.on = function(event, fn, context) {
  */
 NWTNodeInstance.prototype.once = function(event, fn, context) {
 	return nwt.event.on(this, event, fn, context, true);
+};
+
+
+/**
+ * Implement a node API to for event listeners
+ * @see NWTEvent::off
+ */
+NWTNodeInstance.prototype.off = function(event, fn) {
+	return nwt.event.off(this, event, fn);
 };
