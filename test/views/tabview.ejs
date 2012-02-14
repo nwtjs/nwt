@@ -5,70 +5,29 @@
 	<script type="text/javascript" src="/nwt.fallback.min.js"></script>
 <![endif]-->
 
+<script type="text/javascript" src="/plugins/bootstrap/tab.js"></script>
 
-<div id="tabs1"></div>
-<div id="tabs2"></div>
+<link href="http://twitter.github.com/bootstrap/assets/css/bootstrap.css" rel="stylesheet">
+<link href="http://twitter.github.com/bootstrap/assets/css/bootstrap-responsive.css" rel="stylesheet">
+<link href="http://twitter.github.com/bootstrap/assets/js/google-code-prettify/prettify.css" rel="stylesheet">
 
-<script type="text/javascript">
-nwt.register({
-	// Identifier for the plugin
-	name: 'TabView',
+<ul id="tab" class="nav nav-tabs">
+	<li class="active"><a href="#home" data-toggle="tab">Home</a></li>
+	<li class=""><a href="#profile" data-toggle="tab">Profile</a></li>
+	<li class="dropdown">
+		<a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <b class="caret"></b></a>
+		<ul class="dropdown-menu">
+			<li><a href="#dropdown1" data-toggle="tab">Option 1</a></li>
+			<li><a href="#dropdown2" data-toggle="tab">Option 2</a></li>
+		</ul>
+	</li>
+</ul>
+<div class="tab-content">
+	<div class="tab-pane active" id="home">First Tab</div>
+	<div class="tab-pane" id="profile">Second Tab</div>
+	<div class="tab-pane" id="messages">Third Tab</div>
+	<div class="tab-pane" id="settings">Fourth Tab</div>
+</div>
 
-	methods: {
-		init: function(el) {
-			el.setContent(this.getName());
-		},
-
-		getName: function() {
-			return 'regular tabs';
-		},
-
-		render: function() {
-		
-		},
-
-		selectTab: function() {
-			this.tabs.removeClass('active');
-			this.addClass('active');
-			return this;
-		},
-
-		deselectTab: function() {
-			this.tabs.removeClass('active');
-			return this;
-		}
-	}
-});
-
-nwt.plugin('TabView', nwt.one('#tabs1'));
-
-
-
-nwt.register({
-	name: 'AjaxTabView',
-
-	extends: 'TabView',
-
-	methods: {
-		init: function() {
-			console.log('initing ajax', this, this._super);
-			this._super.apply(this, arguments);
-		},
-
-		getName: function() {
-			return 'ajax tabs';
-		},
-
-		selectTab: function() {
-			nwt.io('/backend').success(function() {
-				// Update content
-				this._super.apply();
-			}).post();
-		}
-	}
-});
-
-nwt.plugin('AjaxTabView', nwt.one('#tabs2'));
-</script>
 </body>
 </html>

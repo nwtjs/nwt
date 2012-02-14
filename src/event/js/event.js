@@ -47,6 +47,36 @@ function NWTEvent() {
 
 
 NWTEvent.prototype = {
+
+/**
+ * Adds a live listener to the page
+ * This allows us to update page components,
+ * and still have javascript function properly
+ * @param string Attribute to check on
+ * @param regex Pattern to match against the string
+ * @param function callback if matched
+ */
+live: function(attribute, pattern, callback) {
+
+	var classPattern = new RegExp(pattern);
+
+	nwt.one('body').on('click', 
+	function(e) {
+
+		if (e.target.getAttribute(attribute).match(pattern)) {
+			callback(e.target);
+		}
+
+		// If we found a callback, we usually want to stop the event
+		// Except for input elements (still want checkboxes to check and stuff)
+		if( e.target.get('nodeName').toUpperCase() !== "INPUT") {
+			e.stop();
+		}
+
+		return;
+	});
+},
+
 /**
  * Adds an event listener
  * @param object toImplement Any object which can be evented.

@@ -47,8 +47,8 @@ ancestor: function(selector) {
 },
 
 parent: function() {
-	this._node = this._node.parentNode;
-	return this;
+	var parent = new NWTNodeInstance(this._node.parentNode);
+	return parent;
 },
 
 /**
@@ -358,7 +358,12 @@ setContent: function(content) {
  * Returns the next node
  */
 next: function() {
-	var node = this._node.nextSibling;
+
+	var node = this._node;
+
+	do node = node.nextSibling;
+	while (node && node.nodeType != 1);
+
 	return new NWTNodeInstance(node);
 },
 

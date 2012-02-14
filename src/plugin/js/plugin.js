@@ -1,14 +1,6 @@
 // Map of all registered plugsin to definitions
 var pluginMap = {};
 
-/**
- * Plugin wrapper class
- * @returns {NWTPlugin}
- */
-function NWTPlugin() {
-
-}
-
 
 /**
  * Registers a plugin
