@@ -6,11 +6,11 @@ function NWT() {
 
 };
 
-
+NWT.prototype = {
 /**
  * Lazy implementation method
  */
-NWT.prototype.implement = function(implClass, modClass) {
+implement: function(implClass, modClass) {
 
 	var impls = {
 		DelayableQueue : [
@@ -71,6 +71,7 @@ NWT.prototype.implement = function(implClass, modClass) {
 	};
 
 	modClass[impls[implClass][0]] = impls[implClass][1]();
+}
 };
 
 var nwt = new NWT();

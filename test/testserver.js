@@ -33,6 +33,10 @@ app.get('/test', function(req, res){
 	res.render('test.ejs');
 });
 
+app.get('/test/:subview', function(req, res){
+	res.render('' + req.params.subview + '.ejs');
+});
+
 function getSimpleJson(req, res) {
 	res.end('{"result": 1}');
 }

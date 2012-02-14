@@ -1,0 +1,74 @@
+<html>
+<body>
+<script type="text/javascript" src="/nwt.main.min.js"></script>
+<!--[if lte IE 9]>
+	<script type="text/javascript" src="/nwt.fallback.min.js"></script>
+<![endif]-->
+
+
+<div id="tabs1"></div>
+<div id="tabs2"></div>
+
+<script type="text/javascript">
+nwt.register({
+	// Identifier for the plugin
+	name: 'TabView',
+
+	methods: {
+		init: function(el) {
+			el.setContent(this.getName());
+		},
+
+		getName: function() {
+			return 'regular tabs';
+		},
+
+		render: function() {
+		
+		},
+
+		selectTab: function() {
+			this.tabs.removeClass('active');
+			this.addClass('active');
+			return this;
+		},
+
+		deselectTab: function() {
+			this.tabs.removeClass('active');
+			return this;
+		}
+	}
+});
+
+nwt.plugin('TabView', nwt.one('#tabs1'));
+
+
+
+nwt.register({
+	name: 'AjaxTabView',
+
+	extends: 'TabView',
+
+	methods: {
+		init: function() {
+			console.log('initing ajax', this, this._super);
+			this._super.apply(this, arguments);
+		},
+
+		getName: function() {
+			return 'ajax tabs';
+		},
+
+		selectTab: function() {
+			nwt.io('/backend').success(function() {
+				// Update content
+				this._super.apply();
+			}).post();
+		}
+	}
+});
+
+nwt.plugin('AjaxTabView', nwt.one('#tabs2'));
+</script>
+</body>
+</html>
