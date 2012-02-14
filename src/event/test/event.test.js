@@ -51,9 +51,9 @@ nwt.unit
 
 nwt.unit
 .describe('Tests NWTEventIntance.noDefault')
-.setup('<div id="eventnext"><a href="javascript:window.blahtest=1;">doh</a></div>').run(function(unit) {
+.setup('<div id="eventnext"><input type="checkbox"></div>').run(function(unit) {
 
-	var el = nwt.one('#eventnext a'),
+	var el = nwt.one('#eventnext input'),
 
 		handleClick = function (e) {
 			e.noDefault();
@@ -61,10 +61,10 @@ nwt.unit
 		
 	el.once('click', handleClick);
 	el.click();
-	nwt.unit.isTrue(function() { return (window.blahtest === undefined); });
+	nwt.unit.isFalse(function() { return el.get('checked'); });
 
 	// The second click should work because we used on
 	el.click();
-	nwt.unit.isTrue(function() { return (window.blahtest !== undefined); }).report();
+	nwt.unit.isTrue(function() { return el.get('checked'); }).report();
 });
 

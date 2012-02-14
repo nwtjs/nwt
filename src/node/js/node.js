@@ -434,8 +434,10 @@ insert: function(node, position) {
  * Simulates a click event on a node
  */
 click: function() {
-	var evt = document.createEvent("HTMLEvents");
-	evt.initEvent('click', true, true ); // event type,bubbling,cancelable
+	var evt = document.createEvent("MouseEvents");
+	evt.initMouseEvent("click", true, true, window,
+		0, 0, 0, 0, 0, false, false, false, false, 0, null);
+
 	return !this._node.dispatchEvent(evt);
 }
 };
