@@ -207,6 +207,21 @@ nwt.unit
 );
 
 nwt.unit
+.describe('Tests Node.next/previous with text nodes.')
+.setup('<em id="first">asdf</em> <em id="second">asdf</em>' + "\n" + '<em id="third">asdf</em>')
+.equal(
+	function() {
+		return nwt.one('#first').next()._node;
+	},
+	function() {
+		return nwt.one('#third').previous()._node;
+	},
+	function() {
+		return document.getElementById('second');
+	}
+);
+
+nwt.unit
 .describe('Tests Node.append.')
 .setup('<div id="id1"></div>')
 .equal(

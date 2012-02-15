@@ -372,7 +372,12 @@ next: function() {
  * Returns the previous node
  */
 previous: function() {
-	var node = this._node.previousSibling;
+
+	var node = this._node;
+
+	do node = node.previousSibling;
+	while (node && node.nodeType != 1);
+
 	return new NWTNodeInstance(node);
 },
 
