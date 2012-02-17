@@ -8,6 +8,46 @@ function NWTNodeInstance(node) {
 }
 
 NWTNodeInstance.prototype = {
+
+/**
+ * Gets the region of a node (top, left, bottom, right)
+ */
+region: function() {
+
+	/**
+	 * Gets a cascaded style of a node
+	 * @param object Node that we are traversing
+	 * @param string Attribute we are adding
+	 */
+	var getCascadedAttr = function(node, attr) {
+		var total = 0;
+
+		while (node._node) {
+			var thisLevel = parseInt(node.get(attr), 10);
+			if (thisLevel) {
+				total += thisLevel;
+			}
+
+			node = node.parent();
+		}
+
+		return total;
+	},
+
+	region = {
+		width: this.get('offsetWidth'),
+		height: this.get('offsetHeight'),
+		left:getCascadedAttr(this, 'offsetLeft'),
+		top:getCascadedAttr(this, 'offsetTop')
+	};
+
+	region.bottom = region.top + region.height;
+	region.right = region.left + region.width;
+
+	return region;
+},
+
+
 /**
  * Returns the ancestor that matches the css selector
  * @param string CSS Selector

@@ -317,3 +317,53 @@ nwt.unit
 		return '<div style=""></div>';
 	}
 );
+
+nwt.unit
+.describe('Tests Node.region.height')
+.setup('<div id="id1"><div style="position:absolute; top:10px;left:200px;height:100px; width:90px;background:#FF0000;"></div></div>')
+.equal(
+	function() {
+		var region = nwt.one('#id1 div').region();
+		return region.height;
+	},
+	function() {
+		return 100;
+	}
+);
+
+
+nwt.unit
+.describe('Tests Node.region.width')
+.equal(
+	function() {
+		var region = nwt.one('#id1 div').region();
+		return region.width;
+	},
+	function() {
+		return 90;
+	}
+);
+
+nwt.unit
+.describe('Tests Node.region.left')
+.equal(
+	function() {
+		var region = nwt.one('#id1 div').region();
+		return region.left;
+	},
+	function() {
+		return 200;
+	}
+);
+
+nwt.unit
+.describe('Tests Node.region.right')
+.equal(
+	function() {
+		var region = nwt.one('#id1 div').region();
+		return region.right;
+	},
+	function() {
+		return 290;
+	}
+);
