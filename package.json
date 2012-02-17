@@ -1,7 +1,7 @@
 {
 	"name": "nwtui",
-	"version": "0.0.1",
-	"description": "Node Web Toolkit UI - A modern approach at a UI framework.",
+	"version": "0.0.2",
+	"description": "NWTui is a lightweight frontend JS framework spun off of a full stack framework. NWTui adopts and consolidates the best ideas from a large number of frameworks.",
 	"keywords": ["nwtui"],
 	"homepage": "http://nwtjs.org",
 	"author": "Kevin Grandon <kevingrandon@yahoo.com> (https://github.com/KevinGrandon/)",
@@ -18,5 +18,6 @@
 	},
 	"engines": {
 		"node": ">=0.6.0"
-	}
+	},
+	"ender": "noop"
 }
