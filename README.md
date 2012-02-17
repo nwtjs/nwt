@@ -267,3 +267,11 @@ NWTui works well in the latest version of all modern browsers (Firefox, Safari, 
 	<script type="text/javascript" src="/nwt.fallback.min.js"></script>
 <![endif]-->
 ```
+
+<h3>Ender support</h3>
+
+It's possible to package this library with ender using:
+
+    ender add nwtui
+    
+This will still create the global window.nwt variable and does not yet use the Ender bridge.
