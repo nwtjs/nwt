@@ -71,7 +71,8 @@ el.removeStyles(['top', 'left']);
 // Gets the value of a style
 el.getStyle('top')
 
-// The region() function returns an object with the following keys: top, right, bottom, left, width, height
+// The region() function returns sizing information
+// The return object has the following properties: top, right, bottom, left, width, height
 el.region()
 ```
 
