@@ -1,11 +1,11 @@
 {
 	"name": "nwtui",
-	"version": "0.0.2",
+	"version": "0.0.4",
 	"description": "NWTui is a lightweight frontend JS framework spun off of a full stack framework. NWTui adopts and consolidates the best ideas from a large number of frameworks.",
 	"keywords": ["nwtui"],
 	"homepage": "http://nwtjs.org",
 	"author": "Kevin Grandon <kevingrandon@yahoo.com> (https://github.com/KevinGrandon/)",
-	"dependencies": {
+	"devDependencies": {
 		"dox" : "0.1.3",
 		"ejs" : "*",
 		"express" : "*",
@@ -19,5 +19,6 @@
 	"engines": {
 		"node": ">=0.6.0"
 	},
+	"main": "./nwt.main.min.js",
 	"ender": "noop"
 }
