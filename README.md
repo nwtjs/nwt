@@ -70,6 +70,9 @@ el.removeStyles(['top', 'left']);
 
 // Gets the value of a style
 el.getStyle('top')
+
+// The region() function returns an object with the following keys: top, right, bottom, left, width, height
+el.region()
 ```
 
 Creating new node instances is easy using n.node.create().
