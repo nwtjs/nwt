@@ -49,6 +49,28 @@ region: function() {
 
 
 /**
+ * Checks if a given node intersects another
+ * @param object Node to check against
+ */
+intersects: function(other) {
+	var me = this.region(),
+		you = other.region();
+
+	return !(
+			me.left > you.right ||
+			me.right < you.left ||
+			me.top > you.bottom ||
+			me.bottom < you.top ||
+
+			you.left > me.right ||
+			you.right < me.left ||
+			you.top > me.bottom ||
+			you.bottom < me.top 
+	);
+},
+
+
+/**
  * Returns the ancestor that matches the css selector
  * @param string CSS Selector
  */

@@ -74,6 +74,9 @@ el.getStyle('top')
 // The region() function returns sizing information
 // The return object has the following properties: top, right, bottom, left, width, height
 el.region()
+
+// Tests that a node intersects with node
+el.intersects(otherEl);
 ```
 
 Creating new node instances is easy using n.node.create().
