@@ -275,3 +275,19 @@ It's possible to package this library with ender using:
     ender add nwtui
     
 This will still create the global window.nwt variable and does not yet use the Ender bridge.
+
+
+<h3>Filesize</h3>
+
+Due to the fact that we only support modern browsers by default, we're able to keep the filesize extremely slim. IE users will not be as fast due to the conditional include.
+
+```
+
+Framework Size (In KB)
+
+Framework		Min.	Gzipped
+--------------------------------
+jQuery 1.74		93		33
+MooTools 1.44	89		25
+nwtui   		 8	 	3 
+```
