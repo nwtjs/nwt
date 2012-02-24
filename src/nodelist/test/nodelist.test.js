@@ -42,7 +42,7 @@ nwt.unit
 );
 
 nwt.unit
-.describe('Tests NodeList iterated functions.')
+.describe('Tests NodeList iterated functions (removeClass).')
 .equal(
 	function () {
 		nwt.all('.set1').removeClass('set1');
@@ -53,3 +53,26 @@ nwt.unit
 	}
 );
 
+nwt.unit
+.describe('Tests NodeList iterated functions (setStyle).')
+.equal(
+	function () {
+		nwt.all('#testlist li').setStyle('font-weight', 'bold');
+		return nwt.all('#testlist li').item(1).getStyle('font-weight');
+	},
+	function () {
+		return 'bold';
+	}
+);
+
+nwt.unit
+.describe('Tests NodeList iterated functions (removeStyle).')
+.equal(
+	function () {
+		nwt.all('#testlist li').removeStyle('color');
+		return nwt.all('#testlist li').item(1).getStyle('color');
+	},
+	function () {
+		return null;
+	}
+);

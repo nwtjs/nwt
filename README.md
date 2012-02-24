@@ -118,6 +118,8 @@ els.each(function(el){
 // Chaining from a single node is useful if you already have a node object
 var mynode = n.one('#mymenu');
 mynode.all('li').removeClass('active'); // Removes the 'active' class from all nodes in this collection
+
+// Other iterated functions include: addClass, removeStyle(s), setStyle(s)
 ```
 
 
