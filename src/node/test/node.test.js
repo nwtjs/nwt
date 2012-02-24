@@ -103,6 +103,23 @@ nwt.unit
 	}
 );
 
+
+nwt.unit
+.describe('Tests Node.setData.')
+.equal(
+	function() {
+		var node = nwt.one('#id1');
+		node.setData('sauce', 'bbq');
+		return node.data('sauce');
+	},
+	function() {
+		return nwt.one('#id1').getAttribute('data-sauce');
+	},
+	function() {
+		return 'bbq';
+	}
+);
+
 nwt.unit
 .describe('Tests Node.getAttribute/setAttribute.')
 .equal(

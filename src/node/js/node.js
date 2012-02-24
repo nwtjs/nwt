@@ -164,6 +164,16 @@ data: function(property) {
 
 
 /**
+ * Sets a data attribute from the node
+ * @param string Data attribute to get
+ * @param mixed Value to set
+ */
+setData: function(property, val) {
+	return this._node.setAttribute('data-' + property, val);
+},
+
+
+/**
  * Gets a property from the node object
  * @param string Attribute to get
  */

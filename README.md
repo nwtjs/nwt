@@ -77,6 +77,12 @@ el.region()
 
 // Tests that a node intersects with node
 el.intersects(otherEl);
+
+// Gets a data attribute. The following would receive the "data-bbq" attribute
+el.data('bbq');
+
+// Sets a data attribute
+el.setData('id', 12345);
 ```
 
 Creating new node instances is easy using n.node.create().
