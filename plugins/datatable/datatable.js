@@ -51,6 +51,7 @@ function standardizeCols(columns) {
 			column = {name: column};
 		}
 
+		column.dir = column.sortDir || 'asc';
 		column.formatter = column.formatter || getDefaultFormatter(column.name);
 		column.sorter = column.sorter || getDefaultSorter(column.name);
 
@@ -88,20 +89,24 @@ JSONDataSource.prototype.update = function(callback) {
 /**
  * Datasource from a remote IO source
  */
-function IODataSource(io) {
+function IODataSource(config) {
 	this.columns = standardizeCols(config.columns);
-	this.io = io;
+	this.io = config.data;
 
-	// Make a the data
+	// Default to the first col ASC for sorting
+	this.colSortIdx = 0;
 }
 
 /**
  * No updates required, just render
  */
 IODataSource.prototype.update = function(callback) {
+	var self = this;
 	this.io.success(function(o){
+		self.data = o.obj.results;
+
 		callback();
-	}).post();
+	}).post('sort=' + self.columns[self.colSortIdx].name + '&dir=' + self.columns[self.colSortIdx].dir);
 };
 
 
@@ -189,7 +194,7 @@ nwt.register({
 				this.source = new ElementDataSource(config);
 
 			// TODO: Use instanceof here instead
-			} else if(typeof config.data == 'object' && config.ioData !== undefined) {
+			} else if(typeof config.data == 'object' && config.data.ioData !== undefined) {
 				// n.io Object 
 				this.source = new IODataSource(config);
 

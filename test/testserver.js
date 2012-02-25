@@ -41,6 +41,16 @@ function getSimpleJson(req, res) {
 	res.end('{"result": 1}');
 }
 
+app.post('/complexjson', function(req, res){
+	res.end(JSON.stringify({
+		results: [
+			{one: 'bbq', two: 'ketchup', three: 'mustard'},
+			{one: 'dog', two: 'cat', three: 'raining'},
+			{one: 'Dave', two: 'Logan', three: 'Tony'}
+		]
+	}));
+});
+
 app.get('/simplejson', getSimpleJson);
 app.post('/simplejson', getSimpleJson);
 app.put('/simplejson', getSimpleJson);
