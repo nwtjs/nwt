@@ -3,7 +3,7 @@ layout: default
 title: The Manual
 ---
 
-<h1>NWTui</h1>
+<h1>NWT</h1>
 
 <h2>Usage</h2>
 <p>Include the script. We recommend namespacing window.nwt to window.n for easier access.</p>
@@ -169,7 +169,7 @@ n.io('/test').success(function(o) {
 }).post();
 
 
-// The server here responds with: <span>Hello NWTui</span>
+// The server here responds with: <span>Hello NWT</span>
 n.io('/test').success(function(o) {
 
 	// Sets the content of an element to the response text
@@ -267,7 +267,7 @@ n.one('#myid').on('click', function (e) {
 
 <h3>Browser support</h3>
 
-<p>NWTui works well in the latest version of all modern browsers (Firefox, Safari, Chrome, IE10). For full IE support, we recommend a conditional tag inclusion.</p>
+<p>NWT works well in the latest version of all modern browsers (Firefox, Safari, Chrome, IE10). For full IE support, we recommend a conditional tag inclusion.</p>
 
 {% highlight html %}
 <!--[if lte IE 9]>
@@ -279,7 +279,7 @@ n.one('#myid').on('click', function (e) {
 
 <p>It's possible to package this library with ender using:</p>
 
-    ender add nwtui
+    ender add nwt
     
 <p>This will still create the global window.nwt variable and does not yet use the Ender bridge.</p>
 
@@ -295,5 +295,5 @@ Framework		Min.	Gzipped
 --------------------------------
 jQuery 1.74		93		33
 MooTools 1.44	89		25
-nwtui   		 8	 	3 
+nwt				 8	 	3 
 </pre>

@@ -8,9 +8,9 @@
 	<link href="http://twitter.github.com/bootstrap/assets/css/bootstrap-responsive.css" rel="stylesheet">
 	<link href="http://twitter.github.com/bootstrap/assets/js/google-code-prettify/prettify.css" rel="stylesheet">
 
-	<link href="/nwtui/jekyll/site.css" rel="stylesheet">
+	<link href="/nwt/jekyll/site.css" rel="stylesheet">
 
-	<script type="text/javascript" src="/nwtui/nwt.main.min.js"></script>
+	<script type="text/javascript" src="/nwt/nwt.main.min.js"></script>
 	<!--[if lte IE 9]>
 		<script type="text/javascript" src="/nwt.fallback.min.js"></script>
 	<![endif]-->
@@ -25,7 +25,7 @@
 					<span class="icon-bar"></span>
 					<span class="icon-bar"></span>
 				</a>
-				<a class="brand" href="./index.html">nwtui</a>
+				<a class="brand" href="./index.html">nwt</a>
 				<div class="nav-collapse">
 					<ul class="nav">
 						{% for link in site.navigation %}
@@ -35,7 +35,7 @@
 							{% endif %}
 
 							<li class="{% if forloop.first %}first{% endif %} {{ active }} {% if forloop.last %}last{% endif %}">
-								<a href="/nwtui{{ link.url }}">{{ link.text }}</a>
+								<a href="/nwt{{ link.url }}">{{ link.text }}</a>
 							</li>
 						{% endfor %}
 					</ul>
