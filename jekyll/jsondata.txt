@@ -1,0 +1,19 @@
+{
+    "results": [
+        {
+            "one": "bbq",
+            "two": "ketchup",
+            "three": "mustard"
+        },
+        {
+            "one": "dog",
+            "two": "cat",
+            "three": "raining"
+        },
+        {
+            "one": "Dave",
+            "two": "Logan",
+            "three": "Tony"
+        }
+    ]
+}

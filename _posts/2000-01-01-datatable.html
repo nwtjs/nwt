@@ -3,9 +3,15 @@ layout: default
 title: Datatable
 ---
 
+<h1>Plugins</h1>
+
+<h2>Datatable</h2>
+<p>The datatable plugin hooks up a datasource to a table, and provides for sorting and various features.</p>
+
 <script type="text/javascript" src="/nwtui/plugins/datatable/datatable.js"></script>
 
 <div class="row"><div class="span7">
+<h3>Datatable from markup</h3>
 <table id="mytable1" class="table table-striped table-bordered">
 	<thead>
 		<tr>
@@ -44,10 +50,17 @@ title: Datatable
 </table>
 
 <br><br>
+<h3>JSON Datatable</h3>
 
 <div id="mytable2"></div>
 
+<br><br>
+<h3>IO Datatable</h3>
+
 <div id="mytable3"></div>
+
+</div>
+</div>
 
 <script type="text/javascript">
 
@@ -68,7 +81,7 @@ nwt.plugin('Datatable', {
 nwt.plugin('Datatable', {
 	node: '#mytable3',
 	columns: ['one', 'two', 'three'],
-	data: nwt.io('/complexjson')
+	data: nwt.io('/nwtui/jekyll/jsondata.txt')
 });
 </script>
 

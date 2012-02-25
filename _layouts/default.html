@@ -8,6 +8,8 @@
 	<link href="http://twitter.github.com/bootstrap/assets/css/bootstrap-responsive.css" rel="stylesheet">
 	<link href="http://twitter.github.com/bootstrap/assets/js/google-code-prettify/prettify.css" rel="stylesheet">
 
+	<link href="/nwtui/jekyll/site.css" rel="stylesheet">
+
 	<script type="text/javascript" src="/nwtui/nwt.main.min.js"></script>
 	<!--[if lte IE 9]>
 		<script type="text/javascript" src="/nwt.fallback.min.js"></script>
@@ -26,16 +28,22 @@
 				<a class="brand" href="./index.html">nwtui</a>
 				<div class="nav-collapse">
 					<ul class="nav">
-						<li class="active"><a href="/nwtui">Home</a></li>
-						<li><a href="/nwtui/manual.html">Manual</a></li>
-						<li><a href="/nwtui/bootstrap.html">Bootstrap</a></li>
-						<li><a href="/nwtui/datatable.html">Datatable</a></li>
+						{% for link in site.navigation %}
+							{% assign active = nil %}
+							{% if page.url == link.url %}
+								{% assign active = 'active' %}
+							{% endif %}
+
+							<li class="{% if forloop.first %}first{% endif %} {{ active }} {% if forloop.last %}last{% endif %}">
+								<a href="/nwtui{{ link.url }}">{{ link.text }}</a>
+							</li>
+						{% endfor %}
 					</ul>
 				</div>
 			</div>
 		</div>
 	</div>
-	<div class="container">
+	<div class="container" id="main">
 		{{ content }}
 	</div>
 

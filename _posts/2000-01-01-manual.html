@@ -6,8 +6,7 @@ title: The Manual
 <h1>NWTui</h1>
 
 <h2>Usage</h2>
-
-Include the script. We recommend namespacing window.nwt to window.n for easier access.
+<p>Include the script. We recommend namespacing window.nwt to window.n for easier access.</p>
 
 {% highlight html %}
 <script type="text/javascript" src="nwt.main.min.js"></script>
@@ -15,8 +14,7 @@ Include the script. We recommend namespacing window.nwt to window.n for easier a
 {% endhighlight %}
 
 <h2>Node Methods (DOM methods)</h2>
-
-Accessing dom elements is easy and can be done with n.one() or n.all() for a collection.
+<p>Accessing dom elements is easy and can be done with n.one() or n.all() for a collection.</p>
 
 {% highlight javascript %}
 var el = n.one('#someid .someclass');
@@ -26,7 +24,7 @@ el.setContent('Hello Nodo');
 alert(el.getContent());
 {% endhighlight %}
 
-A few useful methods
+<p>A few useful methods</p>
 
 {% highlight javascript %}
 // Accesses the parent node
@@ -88,7 +86,7 @@ el.data('bbq');
 el.setData('id', 12345);
 {% endhighlight %}
 
-Creating new node instances is easy using n.node.create().
+<p>Creating new node instances is easy using n.node.create().</p>
 
 {% highlight javascript %}
 var el = n.node.create('<div class="boringexample">Some HTML</div>');
@@ -104,8 +102,7 @@ n.one('.container').insert(el, 'after');
 
 
 <h2>Node Collections</h2>
-
-Node Collections are useful when dealing with multiple nodes at once.
+<p>Node Collections are useful when dealing with multiple nodes at once.</p>
 
 {% highlight javascript %}
 // Creating a new collection
@@ -127,8 +124,7 @@ mynode.all('li').removeClass('active'); // Removes the 'active' class from all n
 
 
 <h2>IO (ajax)</h2>
-
-Using n.io it's easy to create ajax calls.
+<p>Using n.io it's easy to create ajax calls.</p>
 
 {% highlight javascript %}
 // Get an io object with n.io
@@ -159,7 +155,7 @@ n.io('/backend').post('mypet=cat&name=snickers');
 n.io('/backend').post(n.one('form#theform'));
 {% endhighlight %}
 
-IO callbacks receive a specially wrapped IO object. You can either use this object as a JSON response via the o.obj property, or static text. The original request object is available in the request key of the object.
+<p>IO callbacks receive a specially wrapped IO object. You can either use this object as a JSON response via the o.obj property, or static text. The original request object is available in the request key of the object.</p>
 
 {% highlight javascript %}
 // The server here responds with the following JSON: {"foo": "bar"}
@@ -186,8 +182,7 @@ n.io('/test').success(function(o) {
 
 
 <h2>Anim (animation)</h2>
-
-The anim utility provides a wrapper for easy CSS3 transitions. 
+<p>The anim utility provides a wrapper for easy CSS3 transitions.</p>
 
 {% highlight javascript %}
 // Animate #cat for 2 seconds
@@ -199,7 +194,7 @@ n.one('#cat').anim({top:100, left:100}, 2);
 n.one('#cat').anim({top:100, left:100}, 2, 'ease-in');
 {% endhighlight %}
 
-It's possible to animate most positioning and formating CSS attributes.
+<p>It's possible to animate most positioning and formating CSS attributes.</p>
 
 {% highlight javascript %}
 // Animates the color to red
@@ -214,8 +209,7 @@ n.one('#mydiv').anim({background:'#00FF00', opacity:1});
 
 
 <h2>Chaining with Node</h2>
-
-Most node objects can be chained. 
+<p>Most node objects can be chained. </p>
 
 {% highlight javascript %}
 // Set the class and content of the node
@@ -234,8 +228,7 @@ n.one('#cat').anim({left:100}).wait(2).setContent('cheezburger').wait(4).remove(
 
 
 <h2>Events</h2>
-
-It's possible to chain most events off of the node instance using node.on, or node.once.
+<p>It's possible to chain most events off of the node instance using node.on, or node.once.</p>
 
 {% highlight javascript %}
 // Node.on fires an event every time that event happens
@@ -253,7 +246,7 @@ n.one('#myid').on('click', fn);
 n.one('#myid').off('click', fn); // Listener removed
 {% endhighlight %}
 
-Event callbacks receive a special NWTEventInstance object.
+<p>Event callbacks receive a special NWTEventInstance object.</p>
 
 {% highlight javascript %}
 n.one('#myid').on('click', function (e) {
@@ -274,7 +267,7 @@ n.one('#myid').on('click', function (e) {
 
 <h3>Browser support</h3>
 
-NWTui works well in the latest version of all modern browsers (Firefox, Safari, Chrome, IE10). For full IE support, we recommend a conditional tag inclusion.
+<p>NWTui works well in the latest version of all modern browsers (Firefox, Safari, Chrome, IE10). For full IE support, we recommend a conditional tag inclusion.</p>
 
 {% highlight html %}
 <!--[if lte IE 9]>
@@ -284,18 +277,17 @@ NWTui works well in the latest version of all modern browsers (Firefox, Safari, 
 
 <h3>Ender support</h3>
 
-It's possible to package this library with ender using:
+<p>It's possible to package this library with ender using:</p>
 
     ender add nwtui
     
-This will still create the global window.nwt variable and does not yet use the Ender bridge.
+<p>This will still create the global window.nwt variable and does not yet use the Ender bridge.</p>
 
 
 <h3>Filesize</h3>
+<p>Due to the fact that we only support modern browsers by default, we're able to keep the filesize extremely slim. IE users will not be as fast due to the conditional include.</p>
 
-Due to the fact that we only support modern browsers by default, we're able to keep the filesize extremely slim. IE users will not be as fast due to the conditional include.
-
-{% endhighlight %}
+<pre>
 
 Framework Size (In KB)
 
@@ -304,4 +296,4 @@ Framework		Min.	Gzipped
 jQuery 1.74		93		33
 MooTools 1.44	89		25
 nwtui   		 8	 	3 
-{% endhighlight %}
+</pre>

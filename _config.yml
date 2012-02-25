@@ -1,1 +1,10 @@
 permalink: none
+navigation:
+- text: Home
+  url: /index.html
+- text: Manual
+  url: /manual.html
+- text: Bootstrap
+  url: /bootstrap.html
+- text: Datatable
+  url: /datatable.html
