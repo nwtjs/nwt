@@ -233,7 +233,7 @@ nwt.register({
 				'<tr>'];
 
 			for (var i in this.source.columns) {
-				content.push('<th class="' + i + '-row"><a data-col-idx="' + i + '" data-sort="sort" href="#">' + this.source.columns[i].name + '</a></th>');
+				content.push('<th class="row-' + i + '"><a data-col-idx="' + i + '" data-sort="sort" href="#">' + this.source.columns[i].name + '</a></th>');
 			}
 
 			content.push('</tr></thead><tbody>');
@@ -243,7 +243,7 @@ nwt.register({
 				content.push('<tr>');
 
 				for (var j in this.source.columns) {
-					content.push('<td class="' + j +'-row">' + this.source.columns[j].formatter(datum) + '</td>');
+					content.push('<td class="row-' + j +'">' + this.source.columns[j].formatter(datum) + '</td>');
 				}
 
 				content.push('</tr>');
