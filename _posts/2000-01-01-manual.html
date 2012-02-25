@@ -16,7 +16,7 @@ title: The Manual
 <h2>Node Methods (DOM methods)</h2>
 <p>Accessing dom elements is easy and can be done with n.one() or n.all() for a collection.</p>
 
-{% highlight javascript %}
+{% highlight js %}
 var el = n.one('#someid .someclass');
 el.setContent('Hello Nodo');
 
@@ -26,7 +26,7 @@ alert(el.getContent());
 
 <p>A few useful methods</p>
 
-{% highlight javascript %}
+{% highlight js %}
 // Accesses the parent node
 el.parent();
 
@@ -88,7 +88,7 @@ el.setData('id', 12345);
 
 <p>Creating new node instances is easy using n.node.create().</p>
 
-{% highlight javascript %}
+{% highlight js %}
 var el = n.node.create('<div class="boringexample">Some HTML</div>');
 alert(el.hasClass('boringexample')); // Alerts true
 
@@ -104,7 +104,7 @@ n.one('.container').insert(el, 'after');
 <h2>Node Collections</h2>
 <p>Node Collections are useful when dealing with multiple nodes at once.</p>
 
-{% highlight javascript %}
+{% highlight js %}
 // Creating a new collection
 var els = n.all('#mymenu li');
 
@@ -126,7 +126,7 @@ mynode.all('li').removeClass('active'); // Removes the 'active' class from all n
 <h2>IO (ajax)</h2>
 <p>Using n.io it's easy to create ajax calls.</p>
 
-{% highlight javascript %}
+{% highlight js %}
 // Get an io object with n.io
 var req = n.io('/backend');
 
@@ -157,7 +157,7 @@ n.io('/backend').post(n.one('form#theform'));
 
 <p>IO callbacks receive a specially wrapped IO object. You can either use this object as a JSON response via the o.obj property, or static text. The original request object is available in the request key of the object.</p>
 
-{% highlight javascript %}
+{% highlight js %}
 // The server here responds with the following JSON: {"foo": "bar"}
 n.io('/test').success(function(o) {
 
@@ -184,7 +184,7 @@ n.io('/test').success(function(o) {
 <h2>Anim (animation)</h2>
 <p>The anim utility provides a wrapper for easy CSS3 transitions.</p>
 
-{% highlight javascript %}
+{% highlight js %}
 // Animate #cat for 2 seconds
 n.one('#cat').anim({top:100, left:100}, 2);
 
@@ -196,7 +196,7 @@ n.one('#cat').anim({top:100, left:100}, 2, 'ease-in');
 
 <p>It's possible to animate most positioning and formating CSS attributes.</p>
 
-{% highlight javascript %}
+{% highlight js %}
 // Animates the color to red
 n.one('#mydiv').anim({color:'#FF0000'});
 
@@ -211,14 +211,14 @@ n.one('#mydiv').anim({background:'#00FF00', opacity:1});
 <h2>Chaining with Node</h2>
 <p>Most node objects can be chained. </p>
 
-{% highlight javascript %}
+{% highlight js %}
 // Set the class and content of the node
 n.one('#cat').addClass('lolcat').setContent('cheezburger');
 {% endhighlight %}
 
 Using the wait method, you can set delays in chained methods. This is useful for performing multiple animations, starting one after the other, or removing an element after an animation.
 
-{% highlight javascript %}
+{% highlight js %}
 // Update the content after animation
 n.one('#cat').anim({left:100}).wait(2).setContent('cheezburger');
 
@@ -230,7 +230,7 @@ n.one('#cat').anim({left:100}).wait(2).setContent('cheezburger').wait(4).remove(
 <h2>Events</h2>
 <p>It's possible to chain most events off of the node instance using node.on, or node.once.</p>
 
-{% highlight javascript %}
+{% highlight js %}
 // Node.on fires an event every time that event happens
 n.one('#myid').on('click', function (e) {
     // Assert: this == n.one('#myid')
@@ -248,7 +248,7 @@ n.one('#myid').off('click', fn); // Listener removed
 
 <p>Event callbacks receive a special NWTEventInstance object.</p>
 
-{% highlight javascript %}
+{% highlight js %}
 n.one('#myid').on('click', function (e) {
 
     // Prevents the event from bubbling up the dom
