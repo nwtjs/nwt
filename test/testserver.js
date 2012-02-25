@@ -19,7 +19,7 @@ var express = require("express"),
 app.set('views', __dirname + '/views');
 
 app.set('view options', {
-  layout: false
+  layout: __dirname + '/views/layout'
 });
 
 app.use(express.static(__dirname + '/../src'));

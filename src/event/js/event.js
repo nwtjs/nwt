@@ -73,6 +73,8 @@ live: function(attribute, pattern, callback) {
 	nwt.one('body').on('click', 
 	function(e) {
 
+		if (!e.target.hasAttribute(attribute)) { return; }
+
 		if (e.target.getAttribute(attribute).match(pattern)) {
 			callback(e.target);
 		}
