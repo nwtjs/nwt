@@ -68,3 +68,32 @@ nwt.unit
 	nwt.unit.isTrue(function() { return el.get('checked'); }).report();
 });
 
+nwt.unit
+.describe('Tests event delegation with on and a selector')
+.setup('<div id="event"><a id="first" class="yes" href="#">a</a><a id="second" href="#">b</a><a href="#" id="third" class="yes">c</a></div>').run(function(unit) {
+
+	var genContent = "",
+	
+		populateResponse = function (e) {
+			genContent += e.target.getContent()
+		};
+	
+	nwt.one('#event').on('click', populateResponse, '.yes');
+
+	nwt.one('#event a#first').click();
+	nwt.one('#event a#second').click();
+	nwt.one('#event a#third').click();
+
+	nwt.unit.equal('ac', genContent).report();
+
+	// Attempt to use event.once with a selector
+	nwt.one('#event').off('click', populateResponse);
+
+	nwt.one('#event').once('click', populateResponse, '.yes');
+
+	nwt.one('#event a#first').click();
+	nwt.one('#event a#second').click();
+	nwt.one('#event a#third').click();
+
+	nwt.unit.equal('aca', genContent).report();
+});

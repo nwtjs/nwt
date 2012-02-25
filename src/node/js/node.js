@@ -346,18 +346,6 @@ setStyles: function(newStyles) {
 
 
 /**
- * Adds an event listener tot he node
- * @param string Event to listen for
- * @param function Event callback function
- */
-on: function(event, callback) {
-	this._node.addEventListener(event, function(e) {
-		callback(new NWTEventWrapper(e));
-	}, false);
-},
-
-
-/**
  * Serializes sub children of the current node into post data
  */
 serialize: function() {

@@ -1,11 +1,17 @@
 /**
  * NWTEventInstance Class
  * Event object wrapper
+ * @param event Event object
+ * @param object (Optional) attributes to populate the event object with
  * @constructor
  */
-function NWTEventInstance (e) {
+function NWTEventInstance (e, attrs) {
 	this._e = e;
 	this.target = new NWTNodeInstance(e.target);
+
+	for (var i in attrs) {
+		this[i] = attrs[i];
+	}
 }
 
 NWTEventInstance.prototype = {
@@ -82,22 +88,38 @@ live: function(attribute, pattern, callback) {
  * @param object toImplement Any object which can be evented.
  * @param string Name Event name
  * @param function Callback Event callback
+ * @param string CSS selector for event bubbling
  * @param object context Execution context
  * @param bool once If true, discards the event callback after is runs
  */
-on: function (implementOn, event, callback, context, once) {
+on: function (implementOn, event, callback, selector, context, once) {
 
 	var wrappedCallback = function (e){
-		var eventWrapper = new NWTEventInstance(e);
+		var eventWrapper = new NWTEventInstance(e),
 
-		callback.call(implementOn, eventWrapper);
+		selfCallee = arguments.callee,
+		
+		returnControl = function() {
+			callback.call(implementOn, eventWrapper);
 
-		if (once) {
-			implementOn.removeEventListener(event, wrappedCallback);
+			if (once) {
+				implementOn.removeEventListener(event, selfCallee);
+			}
+		};
+
+		if (selector) {
+			implementOn.all(selector).each(function(userEl) {
+				if (userEl._node == eventWrapper.target._node) {
+					returnControl();
+				}
+			});
+			return;
 		}
+		returnControl();
 	};
 
 	implementOn.addEventListener(event, wrappedCallback);
+	return implementOn;
 },
 
 /**
@@ -106,7 +128,7 @@ on: function (implementOn, event, callback, context, once) {
  * @param function Callback Event callback
  */
 off: function (implementOn, event, callback) {
-	implement.on.removeEventListener(event, callback);
+	implementOn.removeEventListener(event, callback);
 },
 
 /**
@@ -177,10 +199,10 @@ nwt.ready = nwt.event.ready;
  * Stub out the Node addEventListener/removeEventListener interfaces
  */
 NWTNodeInstance.prototype.addEventListener = function(ev, fn) {
-	return this._node.addEventListener(ev, fn);
+	return this._node.addEventListener(ev, fn, false);
 };
 NWTNodeInstance.prototype.removeEventListener = function(ev, fn) {
-	return this._node.removeEventListener(ev, fn);
+	return this._node.removeEventListener(ev, fn, false);
 };
 
 
@@ -188,8 +210,8 @@ NWTNodeInstance.prototype.removeEventListener = function(ev, fn) {
  * Implement a node API to for event listeners
  * @see NWTEvent::on
  */
-NWTNodeInstance.prototype.on = function(event, fn, context) {
-	return nwt.event.on(this, event, fn, context);
+NWTNodeInstance.prototype.on = function(event, fn, selector, context) {	
+	return nwt.event.on(this, event, fn, selector,context);
 };
 
 
@@ -197,8 +219,8 @@ NWTNodeInstance.prototype.on = function(event, fn, context) {
  * Implement a node API to for event listeners
  * @see NWTEvent::once
  */
-NWTNodeInstance.prototype.once = function(event, fn, context) {
-	return nwt.event.on(this, event, fn, context, true);
+NWTNodeInstance.prototype.once = function(event, fn, selector, context) {
+	return nwt.event.on(this, event, fn, selector, context, true);
 };
 
 
