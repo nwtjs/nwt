@@ -1,6 +1,6 @@
-<h1>NWTui</h1>
+<h1>nwt</h1>
 
-NWTui is a modern approach at a javascript framework. NWTui combines the best practices of leading JS frameworks, along with some personal touches that make for an extremely familiar environment which you will be able to develop rapidly in.
+Node Web Toolkit, nwt is a modern approach at a javascript framework. nwt combines the best practices of leading JS frameworks, along with some personal touches that make for an extremely familiar environment which you will be able to develop rapidly in.
 
 <h2>Usage</h2>
 
@@ -170,7 +170,7 @@ n.io('/test').success(function(o) {
 }).post();
 
 
-// The server here responds with: <span>Hello NWTui</span>
+// The server here responds with: <span>Hello nwt</span>
 n.io('/test').success(function(o) {
 
 	// Sets the content of an element to the response text
@@ -271,7 +271,7 @@ n.one('#myid').on('click', function (e) {
 
 <h3>Browser support</h3>
 
-NWTui works well in the latest version of all modern browsers (Firefox, Safari, Chrome, IE10). For full IE support, we recommend a conditional tag inclusion.
+nwt works well in the latest version of all modern browsers (Firefox, Safari, Chrome, IE10). For full IE support, we recommend a conditional tag inclusion.
 
 ```html
 <!--[if lte IE 9]>
@@ -283,7 +283,7 @@ NWTui works well in the latest version of all modern browsers (Firefox, Safari, 
 
 It's possible to package this library with ender using:
 
-    ender add nwtui
+    ender add nwt
     
 This will still create the global window.nwt variable and does not yet use the Ender bridge.
 
@@ -300,5 +300,5 @@ Framework		Min.	Gzipped
 --------------------------------
 jQuery 1.74		93		33
 MooTools 1.44	89		25
-nwtui   		 8	 	3 
+nwt   		 8	 	3 
 ```
