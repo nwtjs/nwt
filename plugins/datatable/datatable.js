@@ -52,8 +52,8 @@ function standardizeCols(columns) {
 		}
 
 		column.dir = column.sortDir || 'asc';
-		column.formatter = column.formatter || getDefaultFormatter(column.name);
-		column.sorter = column.sorter || getDefaultSorter(column.name);
+		column.formatter = column.formatter || getDefaultFormatter(column.key || column.name);
+		column.sorter = column.sorter || getDefaultSorter(column.key || column.name);
 
 		columns[i] = column;
 	}

@@ -1,6 +1,6 @@
 {
 	"name": "nwtui",
-	"version": "0.0.6",
+	"version": "0.0.7",
 	"description": "NWTui is a lightweight frontend JS framework spun off of a full stack framework. NWTui adopts and consolidates the best ideas from a large number of frameworks.",
 	"keywords": ["nwtui"],
 	"homepage": "http://nwtjs.org",
