@@ -49,6 +49,10 @@ noBubble: function() {
  * @constructor
  */
 function NWTEvent() {
+	// Cached events which have been added
+	// Cache the wrapped events so if the user calls node.off(...)
+	// we can easily look up the function reference
+	this._cached = {};
 }
 
 
@@ -83,22 +87,16 @@ live: function(attribute, pattern, callback) {
 	});
 },
 
-/**
- * Adds an event listener
- * @param object toImplement Any object which can be evented.
- * @param string Name Event name
- * @param function Callback Event callback
- * @param string CSS selector for event bubbling
- * @param object context Execution context
- * @param bool once If true, discards the event callback after is runs
- */
-on: function (implementOn, event, callback, selector, context, once) {
 
-	var wrappedCallback = function (e){
+/**
+ * Wraps an event callback so we can attach/detach it
+ */
+_getEventCallback: function(implementOn, event, callback, selector, context, once) {
+	var wrappedListener = function (e){
 		var eventWrapper = new NWTEventInstance(e),
 
 		selfCallee = arguments.callee,
-		
+
 		returnControl = function() {
 			callback.call(implementOn, eventWrapper);
 
@@ -118,7 +116,25 @@ on: function (implementOn, event, callback, selector, context, once) {
 		returnControl();
 	};
 
-	implementOn.addEventListener(event, wrappedCallback);
+	this._cached[callback.toString()] = {
+		fn: wrappedListener
+	}
+
+	return wrappedListener;
+},
+
+
+/**
+ * Adds an event listener
+ * @param object toImplement Any object which can be evented.
+ * @param string Name Event name
+ * @param function Callback Event callback
+ * @param string CSS selector for event bubbling
+ * @param object context Execution context
+ * @param bool once If true, discards the event callback after is runs
+ */
+on: function (implementOn, event, callback, selector, context, once) {
+	implementOn.addEventListener(event, this._getEventCallback.apply(this, arguments));
 	return implementOn;
 },
 
@@ -128,7 +144,9 @@ on: function (implementOn, event, callback, selector, context, once) {
  * @param function Callback Event callback
  */
 off: function (implementOn, event, callback) {
-	implementOn.removeEventListener(event, callback);
+	var stringy = callback.toString();
+	if (!this._cached[stringy] || !this._cached[stringy].fn) { return; }
+	implementOn.removeEventListener(event, this._cached[stringy].fn);
 },
 
 /**
