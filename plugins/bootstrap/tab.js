@@ -33,8 +33,11 @@ nwt.register({
 			list.all('li').removeClass('active');
 			el.parent().addClass('active');
 
-			list.next().all('.tab-pane.active').removeClass('active');
-			list.next().one('.tab-pane' + el.get('href').substring(el.get('href').indexOf('#'))).addClass('active');
+			try {
+				list.next().all('.tab-pane.active').removeClass('active');
+				list.next().one('.tab-pane' + el.get('href').substring(el.get('href').indexOf('#'))).addClass('active');
+			} catch(e) {
+			}
 		}
 	}
 });

@@ -7,7 +7,7 @@ var http = require("http"),
 http.createServer(function(request, response) {
 
   var uri = url.parse(request.url).pathname
-    , filename = path.join(process.cwd(), uri).replace('nwtui/nwtui', 'nwtui/_site');
+    , filename = path.join(process.cwd(), uri).replace('nwtui/nwt', 'nwtui/_site');
 console.log('Filename is:', filename);
   path.exists(filename, function(exists) {
     if(!exists) {
