@@ -73,7 +73,8 @@ live: function(attribute, pattern, callback) {
 	nwt.one('body').on('click', 
 	function(e) {
 
-		var target = e.target,
+		var originalTarget = e.target,
+			target = originalTarget,
 
 			// Did we find it?
 			found = true;
@@ -82,17 +83,21 @@ live: function(attribute, pattern, callback) {
 
 			if (target._node == nwt.one('body')._node) { break; }
 
-			if (target.hasAttribute(attribute) && target.getAttribute(attribute).match(pattern)) {
+			if (target.hasAttribute(attribute)) {
 
-				callback(target);
+				var matches = target.getAttribute(attribute).match(pattern);
 
-				// If we found a callback, we usually want to stop the event
-				// Except for input elements (still want checkboxes to check and stuff)
-				if( target.get('nodeName').toUpperCase() !== "INPUT") {
-					e.stop();
+				if (matches) {
+					callback(originalTarget, matches);
+	
+					// If we found a callback, we usually want to stop the event
+					// Except for input elements (still want checkboxes to check and stuff)
+					if( target.get('nodeName').toUpperCase() !== "INPUT") {
+						e.stop();
+					}
+
+					break;
 				}
-
-				break;
 			}
 
 			target = target.parent();
