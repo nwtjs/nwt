@@ -1,6 +1,6 @@
 nwt.register({
 
-	name: 'BootstrapCollapse',
+	name: 'Collapse',
 
 	methods: {
 		init: function () {
@@ -9,7 +9,6 @@ nwt.register({
 
 		collapse: function(el) {
 
-			console.log('Got collapse request', el);
 			var collapseGroup = el.ancestor('.accordion-group'),
 				body = collapseGroup.one('.accordion-body');
 
@@ -26,4 +25,4 @@ nwt.register({
 		}
 	}
 });
-nwt.plugin('BootstrapCollapse');
+nwt.plugin('Collapse');

@@ -18,7 +18,7 @@
 
 nwt.register({
 
-	name: 'BootstrapTab',
+	name: 'Tabview',
 
 	methods: {
 		init: function () {
@@ -41,4 +41,4 @@ nwt.register({
 		}
 	}
 });
-nwt.plugin('BootstrapTab');
+nwt.plugin('Tabview');

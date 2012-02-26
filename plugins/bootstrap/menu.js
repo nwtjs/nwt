@@ -15,7 +15,7 @@
 
 nwt.register({
 
-	name: 'BootstrapMenu',
+	name: 'Menu',
 
 	methods: {
 		init: function () {
@@ -58,4 +58,4 @@ nwt.register({
 		}
 	}
 });
-nwt.plugin('BootstrapMenu');
+nwt.plugin('Menu');

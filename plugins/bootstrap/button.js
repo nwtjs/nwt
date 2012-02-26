@@ -1,6 +1,6 @@
 nwt.register({
 
-	name: 'BootstrapButton',
+	name: 'Button',
 
 	methods: {
 		init: function () {
@@ -33,4 +33,4 @@ nwt.register({
 		}
 	}
 });
-nwt.plugin('BootstrapButton');
+nwt.plugin('Button');
