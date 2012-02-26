@@ -1,10 +1,11 @@
 exports.main = [
 	'base/js/base.js',
-	'plugin/js/plugin.js',
 
 	'io/js/io.js',
 	'node/js/node.js',
 	'nodelist/js/nodelist.js',
+
+	'plugin/js/plugin.js',
 
 	'anim/js/anim.js',
 	'event/js/event.js',

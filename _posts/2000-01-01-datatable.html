@@ -49,27 +49,51 @@ title: Datatable
 	</tbody>
 </table>
 
+<h4>Usage</h4>
+
+{% highlight js %}
+nwt.one('#mytable1').plug('Datatable');
+{% endhighlight %}
+
 <br><br>
 <h3>JSON Datatable</h3>
 
 <div id="mytable2"></div>
+
+<h4>Usage</h4>
+
+{% highlight js %}
+nwt.one('#mytable2').plug('Datatable', {
+	columns: [{name:'bbq?', key: 'one'}, 'two', 'three'],
+	data: [
+		{one: 'bbq', two: 'ketchup', three: 'mustard'},
+		{one: 'dog', two: 'cat', three: 'raining'},
+		{one: 'Dave', two: 'Logan', three: 'Tony'}
+	]
+});
+{% endhighlight %}
 
 <br><br>
 <h3>IO Datatable</h3>
 
 <div id="mytable3"></div>
 
+<h4>Usage</h4>
+{% highlight js %}
+nwt.one('#mytable3').plug('Datatable', {
+	columns: ['one', 'two', 'three'],
+	data: nwt.io('/nwt/jekyll/jsondata.txt')
+});
+{% endhighlight %}
+
 </div>
 </div>
 
 <script type="text/javascript">
 
-nwt.plugin('Datatable', {
-	node: nwt.one('#mytable1')
-});
+nwt.one('#mytable1').plug('Datatable');
 
-nwt.plugin('Datatable', {
-	node: '#mytable2',
+nwt.one('#mytable2').plug('Datatable', {
 	columns: [{name:'bbq?', key: 'one'}, 'two', 'three'],
 	data: [
 		{one: 'bbq', two: 'ketchup', three: 'mustard'},
@@ -78,8 +102,7 @@ nwt.plugin('Datatable', {
 	]
 });
 
-nwt.plugin('Datatable', {
-	node: '#mytable3',
+nwt.one('#mytable3').plug('Datatable', {
 	columns: ['one', 'two', 'three'],
 	data: nwt.io('/nwt/jekyll/jsondata.txt')
 });
