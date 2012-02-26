@@ -187,14 +187,14 @@ title: Bootstrap Components
 
 	<hr>
 
-	<h2>Using bootstrap-modal</h2>
+	<!--h3>Usage</h3>
 	<p>Call the modal via javascript:</p>
 
 {% highlight js %}
 nwt.one('#myModal').plug('Modal', options);
 {% endhighlight %}
 
-	<h3>Options</h3>
+	<!--h3>Options</h3>
 	<table class="table table-bordered table-striped">
 		<thead>
 		 <tr>
@@ -225,7 +225,7 @@ nwt.one('#myModal').plug('Modal', options);
 		 </tr>
 		</tbody>
 	</table>
-	<!--h3>Events</h3>
+	<h3>Events</h3>
 	<p>Bootstrap's modal class exposes a few events for hooking into modal functionality.</p>
 	<table class="table table-bordered table-striped">
 		<thead>
@@ -253,3 +253,28 @@ nwt.one('#myModal').plug('Modal', options);
 		 </tr>
 		</tbody>
 	</table-->
+</section>
+
+<section>
+	<script type="text/javascript" src="/nwt/plugins/bootstrap/tooltip.js"></script>
+	<h2>Tooltips/Popovers</h2>
+	<p>Both the bootstrap tooltips and popover controls have been consolidated into a single `tooltip` plugin.</p>
+	<p>This works slightly different than Bootstrap, as it's entirely markup based to trgger a tooltip or popover.</p>
+
+	<h4>Example tooltip</h4>	
+	<div class="tooltip-demo well">
+		<p class="muted" style="margin-bottom: 0;">Tight pants next level keffiyeh <a href="#" data-tooltip="first tooltip">you probably</a> haven't heard of them. Photo booth beard raw denim letterpress vegan messenger bag stumptown. Farm-to-table seitan, mcsweeney's fixie sustainable quinoa 8-bit american apparel <a href="#" data-tooltip="Another tooltip">have a</a> terry richardson vinyl chambray. Beard stumptown, cardigans banh mi lomo thundercats. Tofu biodiesel williamsburg marfa, four loko mcsweeney's cleanse vegan chambray. A <a href="#" data-tooltip="Another one here too">really ironic</a> artisan whatever keytar, scenester farm-to-table banksy Austin <a href="#" data-tooltip="The last tip!">twitter handle</a> freegan cred raw denim single-origin coffee viral.</p>
+	</div>
+
+	<h3>Usage</h3>
+	<p>Markup, simply specify the data-tooltip attribute:</p>
+
+{% highlight js %}
+<a href="#" data-tooltip="An interesting tidbit">some link</a>
+{% endhighlight %}
+
+	<h4>Example popover</h4>
+	<div class="well">
+		<a href="#" class="btn btn-danger" rel="popover" data-content="And here's some amazing content. It's very engaging. right?" data-original-title="A Title">hover for popover</a>
+	</div>
+</section>

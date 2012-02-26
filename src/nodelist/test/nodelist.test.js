@@ -3,7 +3,7 @@ nwt.unit
 .setup('<ul id="testlist"><li class="set1">First</li><li class="set1">Second</li><li>Third</li></ul>')
 .equal(
 	function () {
-		return nwt.all('ul li').size();
+		return nwt.all('ul#testlist li').size();
 	},
 	function () {
 		return document.getElementById('testlist').getElementsByTagName('li').length;

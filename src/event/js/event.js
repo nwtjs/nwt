@@ -65,23 +65,42 @@ NWTEvent.prototype = {
  * @param string Attribute to check on
  * @param regex Pattern to match against the string
  * @param function callback if matched
+ * @param string Type of listener to use, one of: click | mousemove | mouseout
  */
-live: function(attribute, pattern, callback) {
+live: function(attribute, pattern, callback, interaction) {
 
-	var classPattern = new RegExp(pattern);
+	var classPattern = new RegExp(pattern),
 
-	nwt.one('body').on('click', 
+		interaction = interaction || 'click',
+
+		maxSearch,
+
+		dispatcher,
+
+		body = nwt.one('body');
+
+	// Currently only search one level for a mouse listener for performance reasons
+	if (interaction == 'click') {
+		maxSearch = 100;
+	} else {
+		maxSearch = 1;
+	}
+
+	dispatcher = 
 	function(e) {
 
 		var originalTarget = e.target,
 			target = originalTarget,
 
 			// Did we find it?
-			found = true;
+			found = true,
+
+			// Keep track of how many times we bubble up
+			depthSearched = 0;
 
 		while(target._node && target._node.parentNode) {
 
-			if (target._node == nwt.one('body')._node) { break; }
+			if (target._node == nwt.one('body')._node || depthSearched >= maxSearch) { break; }
 
 			if (target.hasAttribute(attribute)) {
 
@@ -100,11 +119,35 @@ live: function(attribute, pattern, callback) {
 				}
 			}
 
+			depthSearched++;
 			target = target.parent();
 		};
 
 		return;
-	});
+	};
+
+
+	var enableListener = function() {
+		body.on(interaction, dispatcher);
+	};
+	enableListener();
+
+	if (interaction !== 'click') {
+
+		// Disable mouseover listeners on scroll
+		var timer = false;
+
+		nwt.one(document).on('scroll', function() {
+
+			body.off(interaction, dispatcher);
+
+			if (timer) {
+				clearTimeout(timer);
+				timer = false;
+			}
+			timer = setTimeout(enableListener, 75);
+		});
+	}
 },
 
 
