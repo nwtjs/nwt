@@ -20,16 +20,16 @@ region: function() {
 	 * @param string Attribute we are adding
 	 */
 	var getCascadedAttr = function(node, attr) {
-		var total = 0;
+		var total = 0,
+			offsetNode = node._node;
 
-		while (node._node) {
-			var thisLevel = parseInt(node.get(attr), 10);
+		do {
+			var thisLevel = parseInt(offsetNode[attr], 10);
 			if (thisLevel) {
 				total += thisLevel;
 			}
 
-			node = node.parent();
-		}
+		} while (node = node.offsetParent);
 
 		return total;
 	},
