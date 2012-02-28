@@ -14,32 +14,25 @@ NWTNodeInstance.prototype = {
  */
 region: function() {
 
-	/**
-	 * Gets a cascaded style of a node
-	 * @param object Node that we are traversing
-	 * @param string Attribute we are adding
-	 */
-	var getCascadedAttr = function(node, attr) {
-		var total = 0,
-			offsetNode = node._node;
-
-		do {
-			var thisLevel = parseInt(offsetNode[attr], 10);
-			if (thisLevel) {
-				total += thisLevel;
-			}
-
-		} while (offsetNode = offsetNode.offsetParent);
-
-		return total;
+	var region = {
+		width: this.get('offsetWidth'),
+		height: this.get('offsetHeight')
 	},
 
-	region = {
-		width: this.get('offsetWidth'),
-		height: this.get('offsetHeight'),
-		left:getCascadedAttr(this, 'offsetLeft'),
-		top:getCascadedAttr(this, 'offsetTop')
-	};
+	box = this._node.getBoundingClientRect(),
+
+	doc = document,
+	docElem = doc.documentElement,
+	body = doc.body,
+	win = window,
+
+	clientTop  = docElem.clientTop  || body.clientTop  || 0,
+	clientLeft = docElem.clientLeft || body.clientLeft || 0,
+	scrollTop  = win.pageYOffset || docElem.scrollTop  || body.scrollTop,
+	scrollLeft = win.pageXOffset || docElem.scrollLeft || body.scrollLeft;
+
+	region.top  = box.top  + scrollTop  - clientTop,
+	region.left = box.left + scrollLeft - clientLeft;
 
 	region.bottom = region.top + region.height;
 	region.right = region.left + region.width;
