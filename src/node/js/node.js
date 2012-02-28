@@ -29,7 +29,7 @@ region: function() {
 				total += thisLevel;
 			}
 
-		} while (node = node.offsetParent);
+		} while (offsetNode = offsetNode.offsetParent);
 
 		return total;
 	},
