@@ -1,6 +1,6 @@
 {
 	"name": "nwt",
-	"version": "0.1.1",
+	"version": "0.1.2",
 	"description": "Node Web Toolkit, nwt is a modern approach at a javascript framework. nwt combines the best practices of leading JS frameworks, along with some personal touches that make for an extremely familiar environment which you will be able to develop rapidly in.",
 	"keywords": ["nwt"],
 	"homepage": "http://nwtjs.org",
