@@ -118,8 +118,15 @@ post: function(data, method) {
 
 /**
  * Runs IO GET
+ * @param string We update the URL if we receive data to GET here
  */
-get: function() {
+get: function(data) {
+
+	// Strip out the old query string and append the new one
+	if (data) {
+		this.url = this.url.split('?', 1)[0] + '?' + data;
+	}
+
 	this.req.open('GET', this.url);
 	return this._run();
 },

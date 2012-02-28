@@ -84,6 +84,16 @@ nwt.one('#mytable3').plug('Datatable', {
 	columns: ['one', 'two', 'three'],
 	data: nwt.io('/nwt/jekyll/jsondata.txt')
 });
+
+// By default we fetch via post, but  it's easy to override
+nwt.one('#mytable3').plug('Datatable', {
+	columns: ['one', 'two', 'three'],
+	data: nwt.io('/nwt/jekyll/jsondata.txt'),
+	fetch: function(io, sort, dir) {
+		io.get('sort=' + sort + '&dir=' + dir);
+	}
+});
+
 {% endhighlight %}
 
 </div>
@@ -104,7 +114,10 @@ nwt.one('#mytable2').plug('Datatable', {
 
 nwt.one('#mytable3').plug('Datatable', {
 	columns: ['one', 'two', 'three'],
-	data: nwt.io('/nwt/jekyll/jsondata.txt')
+	data: nwt.io('/nwt/jekyll/jsondata.txt'),
+	fetch: function(io, sort, dir) {
+		io.get('sort=' + sort + '&dir=' + dir);
+	}
 });
 </script>
 

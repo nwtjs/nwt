@@ -93,6 +93,10 @@ function IODataSource(config) {
 	this.columns = standardizeCols(config.columns);
 	this.io = config.data;
 
+	this.fetch = config.fetch || function(io, sort, dir) {
+		io.post('sort=' + sort + '&dir=' + dir);
+	}
+
 	// Default to the first col ASC for sorting
 	this.colSortIdx = 0;
 }
@@ -102,11 +106,13 @@ function IODataSource(config) {
  */
 IODataSource.prototype.update = function(callback) {
 	var self = this;
-	this.io.success(function(o){
+	self.io.success(function(o){
 		self.data = o.obj.results;
 
 		callback();
-	}).post('sort=' + self.columns[self.colSortIdx].name + '&dir=' + self.columns[self.colSortIdx].dir);
+	});
+
+	self.fetch(self.io, self.columns[self.colSortIdx].name, self.columns[self.colSortIdx].dir);
 };
 
 
