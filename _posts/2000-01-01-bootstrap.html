@@ -261,20 +261,30 @@ nwt.one('#myModal').plug('Modal', options);
 	<p>Both the bootstrap tooltips and popover controls have been consolidated into a single `tooltip` plugin.</p>
 	<p>This works slightly different than Bootstrap, as it's entirely markup based to trgger a tooltip or popover.</p>
 
-	<h4>Example tooltip</h4>	
+	<h3>Example tooltip</h3>
 	<div class="tooltip-demo well">
 		<p class="muted" style="margin-bottom: 0;">Tight pants next level keffiyeh <a href="#" data-tooltip="first tooltip">you probably</a> haven't heard of them. Photo booth beard raw denim letterpress vegan messenger bag stumptown. Farm-to-table seitan, mcsweeney's fixie sustainable quinoa 8-bit american apparel <a href="#" data-position="bottom" data-tooltip="Another tooltip">have a</a> terry richardson vinyl chambray. Beard stumptown, cardigans banh mi lomo thundercats. Tofu biodiesel williamsburg marfa, four loko mcsweeney's cleanse vegan chambray. A <a href="#" data-position="left" data-tooltip="Another one here too">really ironic</a> artisan whatever keytar, scenester farm-to-table banksy Austin <a href="#"  data-position="right" data-tooltip="The last tip!">twitter handle</a> freegan cred raw denim single-origin coffee viral.</p>
 	</div>
 
-	<h3>Usage</h3>
+	<h4>Usage</h4>
 	<p>Markup, simply specify the data-tooltip attribute:</p>
 
 {% highlight js %}
 <a href="#" data-tooltip="An interesting tidbit">some link</a>
 {% endhighlight %}
 
-	<h4>Example popover</h4>
+	<h3>Example popover</h3>
 	<div class="well">
-		<a href="#" class="btn btn-danger" rel="popover" data-content="And here's some amazing content. It's very engaging. right?" data-original-title="A Title">hover for popover</a>
+		<a href="#" class="btn btn-danger" data-layout="popover" data-tooltip="And here's some amazing content. It's very engaging. right?" data-title="A Title" data-position="right">hover for popover</a>
 	</div>
+
+	<h4>Usage</h4>
+	<p>Specify the data-layout="popover" attribute. You can also specify a data-tooltip attribute as the body, and a data-title attribute as the title.</p>
+
+{% highlight js %}
+<a href="#" class="btn btn-danger" data-layout="popover" data-tooltip="My Content" data-title="A Title">hover for popover</a>
+{% endhighlight %}
+
 </section>
+
+

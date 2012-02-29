@@ -9,7 +9,6 @@ nwt.register({
 
 		show: function(el, action) {
 
-
 			if (el.hasClass('tooltip-shown') ) {
 
 				return;
