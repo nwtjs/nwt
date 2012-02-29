@@ -15,6 +15,15 @@ function NWTEventInstance (e, attrs) {
 }
 
 NWTEventInstance.prototype = {
+
+/**
+ * Interface to get the keycode
+ */
+code: function() {
+	return this._e.keyCode;
+},
+
+
 /**
  * Stops the event totally
  * Calls NWTEventInstance noDefault and noBubble

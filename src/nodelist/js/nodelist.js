@@ -11,7 +11,7 @@ function NWTNodeList(nodes) {
 	this.nodes = wrappedNodes;
 
 	var iteratedFunctions = [
-		'remove', 'addClass', 'removeClass', 'setStyle', 'setStyles', 'removeStyle', 'removeStyles'
+		'remove', 'addClass', 'removeClass', 'setStyle', 'setStyles', 'removeStyle', 'removeStyles', 'plug'
 	],
 
 	mythis = this;
