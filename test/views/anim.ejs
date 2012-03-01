@@ -1,0 +1,28 @@
+<html>
+<body>
+<script type="text/javascript" src="/nwt.main.min.js"></script>
+<!--[if lte IE 9]>
+	<script type="text/javascript" src="/nwt.fallback.min.js"></script>
+<![endif]-->
+
+<style type="text/css">
+a { position:relative; }
+</style>
+
+<a href="#" id="anim1">Animate 1</a>
+
+
+<script type="text/javascript">
+nwt.one('#anim1').on('click', function(e) {
+	this.anim({left: 400})
+		.wait(1)
+		.anim({top: 400})
+		.wait(1)
+		.anim({left: 0})
+		.wait(1)
+		.anim({top: 0});
+});
+</script>
+
+</body>
+</html>

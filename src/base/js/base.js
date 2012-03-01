@@ -31,6 +31,7 @@ implement: function(implClass, modClass) {
 				function QueueableObject(context) {
 					this.queue = [];
 					this.context = context;
+					this.inProgress = false;
 				}
 				
 				QueueableObject.prototype = {
@@ -39,7 +40,9 @@ implement: function(implClass, modClass) {
 						var self = this;
 
 						self.queue.push({type: 'chain', func: func, args: args});
-						return self._process();
+						if (!self.inProgress) {
+							return self._process();
+						}
 					},
 
 					/**
@@ -47,8 +50,11 @@ implement: function(implClass, modClass) {
 					 * Shifts an item off the queue and waits for it to finish
 					 */
 					_process: function() {
+
 						var self = this, item;
 
+						self.inProgress = true;
+						
 						if (!self.queue.length) {
 							return;
 						}
