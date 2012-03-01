@@ -28,9 +28,9 @@ nwt.plugin = function(plugin) {
 	wrapPluginCall = function (method) {
 
 		var _super;
-		if (def.extends) {
+		if (def.extend) {
 			_super = function() {
-				pluginMap[def.extends].methods[method].apply(this, arguments);
+				pluginMap[def.extend].methods[method].apply(this, arguments);
 			};
 		}
 
