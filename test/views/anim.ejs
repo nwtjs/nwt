@@ -6,11 +6,16 @@
 <![endif]-->
 
 <style type="text/css">
-a { position:relative; }
+#movement a, #movement span { position:relative; }
+#anim2 { color:#0000FF; }
+#anim3 { color:#FF0000; }
 </style>
 
-<a href="#" id="anim1">Animate 1</a>
-
+<div id="movement">
+	<a href="#" id="anim1">Click me!</a>
+	<span id="anim2">Animate 2</span>
+	<span id="anim3">Animate 3</span>
+</div>
 
 <script type="text/javascript">
 nwt.one('#anim1').on('click', function(e) {
@@ -21,7 +26,22 @@ nwt.one('#anim1').on('click', function(e) {
 		.anim({left: 0})
 		.wait(1)
 		.anim({top: 0});
+
+	nwt.one('#anim2').anim({left: 400, top:400})
+		.wait(1)
+		.anim({top: 300, left:500})
+		.wait(1)
+		.anim({left: 300, top:500})
+		.wait(1)
+		.anim({top: 0, left:0});
+
+	nwt.one('#anim3').anim({left: 100, top:400})
+		.wait(1.5)
+		.anim({left: 400, top:100})
+		.wait(1.5)
+		.anim({top: 0, left:0});
 });
+
 </script>
 
 </body>
