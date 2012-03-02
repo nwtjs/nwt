@@ -45,7 +45,22 @@ nwt.unit
 	});
 
 	nwt.one('#event a').click();
-	nwt.unit.isFalse(function() { return hitParent; }).report();
+	nwt.unit.isFalse(function() { return hitParent; });
+
+
+	// Tests that custom events DO BUBBLE
+	var bubbleCount = 0;
+	nwt.one('#event').on('omgcustom', function (e) {
+		bubbleCount++;
+	});
+	
+	nwt.one('#event a').on('omgcustom', function (e) {
+		bubbleCount++;
+	});
+
+	nwt.one('#event a').fire('omgcustom');
+	nwt.unit.equal(bubbleCount, 2).report();
+
 });
 
 
@@ -65,7 +80,7 @@ nwt.unit
 
 	// The second click should work because we used on
 	el.click();
-	nwt.unit.isTrue(function() { return el.get('checked'); }).report();
+	nwt.unit.isTrue(function() { return el.get('checked'); });
 });
 
 nwt.unit
@@ -95,5 +110,23 @@ nwt.unit
 	nwt.one('#event a#second').click();
 	nwt.one('#event a#third').click();
 
-	nwt.unit.equal('aca', genContent).report();
+	nwt.unit.equal('aca', genContent);
+});
+
+nwt.unit
+.describe('Tests custom events and custom event data')
+.setup('<div id="event"></div>').run(function(unit) {
+
+	var isFired = false,
+		testData;
+
+	nwt.one('#event').once('customEvt', function(e, arg1){
+		isFired = true;
+		testData = arg1.someKey;
+	});
+
+	nwt.one('#event').fire('customEvt', {someKey: 'someData'});
+
+	nwt.unit.equal(isFired, true);
+	nwt.unit.equal(testData, 'someData').report();
 });
