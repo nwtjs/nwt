@@ -16,7 +16,9 @@ nwt.register({
 
 			el.addClass('tooltip-shown');
 
-			var region = el.region(),
+			var layout = el.data('layout') || 'tooltip',
+
+				region = el.region(),
 
 				top,
 
@@ -24,8 +26,10 @@ nwt.register({
 
 				placement = el.data('position') || 'top',
 
-				tooltip = nwt.node.create('<div class="tooltip fade ' + placement + ' in" style="display:block;"><div class="tooltip-arrow"></div><div class="tooltip-inner">' + el.data('tooltip') + '</div></div>'),
-				
+				popoverContent = layout == 'tooltip' ? el.data('tooltip') : '<h3 class="popover-title">' + el.data('title') + '</h3><div class="popover-content">' + el.data('tooltip') + '</div>',
+
+				tooltip = nwt.node.create('<div class="' + layout + ' fade ' + placement + ' in" style="display:block;"><div class="arrow ' + layout + '-arrow"></div><div class="' + layout + '-inner">' + popoverContent + '</div></div>'),
+
 				tipRegion;
 
 			// Append the tooltip so we know it's dimensions
@@ -41,12 +45,12 @@ nwt.register({
 					top = region.top - tipRegion.height
 					left = region.left + (region.width - tipRegion.width) / 2
 				break
-				case 'left':
-					top = region.top - (region.height / 2)
+				case 'left':				
+					top = region.top + (region.height - tipRegion.height) / 2
 					left = region.left - tipRegion.width
 				break
 				case 'right':
-					top = region.top - (region.height / 2)
+					top = region.top + (region.height - tipRegion.height) / 2
 					left = region.right;
 				break
 			}
