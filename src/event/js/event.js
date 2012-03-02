@@ -64,7 +64,7 @@ function NWTEvent() {
 	this._cached = {};
 
 	// Cached event data for custom events
-	this._eventData;
+	this._eventData = [];
 }
 
 
@@ -178,6 +178,7 @@ _getEventCallback: function(implementOn, event, callback, selector, context, onc
 			// Prepend the wrapped event onto the argument list so we can expect what arguments we get
 			nwt.event._eventData.unshift(eventWrapper);
 			callback.apply(implementOn, nwt.event._eventData);
+			nwt.event._eventData = [];
 
 			if (once) {
 				implementOn.removeEventListener(event, selfCallee);
