@@ -62,6 +62,9 @@ function NWTEvent() {
 	// Cache the wrapped events so if the user calls node.off(...)
 	// we can easily look up the function reference
 	this._cached = {};
+
+	// Cached event data for custom events
+	this._eventData;
 }
 
 
@@ -165,12 +168,16 @@ live: function(attribute, pattern, callback, interaction) {
  */
 _getEventCallback: function(implementOn, event, callback, selector, context, once) {
 	var wrappedListener = function (e){
+
 		var eventWrapper = new NWTEventInstance(e),
 
 		selfCallee = arguments.callee,
 
 		returnControl = function() {
-			callback.call(implementOn, eventWrapper);
+			// Call the callback
+			// Prepend the wrapped event onto the argument list so we can expect what arguments we get
+			nwt.event._eventData.unshift(eventWrapper);
+			callback.apply(implementOn, nwt.event._eventData);
 
 			if (once) {
 				implementOn.removeEventListener(event, selfCallee);
@@ -320,4 +327,18 @@ NWTNodeInstance.prototype.once = function(event, fn, selector, context) {
  */
 NWTNodeInstance.prototype.off = function(event, fn) {
 	return nwt.event.off(this, event, fn);
+};
+
+
+/**
+ * Fires an event on a node
+ */
+NWTNodeInstance.prototype.fire = function(event, callback) {	
+	var args = Array.prototype.slice.call(arguments, 1);
+
+	nwt.event._eventData = args;
+
+	var customEvt = document.createEvent("UIEvents");
+	customEvt.initEvent(event, true, false);
+	this._node.dispatchEvent(customEvt);
 };

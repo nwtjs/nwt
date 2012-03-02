@@ -92,6 +92,7 @@ JSONDataSource.prototype.update = function(callback) {
 function IODataSource(config) {
 	this.columns = standardizeCols(config.columns);
 	this.io = config.data;
+	this.node = config.node;
 
 	this.fetch = config.fetch || function(io, sort, dir) {
 		io.post('sort=' + sort + '&dir=' + dir);
@@ -110,6 +111,7 @@ IODataSource.prototype.update = function(callback) {
 		self.data = o.obj.results;
 
 		callback();
+		self.node.fire('update', o);
 	});
 
 	self.fetch(self.io, self.columns[self.colSortIdx].name, self.columns[self.colSortIdx].dir);

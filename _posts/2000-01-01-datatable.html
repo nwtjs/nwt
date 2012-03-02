@@ -121,4 +121,25 @@ nwt.one('#mytable3').plug('Datatable', {
 });
 </script>
 
-</div></div>
+<!--div class="row">
+	<div class="span7">
+		<h3>Datatable Events</h3>
+
+		<div id="mytable4"></div>
+
+		<script type="text/javascript">
+		nwt.one('#mytable4').plug('Datatable', {
+			columns: ['one', 'two', 'three'],
+			data: nwt.io('/nwt/jekyll/jsondata.txt')
+		});
+
+		nwt.one('#mytable4')
+		.on('sort', function(e){
+			console.log('Got sort event!', e, arguments);
+		})
+		.on('update', function(e){
+			console.log('Got update event!', arguments);
+		});
+		</script>
+	</div>
+</div-->
