@@ -437,8 +437,8 @@ setContent: function(content) {
 			};
 
 			self._node.appendChild(newScript);
-		} else if (rawEl.text){
-			eval(rawEl.text);
+		} else if (rawEl.get('text')){
+			eval(rawEl.get('text'));
 			processScripts();
 		}
 	}
