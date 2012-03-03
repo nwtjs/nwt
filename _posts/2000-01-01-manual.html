@@ -16,7 +16,7 @@ title: The Manual
 <h2>Node Methods (DOM methods)</h2>
 <p>Accessing dom elements is easy and can be done with n.one() or n.all() for a collection.</p>
 
-{% highlight js %}
+{% highlight javascript %}
 var el = n.one('#someid .someclass');
 el.setContent('Hello Nodo');
 
@@ -92,8 +92,13 @@ el.setData('id', 12345);
 var el = n.node.create('<div class="boringexample">Some HTML</div>');
 alert(el.hasClass('boringexample')); // Alerts true
 
-// Appending nodes
+// Appending nodes as a child
 n.one('body').append(el);
+
+// It's possible to create a node and append it to a selector, or node instance
+// We can continue to chain methods after appending on the child node.
+n.node.create('<div>Content</div>').appendTo(myNode);
+n.node.create('<div>Content</div>').appendTo('#someSelector');
 
 // Can also use insert (before or after)
 n.one('.container').insert(el, 'before');

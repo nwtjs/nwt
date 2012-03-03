@@ -472,6 +472,21 @@ append: function(node) {
 
 
 /**
+ * Appends the current node to another node
+ * @param {string|object} Either a CSS selector, or node instance
+ * @return object The node that we appended the current node to
+ */
+appendTo: function(node) {
+
+	var newParent = ( node instanceof NWTNodeInstance ) ? node : nwt.one(node);
+
+	newParent.append(this);
+
+	return this;
+},
+
+
+/**
  * Removes a node instance from the dom
  */
 remove: function() {

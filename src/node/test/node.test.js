@@ -253,6 +253,32 @@ nwt.unit
 );
 
 nwt.unit
+.describe('Tests Node.appendTo.')
+.setup('<div id="id1"><span id="child"></span></div><div id="id2"></div>')
+.equal(
+	function() {
+		nwt.one('#child').appendTo('#id2');
+		return nwt.one('#id2').getContent();
+	},
+	function() {
+		return '<span id="child"></span>';
+	}
+);
+
+nwt.unit
+.describe('Tests Node.appendTo from new node.')
+.setup('<div id="id1"></div>')
+.equal(
+	function() {
+		nwt.node.create('<span></span>').appendTo('#id1').set('id', 'myid');
+		return nwt.one('#id1').getContent();
+	},
+	function() {
+		return '<span id="myid"></span>';
+	}
+);
+
+nwt.unit
 .describe('Tests Node.remove.')
 .setup('<div id="id1"></div>')
 .equal(
