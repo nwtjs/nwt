@@ -1,6 +1,5 @@
 ---
-layout: default
-title: Datatable
+layout: example
 ---
 
 <h1>Plugins</h1>
@@ -101,23 +100,25 @@ nwt.one('#mytable3').plug('Datatable', {
 
 <script type="text/javascript">
 
-nwt.one('#mytable1').plug('Datatable');
-
-nwt.one('#mytable2').plug('Datatable', {
-	columns: [{name:'bbq?', key: 'one'}, 'two', 'three'],
-	data: [
-		{one: 'bbq', two: 'ketchup', three: 'mustard'},
-		{one: 'dog', two: 'cat', three: 'raining'},
-		{one: 'Dave', two: 'Logan', three: 'Tony'}
-	]
-});
-
-nwt.one('#mytable3').plug('Datatable', {
-	columns: ['one', 'two', 'three'],
-	data: nwt.io('/nwt/jekyll/jsondata.txt'),
-	fetch: function(io, sort, dir) {
-		io.get('sort=' + sort + '&dir=' + dir);
-	}
+n.ready(function(){
+	nwt.one('#mytable1').plug('Datatable');
+	
+	nwt.one('#mytable2').plug('Datatable', {
+		columns: [{name:'bbq?', key: 'one'}, 'two', 'three'],
+		data: [
+			{one: 'bbq', two: 'ketchup', three: 'mustard'},
+			{one: 'dog', two: 'cat', three: 'raining'},
+			{one: 'Dave', two: 'Logan', three: 'Tony'}
+		]
+	});
+	
+	nwt.one('#mytable3').plug('Datatable', {
+		columns: ['one', 'two', 'three'],
+		data: nwt.io('/nwt/jekyll/jsondata.txt'),
+		fetch: function(io, sort, dir) {
+			io.get('sort=' + sort + '&dir=' + dir);
+		}
+	});
 });
 </script>
 

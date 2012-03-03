@@ -1,0 +1,50 @@
+---
+layout: default
+title: Examples
+---
+
+<div class="row">
+	<div class="span3">
+		<div class="well">
+			<ul class="nav nav-list" id="ExampleMenu">
+				<li class="active"><a href="/nwt/example-intro.html">Home</a></li>
+				<li class="nav-header">Bootstrap Components</li>
+				<li><a href="/nwt/bootstrap-dropdown.html">Dropdown</a></li>
+				<li><a href="/nwt/bootstrap-tabview.html">Tabview</a></li>
+				<li><a href="/nwt/bootstrap-collapse.html">Collapse</a></li>
+				<li><a href="/nwt/bootstrap-button.html">Buttons</a></li>
+				<li><a href="/nwt/bootstrap-overlay.html">Overlays</a></li>
+				<li><a href="/nwt/bootstrap-carousel.html">Carousel</a></li>
+				<li><a href="/nwt/bootstrap-alert.html">Alerts</a></li>
+				<li><a href="/nwt/bootstrap-typeahead.html">Typeahead</a></li>
+				<li><a href="/nwt/bootstrap-scrollspy.html">Scrollspy</a></li>
+				<li><a href="/nwt/bootstrap-datatable.html">Datatable</a></li>
+			</ul>
+		</div> <!-- /well -->
+	</div>
+	<div class="span9">
+		<div id="MainContent">
+			Loading...
+		</div>
+	</div>
+</div>
+
+<script type="text/javascript">
+n.one('#ExampleMenu').on('click', function(e){
+	e.stop();
+
+	var src = e.target.get('href'),
+
+		mainContent = n.one('#MainContent');
+
+	n.io(src).success(function(o){
+		mainContent.setContent(o);
+	}).get();
+
+	// Toggle the active class
+	this.all('.active').removeClass('active');
+	e.target.parent().addClass('active');
+}, 'a');
+
+n.one('#ExampleMenu li.active a').click();
+</script>

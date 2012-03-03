@@ -402,7 +402,48 @@ getContent: function(content) {
  * @param string Content to set
  */
 setContent: function(content) {
-	this._node.innerHTML = content;
+	var self = this,
+		processScripts,
+		scriptTags;
+
+	self._node.innerHTML = content;
+
+	// Re-append any script tags introduced
+	// We need to synchronously process them
+	scriptTags = self.all('script');
+	processScripts = function() {
+
+		var rawEl = scriptTags.nodes.shift();
+
+		if (!rawEl || !rawEl._node) {
+			return;
+		}
+
+		// If there is script content, eval it instead of appending it
+		var scriptSrc = rawEl.getAttribute('src');
+
+		if (scriptSrc) {
+			var newScript = document.createElement('script'),
+				done;
+
+			newScript.type = "text/javascript";
+			newScript.src = scriptSrc;
+	
+			newScript.onload = newScript.onreadystatechange = function() {
+				if ( !done && (!this.readyState || this.readyState === "loaded" || this.readyState === "complete") ) {
+					done = true;
+					processScripts();
+				}
+			};
+
+			self._node.appendChild(newScript);
+		} else if (rawEl.text){
+			eval(rawEl.text);
+			processScripts();
+		}
+	}
+	processScripts();
+
 	return this;
 },
 

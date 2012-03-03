@@ -5,7 +5,5 @@ navigation:
   url: /index.html
 - text: Manual
   url: /manual.html
-- text: Bootstrap
-  url: /bootstrap.html
-- text: Datatable
-  url: /datatable.html
+- text: Examples
+  url: /examples.html

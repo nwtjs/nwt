@@ -5,3 +5,7 @@
 #main section {
 	padding-bottom:20px;
 }
+
+iframe.example {
+	width:100%;
+}
