@@ -155,6 +155,20 @@ nwt.unit
 	}
 );
 
+
+nwt.unit
+.describe('Tests Node.val.')
+.setup('<input id="id1" type="text" value="asdf">')
+.equal(
+	function() {
+		return nwt.one('#id1').val();
+	},
+	function() {
+		return 'asdf';
+	}
+);
+
+
 nwt.unit
 .describe('Tests Node.getStyle.')
 .setup('<span id="id1" style="float:left; position:absolute;"></span>')

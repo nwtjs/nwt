@@ -408,6 +408,14 @@ setContent: function(content) {
 
 
 /**
+ * Passthrough to node.get('val')
+ */
+val: function() {
+	return this.get('value');
+},
+
+
+/**
  * Returns the next node
  */
 next: function() {
