@@ -118,6 +118,4 @@ implement: function(implClass, modClass) {
 }
 };
 
-var nwt = new NWT();
-
-window.nwt = nwt;
+window.nwt = window.n = new NWT();
