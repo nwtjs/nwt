@@ -487,6 +487,22 @@ appendTo: function(node) {
 
 
 /**
+ * Inserts the current node into another node
+ * @param {string|object} Either a CSS selector, or node instance
+ * @param string Position to insert at. Defaults to 'before'
+ * @return object The node that we inserted the current node into
+ */
+insertTo: function(node, position) {
+
+	var newParent = ( node instanceof NWTNodeInstance ) ? node : nwt.one(node);
+
+	newParent.insert(this, position);
+
+	return this;
+},
+
+
+/**
  * Removes a node instance from the dom
  */
 remove: function() {

@@ -321,6 +321,33 @@ nwt.unit
 );
 
 nwt.unit
+.describe('Tests Node.insertTo (Before, Selector).')
+.setup('<div id="id1"><span>b</span></div>')
+.equal(
+	function() {
+		var newNode = nwt.node.create('<em>a</em>').insertTo('#id1 span');
+		return nwt.one('#id1').getContent();
+	},
+	function() {
+		return '<em>a</em><span>b</span>';
+	}
+);
+
+nwt.unit
+.describe('Tests Node.insertTo (After, Node).')
+.setup('<div id="id1"><span>b</span></div>')
+.equal(
+	function() {
+		var insertTarget = nwt.one('#id1 span');
+		var newNode = nwt.node.create('<em>a</em>').insertTo(insertTarget, 'after');
+		return nwt.one('#id1').getContent();
+	},
+	function() {
+		return '<span>b</span><em>a</em>';
+	}
+);
+
+nwt.unit
 .describe('Tests Node.create.')
 .setup('<div id="id1"></div>')
 .equal(

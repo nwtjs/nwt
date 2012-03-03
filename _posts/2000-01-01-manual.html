@@ -103,6 +103,9 @@ n.node.create('<div>Content</div>').appendTo('#someSelector');
 // Can also use insert (before or after)
 n.one('.container').insert(el, 'before');
 n.one('.container').insert(el, 'after');
+
+// Alternatively you can use insertTo
+n.node.create('<div>Content</div>').inserTo(newSibling, 'after');
 {% endhighlight %}
 
 
