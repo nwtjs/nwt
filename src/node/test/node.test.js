@@ -155,6 +155,19 @@ nwt.unit
 	}
 );
 
+nwt.unit
+.describe('Tests Node.setContent /w scripts.')
+.setup('<div id="id1"></div>')
+.equal(
+	function() {
+		window._TEST_COUNTER = 1;
+		nwt.one('#id1').setContent('bbq is fun. <script type="text/javascript">window._TEST_COUNTER++;</script>');
+		return window._TEST_COUNTER;
+	},
+	function() {
+		return 2;
+	}
+);
 
 nwt.unit
 .describe('Tests Node.val.')
