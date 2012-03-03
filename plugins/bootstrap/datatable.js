@@ -66,7 +66,7 @@ function standardizeCols(columns) {
  */
 function JSONDataSource(config) {
 	// Default to the first col ASC for sorting
-	this.colSortIdx = 0;
+	this.colSortIdx = -1;
 
 	this.data = config.data;
 	this.columns = standardizeCols(config.columns);
@@ -78,9 +78,11 @@ function JSONDataSource(config) {
 JSONDataSource.prototype.update = function(callback) {
 	var mythis = this;
 
-	this.data.sort(function(a, b){
-		return mythis.columns[mythis.colSortIdx].sorter(a, b, mythis.columns[mythis.colSortIdx].dir);
-	});
+	if (mythis.colSortIdx >= 0) {
+		this.data.sort(function(a, b){
+			return mythis.columns[mythis.colSortIdx].sorter(a, b, mythis.columns[mythis.colSortIdx].dir);
+		});
+	}
 
 	callback();
 };
@@ -241,7 +243,15 @@ nwt.register({
 				'<tr>'];
 
 			for (var i in this.source.columns) {
-				content.push('<th class="row-' + i + '"><a data-col-idx="' + i + '" data-sort="sort" href="#">' + this.source.columns[i].name + '</a></th>');
+
+				var sortContent = '<i class="icon-placeholder"></i>',
+					colDir = self.source.columns[i].dir;
+
+				if (self.source.colSortIdx == i) {
+					sortContent = '<i class="icon-chevron-' + (colDir == 'asc' ? 'up' : 'down') + '"></i>';
+				}
+				
+				content.push('<th class="row-' + i + '"><a data-col-idx="' + i + '" data-sort="sort" href="#">' + this.source.columns[i].name + ' ' + sortContent + '</a></th>');
 			}
 
 			content.push('</tr></thead><tbody>');
