@@ -130,7 +130,7 @@ function ElementDataSource(config) {
 	var headings = config.data.all('tr th');
 
 	headings.each(function(th){
-		newColumns.push(th.getContent());
+		newColumns.push(th.getHtml());
 	});
 
 	config.data.all('tr').each(function(tr){
@@ -141,7 +141,7 @@ function ElementDataSource(config) {
 
 			if (!tr.all('td').item(i)) { continue; }
 
-			newRow[headings.item(i).getContent()] = tr.all('td').item(i).getContent();
+			newRow[headings.item(i).getHtml()] = tr.all('td').item(i).getHtml();
 			populated = true;
 		}
 
@@ -238,7 +238,7 @@ nwt.register({
 
 			var self = this;
 
-			// Populate table content
+			// Populate table html
 			var content = ['<table class="' + this.tableClass + '"><thead>',
 				'<tr>'];
 
@@ -269,7 +269,7 @@ nwt.register({
 
 			content.push('</tbody></table>');
 
-			this.node.setContent(content.join(''));
+			this.node.setHtml(content.join(''));
 
 			this.node.one('table thead').on('click', function(e) {
 				if (e.target.data('sort')) {

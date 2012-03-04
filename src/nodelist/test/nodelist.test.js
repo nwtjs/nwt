@@ -17,7 +17,7 @@ nwt.unit
 .describe('Tests NodeList.item().')
 .equal(
 	function () {
-		return nwt.all('ul li').item(1).getContent();
+		return nwt.all('ul li').item(1).getHtml();
 	},
 	function () {
 		return 'Second';
@@ -31,10 +31,10 @@ nwt.unit
 		var counter = 1;
 		nwt.all('ul li').each(function(el){
 			if( counter > 2 ) { return; }
-			el.setContent(el.getContent() + counter);
+			el.setHtml(el.getHtml() + counter);
 			counter++
 		});
-		return nwt.one('ul').getContent();
+		return nwt.one('ul').getHtml();
 	},
 	function () {
 		return '<li class="set1">First1</li><li class="set1">Second2</li><li>Third</li>';

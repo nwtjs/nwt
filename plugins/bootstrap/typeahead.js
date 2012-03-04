@@ -135,7 +135,7 @@ nwt.register({
 
 			var inputRegion = this.node.region();
 
-			this.menu.setContent(itemMarkup)
+			this.menu.setHtml(itemMarkup)
 			this.menu.one('li').addClass('active')
 
 			this.menu.setStyles({
@@ -162,7 +162,7 @@ nwt.register({
 		 * Handles selection of an element
 		 */
 		select: function (el) {
-			el.set('value', this.menu.one('li.active a').getContent());
+			el.set('value', this.menu.one('li.active a').getHtml());
 			return this.hide();
 		}
 	}

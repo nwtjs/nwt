@@ -40,7 +40,7 @@ NWTUnitTestFramework.prototype.pass = function() {
  * Setup method for a test (optional)
  */
 NWTUnitTestFramework.prototype.setup = function(bodyContent) {
-	nwt.one('#root').setContent(bodyContent);
+	nwt.one('#root').setHtml(bodyContent);
 	return this;
 };
 

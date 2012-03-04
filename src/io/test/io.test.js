@@ -17,8 +17,8 @@ nwt.unit
 		.success(
 			function(o) {
 				nwt.one('body').append(nwt.node.create('<div id="lateajax"></div>'));
-				nwt.one('#lateajax').setContent(o);
-				unit.equal(o, nwt.one('#lateajax').getContent())
+				nwt.one('#lateajax').setHtml(o);
+				unit.equal(o, nwt.one('#lateajax').getHtml())
 				nwt.one('#lateajax').remove();
 				unit.report()
 			})

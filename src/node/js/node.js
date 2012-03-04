@@ -390,23 +390,23 @@ serialize: function() {
 
 
 /**
- * Gets the content of the node
+ * Gets the html of the node
  */
-getContent: function(content) {
+getHtml: function() {
 	return this._node.innerHTML;
 },
 
 
 /**
- * Sets the content of the node
- * @param string Content to set
+ * Sets the html of the node
+ * @param string Html to set
  */
-setContent: function(content) {
+setHtml: function(html) {
 	var self = this,
 		processScripts,
 		scriptTags;
 
-	self._node.innerHTML = content;
+	self._node.innerHTML = html;
 
 	// Re-append any script tags introduced
 	// We need to synchronously process them
@@ -419,7 +419,7 @@ setContent: function(content) {
 			return;
 		}
 
-		// If there is script content, eval it instead of appending it
+		// If there is script html, eval it instead of appending it
 		var scriptSrc = rawEl.getAttribute('src');
 
 		if (scriptSrc) {

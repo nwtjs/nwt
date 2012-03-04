@@ -38,7 +38,7 @@ n.one('#ExampleMenu').on('click', function(e){
 		mainContent = n.one('#MainContent');
 
 	n.io(src).success(function(o){
-		mainContent.setContent(o);
+		mainContent.setHtml(o);
 	}).get();
 
 	// Toggle the active class

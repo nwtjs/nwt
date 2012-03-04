@@ -42,7 +42,7 @@ init: function(duration, easing) {
 		cleanThese.push(i);
 		newContent += i + ': ' + cssTransitionProperties[i] + ';';
 	}
-	newStylesheet.setContent('.' + this.animClass + '{' + newContent + '}');
+	newStylesheet.setHtml('.' + this.animClass + '{' + newContent + '}');
 
 	nwt.one('head').append(newStylesheet);
 },

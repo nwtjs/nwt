@@ -52,10 +52,10 @@ nwt.unit
 .equal(
 	function() {
 		var ancestor = nwt.one('#inner').ancestor('#parent');
-		return ancestor.getContent();
+		return ancestor.getHtml();
 	},
 	function() {
-		return nwt.one('#parent').getContent();
+		return nwt.one('#parent').getHtml();
 	}
 );
 
@@ -132,11 +132,11 @@ nwt.unit
 );
 
 nwt.unit
-.describe('Tests Node.getContent.')
+.describe('Tests Node.getHtml.')
 .setup('<span id="id1">asdf</span>')
 .equal(
 	function() {
-		return nwt.one('#id1').getContent();
+		return nwt.one('#id1').getHtml();
 	},
 	function() {
 		return 'asdf';
@@ -144,11 +144,11 @@ nwt.unit
 );
 
 nwt.unit
-.describe('Tests Node.setContent.')
+.describe('Tests Node.setHtml.')
 .equal(
 	function() {
-		nwt.one('#id1').setContent('bbq');
-		return nwt.one('#id1').getContent();
+		nwt.one('#id1').setHtml('bbq');
+		return nwt.one('#id1').getHtml();
 	},
 	function() {
 		return 'bbq';
@@ -156,12 +156,12 @@ nwt.unit
 );
 
 nwt.unit
-.describe('Tests Node.setContent /w scripts.')
+.describe('Tests Node.setHtml /w scripts.')
 .setup('<div id="id1"></div>')
 .equal(
 	function() {
 		window._TEST_COUNTER = 1;
-		nwt.one('#id1').setContent('bbq is fun. <script type="text/javascript">window._TEST_COUNTER++;</script>');
+		nwt.one('#id1').setHtml('bbq is fun. <script type="text/javascript">window._TEST_COUNTER++;</script>');
 		return window._TEST_COUNTER;
 	},
 	function() {
@@ -285,7 +285,7 @@ nwt.unit
 .equal(
 	function() {
 		nwt.one('#child').appendTo('#id2');
-		return nwt.one('#id2').getContent();
+		return nwt.one('#id2').getHtml();
 	},
 	function() {
 		return '<span id="child"></span>';
@@ -298,7 +298,7 @@ nwt.unit
 .equal(
 	function() {
 		nwt.node.create('<span></span>').appendTo('#id1').set('id', 'myid');
-		return nwt.one('#id1').getContent();
+		return nwt.one('#id1').getHtml();
 	},
 	function() {
 		return '<span id="myid"></span>';
@@ -325,7 +325,7 @@ nwt.unit
 	function() {
 		var newNode = nwt.node.create('<em>a</em>');
 		nwt.one('#id1 span').insert(newNode);
-		return nwt.one('#id1').getContent();
+		return nwt.one('#id1').getHtml();
 	},
 	function() {
 		return '<em>a</em><span></span>';
@@ -340,7 +340,7 @@ nwt.unit
 	function() {
 		var newNode = nwt.node.create('<em>a</em>');
 		nwt.one('#id1 span').insert(newNode, 'after');
-		return nwt.one('#id1').getContent();
+		return nwt.one('#id1').getHtml();
 	},
 	function() {
 		return '<span>b</span><em>a</em>';
@@ -353,7 +353,7 @@ nwt.unit
 .equal(
 	function() {
 		var newNode = nwt.node.create('<em>a</em>').insertTo('#id1 span');
-		return nwt.one('#id1').getContent();
+		return nwt.one('#id1').getHtml();
 	},
 	function() {
 		return '<em>a</em><span>b</span>';
@@ -367,7 +367,7 @@ nwt.unit
 	function() {
 		var insertTarget = nwt.one('#id1 span');
 		var newNode = nwt.node.create('<em>a</em>').insertTo(insertTarget, 'after');
-		return nwt.one('#id1').getContent();
+		return nwt.one('#id1').getHtml();
 	},
 	function() {
 		return '<span>b</span><em>a</em>';
@@ -381,7 +381,7 @@ nwt.unit
 	function() {
 		var newNode = nwt.node.create('<div id="wtf" class="bbq" data-omg="wee">aaa</div>');
 		nwt.one('#id1').append(newNode);
-		return nwt.one('#id1').getContent();
+		return nwt.one('#id1').getHtml();
 	},
 	function() {
 		return '<div id="wtf" class="bbq" data-omg="wee">aaa</div>';
@@ -408,7 +408,7 @@ nwt.unit
 .equal(
 	function() {
 		nwt.one('#id1 div').removeStyles(['top', 'left']);
-		return nwt.one('#id1').getContent();
+		return nwt.one('#id1').getHtml();
 	},
 	function() {
 		return '<div style=""></div>';

@@ -10,8 +10,8 @@ nwt.register({
 		toggle: function(el, action) {
 			var togglers = {
 				'button-state' : function(){
-					el.setData('original-text', el.getContent());
-					el.setContent(el.data('loading-text'));
+					el.setData('original-text', el.getHtml());
+					el.setHtml(el.data('loading-text'));
 					el.set('disabled', true);
 				},
 				'buttons-checkbox' : function(){

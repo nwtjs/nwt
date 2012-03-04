@@ -42,7 +42,7 @@ nwt.register({
 					var targetParent = e.target.parent();
 					while(true) {
 						if (targetParent && targetParent._node == btnParent._node) {
-							el.setContent(e.target.getContent() + ' <span class="caret"></span>');
+							el.setHtml(e.target.getHtml() + ' <span class="caret"></span>');
 							e.stop();
 							break;
 						}
