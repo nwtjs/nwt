@@ -47,8 +47,11 @@ nwt.plugin = function(plugin) {
 		}
 	}
 
-	myPluginClass = new tempHolder();
-	return myPluginClass.init.apply(myPluginClass, params);
+	// Init plugins on dom ready
+	nwt.ready(function(){
+		myPluginClass = new tempHolder();
+		myPluginClass.init.apply(myPluginClass, params);
+	});
 };
 
 /**
