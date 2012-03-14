@@ -80,7 +80,6 @@ NWTEvent.prototype = {
  * @param string Type of listener to use, one of: click | mousemove | mouseout
  */
 live: function(attribute, pattern, callback, interaction) {
-
 	var classPattern = new RegExp(pattern),
 
 		interaction = interaction || 'click',
@@ -100,7 +99,6 @@ live: function(attribute, pattern, callback, interaction) {
 
 	dispatcher = 
 	function(e) {
-
 		var originalTarget = e.target,
 			target = originalTarget,
 
@@ -214,13 +212,6 @@ _getEventCallback: function(implementOn, event, callback, selector, context, onc
  * @param bool once If true, discards the event callback after is runs
  */
 on: function (implementOn, event, callback, selector, context, once) {
-
-	// Only add one copy per listener to an element
-	// If the listener is cached, remove the listener
-	if (this._cached[callback.toString()] ) {
-		this.off.apply(this, arguments);
-	}
-
 	implementOn.addEventListener(event, this._getEventCallback.apply(this, arguments));
 	return implementOn;
 },

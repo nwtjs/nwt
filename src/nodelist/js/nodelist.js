@@ -3,6 +3,9 @@
  * @constructor
  */
 function NWTNodeList(nodes) {
+
+	nwt.implement('DelayableQueue', this);
+
 	var wrappedNodes = [];
 
 	for( var i = 0, node ; node = nodes[i] ; i++  ) {
