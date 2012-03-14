@@ -167,7 +167,8 @@ live: function(attribute, pattern, callback, interaction) {
  * Wraps an event callback so we can attach/detach it
  */
 _getEventCallback: function(implementOn, event, callback, selector, context, once) {
-	var wrappedListener = function (e){
+	var self = this,
+		wrappedListener = function (e){
 
 		var eventWrapper = new NWTEventInstance(e),
 
@@ -196,9 +197,10 @@ _getEventCallback: function(implementOn, event, callback, selector, context, onc
 		returnControl();
 	};
 
+	// Push the callback onto the cached string
 	var stringy = callback.toString();
-	this._cached[stringy] = this._cached[stringy] || [];
-	this._cached[stringy].push({
+	self._cached[stringy] = self._cached[stringy] || [];
+	self._cached[stringy].push({
 		fn: wrappedListener,
 		raw: callback
 	})
@@ -230,6 +232,7 @@ off: function (implementOn, event, callback) {
 	var stringy = callback.toString();
 	if (this._cached[stringy]) {
 
+		// Iteratre through the cached callbacks and remove the correct one based on reference
 		for(var i=0,numCbs=this._cached[stringy].length; i < numCbs; i++) {
 			if (this._cached[stringy][i].raw === callback) {
 				implementOn.removeEventListener(event, this._cached[stringy][i].fn);
