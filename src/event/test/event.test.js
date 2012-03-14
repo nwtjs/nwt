@@ -130,3 +130,41 @@ nwt.unit
 	nwt.unit.equal(isFired, true);
 	nwt.unit.equal(testData, 'someData').report();
 });
+
+nwt.unit
+.describe('Tests adding event twice')
+.setup('<div id="event"></div>').run(function(unit) {
+
+	var counter = 0,
+	
+		callback = function() {
+			counter++;
+		},
+		
+		eventEl = nwt.one('#event');
+
+	var callback1 = function(e){
+		counter++;
+	},
+	callback2 = function(e){
+		counter++;
+	};
+
+	eventEl.on('click', callback1);
+	eventEl.on('click', callback2);
+	
+	eventEl.click();
+	eventEl.click();
+
+	nwt.unit.equal(counter, 4);
+	
+	eventEl.off('click', callback1);
+	eventEl.click();
+
+	nwt.unit.equal(counter, 5);
+
+	eventEl.off('click', callback2);
+	eventEl.click();
+
+	nwt.unit.equal(counter, 5);
+});

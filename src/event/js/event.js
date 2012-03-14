@@ -196,9 +196,12 @@ _getEventCallback: function(implementOn, event, callback, selector, context, onc
 		returnControl();
 	};
 
-	this._cached[callback.toString()] = {
-		fn: wrappedListener
-	}
+	var stringy = callback.toString();
+	this._cached[stringy] = this._cached[stringy] || [];
+	this._cached[stringy].push({
+		fn: wrappedListener,
+		raw: callback
+	})
 
 	return wrappedListener;
 },
@@ -214,13 +217,6 @@ _getEventCallback: function(implementOn, event, callback, selector, context, onc
  * @param bool once If true, discards the event callback after is runs
  */
 on: function (implementOn, event, callback, selector, context, once) {
-
-	// Only add one copy per listener to an element
-	// If the listener is cached, remove the listener
-	if (this._cached[callback.toString()] ) {
-		this.off.apply(this, arguments);
-	}
-
 	implementOn.addEventListener(event, this._getEventCallback.apply(this, arguments));
 	return implementOn;
 },
@@ -232,8 +228,14 @@ on: function (implementOn, event, callback, selector, context, once) {
  */
 off: function (implementOn, event, callback) {
 	var stringy = callback.toString();
-	if (!this._cached[stringy] || !this._cached[stringy].fn) { return; }
-	implementOn.removeEventListener(event, this._cached[stringy].fn);
+	if (this._cached[stringy]) {
+
+		for(var i=0,numCbs=this._cached[stringy].length; i < numCbs; i++) {
+			if (this._cached[stringy][i].raw === callback) {
+				implementOn.removeEventListener(event, this._cached[stringy][i].fn);
+			}
+		}
+	}
 },
 
 /**
