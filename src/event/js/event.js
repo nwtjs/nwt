@@ -168,7 +168,10 @@ live: function(attribute, pattern, callback, interaction) {
  */
 _getEventCallback: function(implementOn, event, callback, selector, context, once) {
 	var self = this,
-		wrappedListener = function (e){
+
+	stringy = callback.toString(),
+	
+	wrappedListener = function (e){
 
 		var eventWrapper = new NWTEventInstance(e),
 
@@ -198,7 +201,6 @@ _getEventCallback: function(implementOn, event, callback, selector, context, onc
 	};
 
 	// Push the callback onto the cached string
-	var stringy = callback.toString();
 	self._cached[stringy] = self._cached[stringy] || [];
 	self._cached[stringy].push({
 		fn: wrappedListener,
@@ -230,6 +232,7 @@ on: function (implementOn, event, callback, selector, context, once) {
  */
 off: function (implementOn, event, callback) {
 	var stringy = callback.toString();
+
 	if (this._cached[stringy]) {
 
 		// Iteratre through the cached callbacks and remove the correct one based on reference
