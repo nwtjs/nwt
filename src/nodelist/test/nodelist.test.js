@@ -57,8 +57,8 @@ nwt.unit
 .describe('Tests NodeList iterated functions (setStyle).')
 .equal(
 	function () {
-		nwt.all('#testlist li').setStyle('font-weight', 'bold');
-		return nwt.all('#testlist li').item(1).getStyle('font-weight');
+		nwt.all('#testlist li').setStyle('fontWeight', 'bold');
+		return nwt.all('#testlist li').item(1).getStyle('fontWeight');
 	},
 	function () {
 		return 'bold';

@@ -40,7 +40,7 @@ title: Examples
 			mainContent = n.one('#MainContent');
 
 		n.io(src).success(function(o){
-			n.one('body').purge();
+			n.one('body').purge(null, null, true);
 			n.one('#ExampleMenu').once('click', loadSection, 'a');
 
 			mainContent.setHtml(o);

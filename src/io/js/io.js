@@ -63,11 +63,12 @@ NWTIO.prototype = {
 _run: function() {
 	var mythis = this;
 	this.req.onreadystatechange = function() {		
-		var callback;
+		var callback,
+			state = mythis.req.readyState;
 
-		if (mythis.req.readyState == 4 && mythis.req.status == 200) {
+		if (state == 4 && mythis.req.status == 200) {
 			callback = 'success';
-		} else if (mythis.req.readyState == 4) {
+		} else if (state == 4) {
 			callback = 'failure';
 		}
 
