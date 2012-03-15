@@ -80,7 +80,6 @@ NWTEvent.prototype = {
  * @param string Type of listener to use, one of: click | mousemove | mouseout
  */
 live: function(attribute, pattern, callback, interaction) {
-
 	var classPattern = new RegExp(pattern),
 
 		interaction = interaction || 'click',
@@ -100,7 +99,6 @@ live: function(attribute, pattern, callback, interaction) {
 
 	dispatcher = 
 	function(e) {
-
 		var originalTarget = e.target,
 			target = originalTarget,
 
