@@ -201,6 +201,8 @@ _getEventCallback: function(implementOn, event, callback, selector, context, onc
 	// Push the callback onto the cached string
 	self._cached[stringy] = self._cached[stringy] || [];
 	self._cached[stringy].push({
+		type: event,
+		obj: implementOn,
 		fn: wrappedListener,
 		raw: callback
 	})
@@ -341,6 +343,32 @@ NWTNodeInstance.prototype.once = function(event, fn, selector, context) {
  */
 NWTNodeInstance.prototype.off = function(event, fn) {
 	return nwt.event.off(this, event, fn);
+};
+
+
+/**
+ * Purges a node of all listeners
+ * @param string If passed, only purges this type of listener
+ * @param function If passed, only purges the node of this listener
+ * @param bool If true, purges children
+ */
+NWTNodeInstance.prototype.purge = function(type, callback, recurse) {
+	var evt = nwt.event;
+
+	for (var i in evt._cached) {
+		for(var j=0,numCbs=evt._cached[i].length; j < numCbs; j++) {
+			var thisEvt = evt._cached[i][j];
+			if (this._node == thisEvt.obj._node && (!type || type == thisEvt.type)) {
+				evt.off(thisEvt.obj, thisEvt.type, thisEvt.raw)
+			}
+		}
+	}
+
+	if (recurse) {
+		this.all('*').each(function(el){
+			el.purge(type, callback, recurse);
+		})
+	}
 };
 
 

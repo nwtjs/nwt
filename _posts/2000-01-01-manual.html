@@ -254,6 +254,10 @@ n.one('#myid').once('click', function (e) {
 // Use off to remove events
 n.one('#myid').on('click', fn);
 n.one('#myid').off('click', fn); // Listener removed
+
+// You can also use purge to remove multiple events at once
+el.purge('click', callback, true); // True to recursively remove events from children
+el.purge(); // Removes all events on the node (does not recurse)
 {% endhighlight %}
 
 <p>Event callbacks receive a special NWTEventInstance object.</p>
@@ -297,13 +301,33 @@ n.one('#myid').on('click', function (e) {
 <h3>Filesize</h3>
 <p>Due to the fact that we only support modern browsers by default, we're able to keep the filesize extremely slim. IE users will not be as fast due to the conditional include.</p>
 
-<pre>
-
-Framework Size (In KB)
-
-Framework		Min.	Gzipped
---------------------------------
-jQuery 1.74		93		33
-MooTools 1.44	89		25
-nwt				 8	 	3 
-</pre>
+<div class="row">
+	<div class="span5">
+		<table class="table table-striped">
+			<thead>
+				<tr>
+					<th>Framework</th>
+					<th>Minified Size</th>
+					<th>Min + Gzipped Size</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td>jQuery 1.74</td>
+					<td>93</td>
+					<td>33</td>
+				</tr>
+				<tr>
+					<td>MooTools 1.44</td>
+					<td>89</td>
+					<td>25</td>
+				</tr>
+				<tr>
+					<td>nwt</td>
+					<td>12.5</td>
+					<td><strong>4.2</strong></td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</div>

@@ -30,21 +30,32 @@ title: Examples
 </div>
 
 <script type="text/javascript">
-n.one('#ExampleMenu').on('click', function(e){
-	e.stop();
+!function() {
 
-	var src = e.target.get('href'),
+	var loadSection = function(e){
+		e.stop();
 
-		mainContent = n.one('#MainContent');
+		var src = e.target.get('href'),
 
-	n.io(src).success(function(o){
-		mainContent.setHtml(o);
-	}).get();
+			mainContent = n.one('#MainContent');
 
-	// Toggle the active class
-	this.all('.active').removeClass('active');
-	e.target.parent().addClass('active');
-}, 'a');
+		n.io(src).success(function(o){
+			n.one('body').purge();
+			n.one('#ExampleMenu').once('click', loadSection, 'a');
 
-n.one('#ExampleMenu li.active a').click();
+			mainContent.setHtml(o);
+		}).get();
+
+		// Toggle the active class
+		this.all('.active').removeClass('active');
+		e.target.parent().addClass('active');
+
+		// Keep this alive because we purge
+		n.one('#ExampleMenu').on('click', loadSection, 'a');
+	};
+
+	n.one('#ExampleMenu').once('click', loadSection, 'a');
+
+	n.one('#ExampleMenu li.active a').click();
+}()
 </script>

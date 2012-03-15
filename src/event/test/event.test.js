@@ -168,3 +168,38 @@ nwt.unit
 
 	nwt.unit.equal(counter, 5);
 });
+
+nwt.unit
+.describe('Tests node.purge')
+.setup('<div id="event_wrapper"><div id="event"></div></div>').run(function(unit) {
+
+	var counter = 0,
+	
+		callback = function() {
+			counter++;
+		},
+		
+		eventEl = nwt.one('#event'),
+		parentEventEl = nwt.one('#event_wrapper');
+
+	eventEl.on('click', callback);
+
+	eventEl.click();
+
+	// Now purge the node and make sure events stop firing
+	eventEl.purge();
+	eventEl.click(); eventEl.click();
+
+	nwt.unit.equal(counter, 1);
+
+	eventEl.on('click', callback);
+
+	eventEl.click();
+	nwt.unit.equal(counter, 2);
+
+	// Now purge from the parent and test
+	parentEventEl.purge('click', null, true);
+	eventEl.click();
+	nwt.unit.equal(counter, 2);
+
+});
