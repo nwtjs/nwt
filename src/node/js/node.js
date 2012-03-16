@@ -455,32 +455,70 @@ val: function() {
 	return this.get('value');
 },
 
+/**
+ * Finds a node based on direction
+ * @param string Native method to iterate nodes {previous | next}
+ * @param string criteria CSS selector or Filtering function
+ */
+_find: function(method, criteria) {
+	// Iterate on the raw node
+	var node = this._node,
+
+		// Method to iterate on
+		siblingType = method + 'Sibling',
+
+		// Filter to test the node
+		filter,
+
+		validItems;
+
+	// CSS Selector case
+	if (typeof criteria == "string") {
+		validItems = n.all(criteria);
+		filter = function(rawNode) {
+			var found = false;
+			
+			validItems.each(function(el){
+				if (rawNode == el._node) {
+					found = true;
+				}
+			});
+			return found;
+		}; 
+
+	// Default the filter to return true
+	} else if (!criteria) {
+		filter = function(){ return true }
+	} else {
+		filter = function(rawEl) {
+			return criteria(new NWTNodeInstance(rawEl));
+		}
+	}
+
+	while(node) {
+		node = node[siblingType];
+
+		if (node && node.nodeType == 1 && filter(node)) {
+			break;
+		}	
+	}
+
+	return node ? new NWTNodeInstance(node) : null;
+},
 
 /**
  * Returns the next node
  */
-next: function() {
-
-	var node = this._node;
-
-	do node = node.nextSibling;
-	while (node && node.nodeType != 1);
-
-	return new NWTNodeInstance(node);
+next: function(filter) {
+	return this._find('next', filter)
 },
 
 
 /**
  * Returns the previous node
  */
-previous: function() {
-
-	var node = this._node;
-
-	do node = node.previousSibling;
-	while (node && node.nodeType != 1);
-
-	return new NWTNodeInstance(node);
+previous: function(filter) {
+	return this._find('previous', filter)
 },
 
 
@@ -568,7 +606,7 @@ insert: function(node, position) {
 	if( position == 'before'  ) {
 		this._node.parentNode.insertBefore(node._node, this._node);
 	} else if ( position == 'after' ) {
-		this._node.parentNode.insertBefore(node._node, this.next()._node);
+		this._node.parentNode.insertBefore(node._node, this.next() ? this.next()._node : null);
 	}
 },
 

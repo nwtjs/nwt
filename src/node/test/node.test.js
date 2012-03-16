@@ -251,6 +251,34 @@ nwt.unit
 );
 
 nwt.unit
+.describe('Tests Node.next with filtering')
+.equal(
+	function() {
+		return nwt.one('#first').next(function(el){return el.get('id') == "third"})._node;
+	},
+	function() {
+		return nwt.one('#first').next('#third')._node;
+	},
+	function() {
+		return nwt.one('#third')._node;
+	}
+);
+
+nwt.unit
+.describe('Tests Node.previous with filtering')
+.equal(
+	function() {
+		return nwt.one('#third').previous(function(el){return el.get('id') == "first"})._node;
+	},
+	function() {
+		return nwt.one('#third').previous('#first')._node;
+	},
+	function() {
+		return nwt.one('#first')._node;
+	}
+);
+
+nwt.unit
 .describe('Tests Node.next/previous with text nodes.')
 .setup('<em id="first">asdf</em> <em id="second">asdf</em>' + "\n" + '<em id="third">asdf</em>')
 .equal(

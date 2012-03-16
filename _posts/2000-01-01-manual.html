@@ -38,6 +38,10 @@ el.previous();
 // Gets the next node
 el.next();
 
+// Next and previous may take an optional selector or filtering function
+el.next('.selector');
+el.previous(function(el) { return el.hasClass('bbq') });
+
 // Returns a single element that is a child of this node based on selector
 el.one('#selector');
 

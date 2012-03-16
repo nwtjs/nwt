@@ -23,6 +23,7 @@ NWTUnitTestFramework.prototype.addError = function() {
  * Provides the description of the test
  */
 NWTUnitTestFramework.prototype.describe = function(description) {
+	//console.log('Describing', description)
 	this.description = description;
 	return this;
 };

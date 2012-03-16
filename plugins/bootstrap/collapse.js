@@ -9,8 +9,7 @@ nwt.register({
 
 		collapse: function(el) {
 
-			var collapseGroup = el.ancestor('.accordion-group'),
-				body = collapseGroup.one('.accordion-body');
+			var body = el.next('.collapse');
 
 			// Add the in class for transitions
 			if (!body.hasClass('in')) {
