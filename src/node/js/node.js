@@ -574,6 +574,23 @@ appendTo: function(node) {
 
 
 /**
+ * Prepends a node to the beginning of the children of this node
+ */
+prepend: function(node) {
+
+	if( node instanceof NWTNodeInstance ) {
+		node = node._node;
+	}
+
+	var child = this.one('*');
+
+	this._node.insertBefore(node, (child._node? child._node : null));
+	
+	return this;
+},
+
+
+/**
  * Inserts the current node into another node
  * @param {string|object} Either a CSS selector, or node instance
  * @param string Position to insert at. Defaults to 'before'

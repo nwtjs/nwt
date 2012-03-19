@@ -294,6 +294,33 @@ nwt.unit
 );
 
 nwt.unit
+.describe('Tests Node.prepend to empty node.')
+.setup('<div id="id1"></div>')
+.equal(
+	function() {
+		var newEl = nwt.node.create('<em id="woohoo">bbq</em>');
+		nwt.one('#id1').prepend(newEl);
+		return nwt.one('#id1').getHtml();
+	},
+	function() {
+		return '<em id="woohoo">bbq</em>';
+	}
+);
+
+nwt.unit
+.describe('Tests Node.prepend to non-empty node.')
+.equal(
+	function() {
+		var newEl = nwt.node.create('<i>i</i>');
+		nwt.one('#id1').prepend(newEl);
+		return nwt.one('#id1').getHtml();
+	},
+	function() {
+		return '<i>i</i><em id="woohoo">bbq</em>';
+	}
+);
+
+nwt.unit
 .describe('Tests Node.append.')
 .setup('<div id="id1"></div>')
 .equal(
