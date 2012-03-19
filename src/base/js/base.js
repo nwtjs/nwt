@@ -133,7 +133,6 @@ declare: function(name, clazz) {
  * Augments a class namespaced on n.classList
  */
 augment: function(name, fnName, fn) {
-	console.log('Augmenting', name, fnName, fn + '')
 	nwt.classList[name].prototype[fnName] = fn; 
 }
 };

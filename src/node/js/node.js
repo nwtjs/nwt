@@ -324,7 +324,7 @@ setStyles: function(newStyles) {
 		newStyleKeys = [];
 
 	for( i in newStyles ) {
-		var styleKey = this._jsStyle(i);
+		var styleKey = this._jsStyle(i),
 		eachStyleVal = newStyles[i];
 
 		// Default the unit if necessary
