@@ -273,9 +273,9 @@ ready: function(fn) {
 
 		doc = win.document, root = doc.documentElement,
 	
-		add = doc.addEventListener ? 'addEventListener' : 'attachEvent',
-		rem = doc.addEventListener ? 'removeEventListener' : 'detachEvent',
-		pre = doc.addEventListener ? '' : 'on',
+		add = doc.attachEvent ? 'attachEvent' : 'addEventListener',
+		rem = doc.attachEvent ? 'detachEvent' : 'removeEventListener',
+		pre = doc.attachEvent ? 'on' : '',
 	
 		init = function(e) {
 			if (e.type == 'readystatechange' && doc.readyState != 'complete') return;
