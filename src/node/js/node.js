@@ -6,6 +6,7 @@ function NWTNodeInstance(node) {
 	nwt.implement('DelayableQueue', this);
 	this._node = node;
 }
+n.declare('Node', NWTNodeInstance);
 
 NWTNodeInstance.prototype = {
 

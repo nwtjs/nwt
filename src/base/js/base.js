@@ -115,6 +115,26 @@ implement: function(implClass, modClass) {
 	};
 
 	modClass[impls[implClass][0]] = impls[implClass][1]();
+},
+
+/**
+ * Declares a class on the n.* namespace
+ * This allows us to play with the prototype and do other things later
+ */
+declare: function(name, clazz) {
+	if (!nwt.classList) {
+		nwt.classList = {};
+	}
+
+	nwt.classList[name] = clazz;
+},
+
+/**
+ * Augments a class namespaced on n.classList
+ */
+augment: function(name, fnName, fn) {
+	console.log('Augmenting', name, fnName, fn + '')
+	nwt.classList[name].prototype[fnName] = fn; 
 }
 };
 
