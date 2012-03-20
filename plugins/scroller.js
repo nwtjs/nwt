@@ -9,7 +9,7 @@ nwt.register({
 		init: function (config) {
 
 			var self = this;
-
+			
 			// The node we scroll inside of
 			this.node = config.node;
 
@@ -21,57 +21,65 @@ nwt.register({
 
 			// Build the markup
 			this.thumb = n.node.create('<div class="thumb" style="width:25px;cursor:pointer;overflow:hidden;position:absolute;top:0;left:-4px;"><div style="background:#98bb47;border-radius:5px;height:100%;width:12px;margin:0 0 0 6px;"></div></div>'),
-			this.scrollbar = n.node.create('<div class="scrollbar" style="background:#DDD; border-radius:5px;position:absolute;right:3px;top:' + this.scrollbarOffset + 'px;z-index:100;width:16px;margin-left:11px;cursor: pointer;"></div>').append(this.thumb),
+			this.scrollbar = n.node.create('<div class="scrollbar" style="background:#DDD; border-radius:5px;position:absolute;z-index:100;width:16px;margin-left:11px;cursor: pointer;"></div>').append(this.thumb),
 
 			// Current ratio of region height to total scroll area
 			// If this is >= there is no need to scroll
 			this.currRatio;
 
-			// Append the scrollbar to the node
-			this.node.prepend(this.scrollbar);
+			// Set the element we are scrolling to overflow:hidden so there isnt' two scrollbars
+			this.node.setStyle('overflow', 'hidden')
+			
+			// Append the scrollbar to the body and render absolutely
+			this.scrollbar.appendTo('body');
+
+			this.scrollbar.setStyles({
+				left: this.node.region().right,
+				top: this.scrollbarOffset + this.node.region().top
+			});
 
 			// Add dom events
 			/**
 			 * Handle mousewheel scrolling
 			 * Bubble up through the parents of the target and find the container
 			 */
-			n.one(document).on('mousewheel', function(e){
+			n.one(window).on('mousewheel', function(e){
 				var target = e.target;
-			
-				while (target) {
+
+				while (target && target._node) {
 					// Only scroll if we found the target and there is something to scroll
-					if (target == this.node && currRatio < 1) {
-						this.setPositionIfValid(parseInt(this.thumb.getStyle('top'), 10) - (e.wheelDelta*wheel))
+					if (target._node == this.node._node && this.currRatio < 1) {
+						this.setPositionIfValid(parseInt(this.thumb.getStyle('top'), 10) - (e._e.wheelDelta*this.wheelScroll))
 						e.preventDefault();
 						break;
 					}
-					target = target.get('parentNode');
+					target = target.parent();
 				}
-			}, this.node);
+			}.bind(this));
 
 			// Add events
-			this.scrollbar.on('mousedown', this.startInteract);
-			this.scrollbar.on('mouseup', this.endInteract);
+			this.scrollbar.on('mousedown', this.startInteract.bind(this));
+			this.scrollbar.on('mouseup', this.endInteract.bind(this));
 			
 			this.setSizing();
 		},
 			
 		setSizing: function() {
 			// Size the scrollbar appropriately
-			this.scrollbar.setStyle('height', parseInt(el.getStyle('height'), 10)+ 'px');
+			this.scrollbar.setStyle('height', parseInt(this.node.getStyle('height'), 10)+ 'px');
 		
 			// Update the ratio
-			currRatio = this.node.region().height / this.node.get('scrollHeight')
+			this.currRatio = this.node.region().height / this.node.get('scrollHeight')
 			
 			// Hide elements if the ratio is < 1
-			if (currRatio >= 1) {
+			if (this.currRatio >= 1) {
 				this.scrollbar.setStyle('display', 'none');
 			} else {
 				this.scrollbar.setStyle('display', 'block');
 			}
 		
 			// Size the thumb based on ratio
-			this.thumb.setStyle('height', Math.round(currRatio*100) + '%');
+			this.thumb.setStyle('height', Math.round(this.currRatio*100) + '%');
 		},
 		
 		setPositionIfValid: function(pos) {
@@ -98,7 +106,7 @@ nwt.register({
 		 */
 		updatePositionFromEvent: function(e) {
 			var thumbOffset = this.thumb.region().height/2;
-			this.setPositionIfValid(e.pageY - (el.region().top + this.scrollbarOffset) - thumbOffset);
+			this.setPositionIfValid(e.pageY - (this.node.region().top + this.scrollbarOffset) - thumbOffset);
 		},
 		
 		
