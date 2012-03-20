@@ -64,3 +64,13 @@ if (!Element.prototype.addEventListener) {
 		}
 	};
 }
+
+/**
+ * Resolves JS Styles
+ */
+nwt.augment('Node', '_jsStyle', function (name) {
+	var lookupMap = {float: 'styleFloat'};
+
+	if (lookupMap[name]) name = lookupMap[name];
+	return name;
+});

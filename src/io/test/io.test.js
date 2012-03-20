@@ -70,7 +70,7 @@ nwt.unit
 			unit.equal(o.obj.header, 'delete');
 			unit.report();
 		})
-	.delete();
+	['delete']();
 });
 
 nwt.unit

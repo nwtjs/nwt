@@ -60,10 +60,23 @@ NWTUnitTestFramework.prototype.equal = function() {
 		numArgs = arguments.length,
 		i;
 
+	// Cast to lowercase for IE
+	// Consider having node class return lowercase
+	if (firstTest && firstTest.toLowerCase) {
+		firstTest = firstTest.toLowerCase();
+	}
+	
 	this.assertionCount += arguments.length;
 
 	for (i = 1; i < numArgs; i += 1) {
 		var result = typeof arguments[i] == 'function' ? arguments[i]() : arguments[i];
+
+		// Cast to lowercase for IE
+		// Consider having node class return lowercase
+		if (result && result.toLowerCase) {
+			result = result.toLowerCase();
+		}
+		
 		if( result != firstTest ) {
 			return this.addError('Arguments not equal.', result, firstTest);
 		}

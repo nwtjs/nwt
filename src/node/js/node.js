@@ -6,6 +6,7 @@ function NWTNodeInstance(node) {
 	nwt.implement('DelayableQueue', this);
 	this._node = node;
 }
+n.declare('Node', NWTNodeInstance);
 
 NWTNodeInstance.prototype = {
 
@@ -323,7 +324,7 @@ setStyles: function(newStyles) {
 		newStyleKeys = [];
 
 	for( i in newStyles ) {
-		var styleKey = this._jsStyle(i);
+		var styleKey = this._jsStyle(i),
 		eachStyleVal = newStyles[i];
 
 		// Default the unit if necessary
