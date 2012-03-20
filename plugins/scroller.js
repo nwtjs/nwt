@@ -50,7 +50,7 @@ nwt.register({
 					// Only scroll if we found the target and there is something to scroll
 					if (target._node == this.node._node && this.currRatio < 1) {
 						this.setPositionIfValid(parseInt(this.thumb.getStyle('top'), 10) - (e._e.wheelDelta*this.wheelScroll))
-						e.preventDefault();
+						e.noDefault();
 						break;
 					}
 					target = target.parent();
@@ -106,7 +106,7 @@ nwt.register({
 		 */
 		updatePositionFromEvent: function(e) {
 			var thumbOffset = this.thumb.region().height/2;
-			this.setPositionIfValid(e.pageY - (this.node.region().top + this.scrollbarOffset) - thumbOffset);
+			this.setPositionIfValid(e._e.pageY - (this.node.region().top + this.scrollbarOffset) - thumbOffset);
 		},
 		
 		
@@ -115,7 +115,7 @@ nwt.register({
 		 */
 		startInteract: function(e) {
 			this.updatePositionFromEvent(e)
-			this.scrollbar.on('mousemove', this.updatePositionFromEvent);
+			this.scrollbar.on('mousemove', this.updatePositionFromEvent.bind(this));
 		},
 		
 		/**
@@ -123,7 +123,7 @@ nwt.register({
 		 */
 		endInteract: function(e) {
 			this.updatePositionFromEvent(e)
-			this.scrollbar.detach('mousemove', this.updatePositionFromEvent);
+			this.scrollbar.off('mousemove', this.updatePositionFromEvent.bind(this));
 		}
 	}
 });

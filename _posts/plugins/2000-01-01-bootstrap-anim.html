@@ -1,9 +1,9 @@
-<html>
-<body>
-<script type="text/javascript" src="/nwt.main.min.js"></script>
-<!--[if lte IE 9]>
-	<script type="text/javascript" src="/nwt.fallback.min.js"></script>
-<![endif]-->
+---
+layout: example
+---
+
+<h2>Animation</h2>
+<p>NWT ships with a simple and easy to use animation mechanism. Modern browsers receive CSS transitions.</p>
 
 <style type="text/css">
 #movement a, #movement span { position:relative; }
@@ -63,8 +63,3 @@ nwt.one('#anim1').on('click', function(e) {
 		.wait(1.5)
 		.anim({top: 0, left:0});
 });
-
-</script>
-
-</body>
-</html>
