@@ -39,6 +39,7 @@ title: Examples
 !function() {
 
 	var loadSection = function(e){
+
 		e.stop();
 
  		var src = e.target.get('href').split('#')[1],
@@ -46,6 +47,7 @@ title: Examples
 			mainContent = n.one('#MainContent');
 
 		n.io(src).success(function(o){
+			n.one('#ExampleMenu').fire('pluginexit');
 			n.one('body').purge(null, null, true);
 			n.one('#ExampleMenu').once('click', loadSection, 'a');
 

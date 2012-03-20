@@ -32,4 +32,7 @@ layout: example
 </div>
 <script type="text/javascript">
 	n.one('#scroller1').plug('Scroller');
+	n.one(document).once('pluginexit', function(){
+		n.all('.scrollbar').remove();
+	})
 </script>

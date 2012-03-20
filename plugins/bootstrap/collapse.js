@@ -9,7 +9,7 @@ nwt.register({
 
 		collapse: function(el) {
 
-			var body = el.next('.collapse');
+			var body = el.parent().next('.collapse');
 
 			// Add the in class for transitions
 			if (!body.hasClass('in')) {
