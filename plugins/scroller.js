@@ -14,7 +14,7 @@ nwt.register({
 			this.node = config.node;
 
 			// Amount to scroll by
-			this.wheelScroll = config.wheelScroll || 15;
+			this.wheelScroll = config.wheelScroll || 1;
 
 			// How far offset is the scrollbar from the top of the scrollable area
 			this.scrollbarOffset = config.scrollbarOffset || 0;
