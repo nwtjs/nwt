@@ -638,6 +638,103 @@ click: function() {
 		0, 0, 0, 0, 0, false, false, false, false, 0, null);
 
 	return !this._node.dispatchEvent(evt);
+},
+
+
+// Begin NWT Event hooks
+/**
+ * Stub out the Node addEventListener/removeEventListener interfaces
+ */
+addEventListener: function(ev, fn) {
+	return this._node.addEventListener(ev, fn, false);
+},
+removeEventListener: function(ev, fn) {
+	return this._node.removeEventListener(ev, fn, false);
+},
+
+
+/**
+ * Implement a node API to for event listeners
+ * @see NWTEvent::on
+ */
+on: function(event, fn, selector, context) {	
+	return nwt.event.on(this, event, fn, selector,context);
+},
+
+
+/**
+ * Implement a node API to for event listeners
+ * @see NWTEvent::once
+ */
+once: function(event, fn, selector, context) {
+	return nwt.event.on(this, event, fn, selector, context, true);
+},
+
+
+/**
+ * Implement a node API to for event listeners
+ * @see NWTEvent::off
+ */
+off: function(event, fn) {
+	return nwt.event.off(this, event, fn);
+},
+
+
+/**
+ * Purges a node of all listeners
+ * @param string If passed, only purges this type of listener
+ * @param function If passed, only purges the node of this listener
+ * @param bool If true, purges children
+ */
+purge: function(type, callback, recurse) {
+	var evt = nwt.event;
+
+	for (var i in evt._cached) {
+		for(var j=0,numCbs=evt._cached[i].length; j < numCbs; j++) {
+			var thisEvt = evt._cached[i][j];
+			if (this._node == thisEvt.obj._node && (!type || type == thisEvt.type)) {
+				evt.off(thisEvt.obj, thisEvt.type, thisEvt.raw)
+			}
+		}
+	}
+
+	if (recurse) {
+		this.all('*').each(function(el){
+			el.purge(type, callback, recurse);
+		})
+	}
+},
+
+
+/**
+ * Fires an event on a node
+ */
+fire: function(event, callback) {	
+	var args = Array.prototype.slice.call(arguments, 1);
+
+	nwt.event._eventData = args;
+
+	var customEvt = document.createEvent("UIEvents");
+	customEvt.initEvent(event, true, false);
+	this._node.dispatchEvent(customEvt);
+},
+
+/**
+ * Implement a node API to animate
+ * @see NWTAnimate::anim
+ */
+anim: function(styles, duration, easing) {
+	return nwt.anim(this, styles, duration, easing);
+},
+
+/**
+ * Implement a node API for plugins
+ * @see nwt.plugin
+ */
+plug: function(plugin, config) {	
+	config = config || {};
+	config.node = this;
+	return nwt.plugin(plugin, config);
 }
 };
 

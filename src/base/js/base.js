@@ -122,18 +122,15 @@ implement: function(implClass, modClass) {
  * This allows us to play with the prototype and do other things later
  */
 declare: function(name, clazz) {
-	if (!nwt.classList) {
-		nwt.classList = {};
-	}
-
-	nwt.classList[name] = clazz;
+	nwt._lib = nwt._lib || {}
+	nwt._lib[name] = clazz
 },
 
 /**
- * Augments a class namespaced on n.classList
+ * Augments a class namespaced on n._lib
  */
 augment: function(name, fnName, fn) {
-	nwt.classList[name].prototype[fnName] = fn; 
+	nwt._lib[name].prototype[fnName] = fn; 
 }
 };
 

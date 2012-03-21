@@ -25,7 +25,7 @@ for( var i in packages ) {
 	}
 
 	// Wrap every file in an anonymous function
-	scriptContent = '(function(){' + scriptContent.join('') + '}());';
+	scriptContent = '(function(window,document){' + scriptContent.join('') + '})(window, document)';
 
 	// Finished a package
 	scriptContent = uglify(scriptContent, {mangle_options: {toplevel: true}});

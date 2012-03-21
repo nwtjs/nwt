@@ -53,13 +53,3 @@ nwt.plugin = function(plugin) {
 		myPluginClass.init.apply(myPluginClass, params);
 	});
 };
-
-/**
- * Implement a node API for plugins
- * @see nwt.plugin
- */
-NWTNodeInstance.prototype.plug = function(plugin, config) {	
-	config = config || {};
-	config.node = this;
-	return nwt.plugin(plugin, config);
-};
