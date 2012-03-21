@@ -25,7 +25,11 @@ for( var i in packages ) {
 	}
 
 	// Wrap every file in an anonymous function
-	scriptContent = '(function(window,document){' + scriptContent.join('') + '})(window, document)';
+	// Uglify-js is not rewriting my window/document names for some reason, so just do it manually for now
+	scriptContent = scriptContent.join('')
+	scriptContent = scriptContent.replace(/window/g, 'z');
+	scriptContent = scriptContent.replace(/document(?!Element)/g, 'y');
+	scriptContent = '!function(z,y){' + scriptContent + '}(window, document)';
 
 	// Finished a package
 	scriptContent = uglify(scriptContent, {mangle_options: {toplevel: true}});

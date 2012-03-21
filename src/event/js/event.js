@@ -263,24 +263,21 @@ ready: function(fn) {
 	 *
 	 */
 	
-	// @win window reference
 	// @fn function reference
 
 	var done = false,
 		top = true,
 
-		win = window,
-
-		doc = win.document, root = doc.documentElement,
+		root = document.documentElement,
 	
-		add = doc.attachEvent ? 'attachEvent' : 'addEventListener',
-		rem = doc.attachEvent ? 'detachEvent' : 'removeEventListener',
-		pre = doc.attachEvent ? 'on' : '',
+		add = document.attachEvent ? 'attachEvent' : 'addEventListener',
+		rem = document.attachEvent ? 'detachEvent' : 'removeEventListener',
+		pre = document.attachEvent ? 'on' : '',
 	
 		init = function(e) {
-			if (e.type == 'readystatechange' && doc.readyState != 'complete') return;
-			(e.type == 'load' ? win : doc)[rem](pre + e.type, init, false);
-			if (!done && (done = true)) fn.call(win, e.type || e);
+			if (e.type == 'readystatechange' && document.readyState != 'complete') return;
+			(e.type == 'load' ? window : document)[rem](pre + e.type, init, false);
+			if (!done && (done = true)) fn.call(window, e.type || e);
 		},
 	
 		poll = function() {
@@ -288,15 +285,15 @@ ready: function(fn) {
 			init('poll');
 		};
 
-	if (doc.readyState == 'complete') fn.call(win, 'lazy');
+	if (document.readyState == 'complete') fn.call(window, 'lazy');
 	else {
-		if (doc.createEventObject && root.doScroll) {
-			try { top = !win.frameElement; } catch(e) { }
+		if (document.createEventObject && root.doScroll) {
+			try { top = !window.frameElement; } catch(e) { }
 			if (top) poll();
 		}
-		doc[add](pre + 'DOMContentLoaded', init, false);
-		doc[add](pre + 'readystatechange', init, false);
-		win[add](pre + 'load', init, false);
+		document[add](pre + 'DOMContentLoaded', init, false);
+		document[add](pre + 'readystatechange', init, false);
+		window[add](pre + 'load', init, false);
 	}
 }
 
