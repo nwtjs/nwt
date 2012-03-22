@@ -11,6 +11,32 @@ layout: example
 #anim3 { color:#FF0000; }
 </style>
 
+<h3>Demo</h3>
+<div class="well anim_first">
+	<a href="#">Click Me!</a>
+</div>
+
+<h4>Usage</h4>
+{% highlight js %}
+	// Get the element
+	var el = n.one('.myel')
+
+	// Do the animation
+	el.anim({'margin-left':'600px', color:'#FF0000'}, 0.5)
+		.wait(1) // After the first step, wait for one second
+		.anim({'margin-left':'0px', color:'#000'}, 0.5) // Reset he animation  after 1 second
+{% endhighlight %}
+
+<script type="text/javascript">
+	n.one('.anim_first a').on('click', function(e) {
+		this.anim({'margin-left':'600px', color:'#FF0000'}, 0.5)
+			.wait(1)
+			.anim({'margin-left':'0px', color:'#000'}, 0.5)
+		e.stop()
+	})
+</script>
+
+<h3>Demo 2</h3>
 <div id="movement">
 	<a href="#" id="anim1">Click me!</a>
 	<span id="anim2">Animate 2</span>
