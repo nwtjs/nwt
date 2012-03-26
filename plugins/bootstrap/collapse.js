@@ -4,19 +4,20 @@ nwt.register({
 
 	methods: {
 		init: function () {
-			nwt.event.live('data-toggle', /(collapse)/, this.collapse);
+			nwt.event.live('data-toggle', /(collapse)/, this.collapse.bind(this));
 		},
 
 		/**
 		 * Gets the el to expand/collapse
 		 */
 		_getEl: function(el) {
+			console.log('Getting .collapse from el:', el)
 			return el.parent().next('.collapse');
 		},
-		
+
 		collapse: function(el) {
 
-			var body = this._getEl();
+			var body = this._getEl(el);
 
 			// Add the in class for transitions
 			if (!body.hasClass('in')) {
