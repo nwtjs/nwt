@@ -36,7 +36,34 @@ layout: example
 	})
 </script>
 
-<h3>Demo 2</h3>
+<br><br>
+<h3>Reversing an applied animation</h3>
+<p>A common use case is to reverse an applied animation on click.</p>
+<div class="well anim_two">
+	<a href="#">Click Me!</a>
+</div>
+<script type="text/javascript">
+	n.one('.anim_two a').on('click', function(e) {
+		console.log('Got click event', this.popAnim)
+		this.popAnim() || this.anim({'margin-left':'600px', color:'#FF0000'}, 0.5)
+		e.stop()
+	})
+</script>
+<h4>Usage</h4>
+{% highlight js %}
+	// Get the element
+	var el = n.one('.myel')
+
+	// Do the animation
+	el.on('click', function(e) {
+		// PopAnim will either run the last animation in reverse and return true, or return false
+		this.popAnim() || this.anim({'margin-left':'600px', color:'#FF0000'}, 0.5)
+		e.stop()
+	})
+{% endhighlight %}
+
+<br><br>
+<h3>Demo 3</h3>
 <div id="movement">
 	<a href="#" id="anim1">Click me!</a>
 	<span id="anim2">Animate 2</span>

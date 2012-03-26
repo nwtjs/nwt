@@ -5,6 +5,8 @@
 function NWTNodeInstance(node) {
 	nwt.implement('DelayableQueue', this);
 	this._node = node;
+
+	this.fxStack = []
 }
 n.declare('Node', NWTNodeInstance);
 
@@ -721,10 +723,39 @@ fire: function(event, callback) {
 
 /**
  * Implement a node API to animate
- * @see NWTAnimate::anim
+ * Takes an additional argument, pushState which signals whether or not to push this anim state onto fxStack
+ * @see NWTAnimate::anin
  */
-anim: function(styles, duration, easing) {
+anim: function(styles, duration, easing, pushState) {
+	if (!pushState) {
+
+		var computedStyles = document.defaultView.getComputedStyle(this._node),
+			defaultStyles = {}
+
+		for (var i in styles) {
+			defaultStyles[i] = computedStyles[i] 
+		}
+
+		this.fxStack.push({
+			from: [defaultStyles, duration, easing, true /* This makes it so we do not push this again */],
+			to: [styles, duration, easing]
+		})
+	}
+
 	return nwt.anim(this, styles, duration, easing);
+},
+
+/**
+ * Implement a node API to reverse animations
+ * This function will return true if we have a reversible animation to run allowing for syntax like:
+ * this.popAnim() || this.anim()
+ */
+popAnim: function() {
+	var fx = this.fxStack.pop()
+
+	if (!fx) { return false; }
+
+	return this.anim.apply(this, fx.from)
 },
 
 /**
