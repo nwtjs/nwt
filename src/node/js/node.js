@@ -1,3 +1,7 @@
+var fxObj = {
+	// <id> : { ..obj mapping.. }
+}
+
 /**
  * Individually wrapped NWTNode
  * @constructor
@@ -5,8 +9,6 @@
 function NWTNodeInstance(node) {
 	nwt.implement('DelayableQueue', this);
 	this._node = node;
-
-	this.fxStack = []
 }
 n.declare('Node', NWTNodeInstance);
 
@@ -721,6 +723,13 @@ fire: function(event, callback) {
 	this._node.dispatchEvent(customEvt);
 },
 
+uuid: function() {
+	if (!this._node.id) {
+		this._node.id = 'n' + nwt.uuid()
+	}
+	return this._node.id
+},
+
 /**
  * Implement a node API to animate
  * Takes an additional argument, pushState which signals whether or not to push this anim state onto fxStack
@@ -736,10 +745,10 @@ anim: function(styles, duration, easing, pushState) {
 			defaultStyles[i] = computedStyles[i] 
 		}
 
-		this.fxStack.push({
+		fxObj[this.uuid()] = {
 			from: [defaultStyles, duration, easing, true /* This makes it so we do not push this again */],
 			to: [styles, duration, easing]
-		})
+		}
 	}
 
 	return nwt.anim(this, styles, duration, easing);
@@ -751,9 +760,12 @@ anim: function(styles, duration, easing, pushState) {
  * this.popAnim() || this.anim()
  */
 popAnim: function() {
-	var fx = this.fxStack.pop()
+	var id = this.uuid()
+		, fx = fxObj[id]
 
-	if (!fx) { return false; }
+	if (!fx) { return false }
+
+	delete fxObj[id]
 
 	return this.anim.apply(this, fx.from)
 },

@@ -117,7 +117,7 @@ live: function(attribute, pattern, callback, interaction) {
 				var matches = target.getAttribute(attribute).match(pattern);
 
 				if (matches) {
-					callback(originalTarget, matches);
+					callback(originalTarget, target, matches);
 	
 					// If we found a callback, we usually want to stop the event
 					// Except for input elements (still want checkboxes to check and stuff)

@@ -85,6 +85,32 @@ NWTUnitTestFramework.prototype.equal = function() {
 };
 
 /**
+ * Validates that all arguments are NOT equal
+ */
+NWTUnitTestFramework.prototype.notEqual = function() {
+	var firstTest = typeof arguments[0] == 'function' ? arguments[0]() : arguments[0],
+		numArgs = arguments.length,
+		i;
+
+	// Cast to lowercase for IE
+	// Consider having node class return lowercase
+	if (firstTest && firstTest.toLowerCase) {
+		firstTest = firstTest.toLowerCase();
+	}
+	
+	this.assertionCount += arguments.length;
+
+	for (i = 1; i < numArgs; i += 1) {
+		var result = typeof arguments[i] == 'function' ? arguments[i]() : arguments[i];
+		
+		if( result === firstTest ) {
+			return this.addError('Arguments are equal and should not be.', result, firstTest);
+		}
+	}
+	return this.pass();
+};
+
+/**
  * Validates that all arguments results are true
  */
 NWTUnitTestFramework.prototype.isTrue = function() {

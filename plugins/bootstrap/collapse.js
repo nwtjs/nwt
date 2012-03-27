@@ -11,29 +11,26 @@ nwt.register({
 		 * Gets the el to expand/collapse
 		 */
 		_getEl: function(el) {
-			console.log('Getting .collapse from el:', el)
-			return el.parent().next('.collapse');
+			return el.next('.collapse');
 		},
 
-		collapse: function(el) {
+		collapse: function(el, target) {
 
-			var body = this._getEl(el);
+			var body = this._getEl(target);
 
 			// Add the in class for transitions
 			if (!body.hasClass('in')) {
 				body.addClass('in');
 			}
 
-			// If we are expanded, collapse and return
-			if (parseInt(body.getStyle('height'), 10) !== 0) {
-				body.setStyle('height', '0px');
-				return;
-			}
-
 			// Shrink all others in the accordian
-			body.ancestor('.accordion').all('.collapse').setStyle('height', '0px');
+			try {
+				body.ancestor('.accordion').all('.collapse').each(function(el){
+					if (parseInt(el.getStyle('height'), 10) !== 0) el.anim({'height': 0}, 0.20);
+				})
+			} catch(e) {}
 
-			body.setStyle('height', body.get('scrollHeight'));
+			body.popAnim() || body.anim({'height': body.get('scrollHeight')}, 0.20);
 		}
 	}
 });
