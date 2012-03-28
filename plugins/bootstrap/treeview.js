@@ -1,31 +1,39 @@
 /**
  * This allows treeviews to function using semantic attributes
  */
-/*
 nwt.register({
 
 	name: 'Treeview',
-
+	
 	methods: {
-		init: function () {
-			nwt.event.live('class', /(.*)/, this.toggle);
+		init: function (config) {
+			this.node = config.node;
+
+			this.node.on('click', this.collapse)
 		},
 
-		toggle: function(el) {
-			if ( el.parent().hasClass('active') ) return;
+		
+		/**
+		 * Collapses the next tree item
+		 */
+		collapse: function(e) {
 
-			var list = el.ancestor('ul');
+			var leaf = e.target.next();
 
-			list.all('li').removeClass('active');
-			el.parent().addClass('active');
-
-			try {
-				list.next().all('.tab-pane.active').removeClass('active');
-				list.next().one('.tab-pane' + el.get('href').substring(el.get('href').indexOf('#'))).addClass('active');
-			} catch(e) {
+			// Add the in class for transitions
+			if (!leaf.hasClass('in')) {
+				leaf.addClass('in');
 			}
+
+			// If we are expanded, collapse and return
+			if (leaf.hasClass('show')) {
+				leaf.removeClass('show');
+				return;
+			}
+
+			leaf.addClass('show');
+			e.stop();
 		}
 	}
 });
-nwt.plugin('Treeview');
-*/
+nwt.all('.treeview').plug('Treeview');

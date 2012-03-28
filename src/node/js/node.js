@@ -1,3 +1,7 @@
+var fxObj = {
+	// <id> : { ..obj mapping.. }
+}
+
 /**
  * Individually wrapped NWTNode
  * @constructor
@@ -719,12 +723,51 @@ fire: function(event, callback) {
 	this._node.dispatchEvent(customEvt);
 },
 
+uuid: function() {
+	if (!this._node.id) {
+		this._node.id = 'n' + nwt.uuid()
+	}
+	return this._node.id
+},
+
 /**
  * Implement a node API to animate
- * @see NWTAnimate::anim
+ * Takes an additional argument, pushState which signals whether or not to push this anim state onto fxStack
+ * @see NWTAnimate::anin
  */
-anim: function(styles, duration, easing) {
+anim: function(styles, duration, easing, pushState) {
+	if (!pushState) {
+
+		var computedStyles = document.defaultView.getComputedStyle(this._node),
+			defaultStyles = {}
+
+		for (var i in styles) {
+			defaultStyles[i] = computedStyles[i] 
+		}
+
+		fxObj[this.uuid()] = {
+			from: [defaultStyles, duration, easing, true /* This makes it so we do not push this again */],
+			to: [styles, duration, easing]
+		}
+	}
+
 	return nwt.anim(this, styles, duration, easing);
+},
+
+/**
+ * Implement a node API to reverse animations
+ * This function will return true if we have a reversible animation to run allowing for syntax like:
+ * this.popAnim() || this.anim()
+ */
+popAnim: function() {
+	var id = this.uuid()
+		, fx = fxObj[id]
+
+	if (!fx) { return false }
+
+	delete fxObj[id]
+
+	return this.anim.apply(this, fx.from)
 },
 
 /**

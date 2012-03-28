@@ -131,7 +131,20 @@ declare: function(name, clazz) {
  */
 augment: function(name, fnName, fn) {
 	nwt._lib[name].prototype[fnName] = fn; 
-}
+},
+
+
+/**
+ * Generates a unique id
+ */
+uuid: function() {
+	var counter = 0;
+
+	return function(){
+		counter++;
+		return counter.toString(16)
+	}
+}()
 };
 
 window.nwt = window.n = new NWT();

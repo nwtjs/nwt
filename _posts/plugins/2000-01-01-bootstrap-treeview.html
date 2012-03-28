@@ -3,40 +3,43 @@ layout: example
 ---
 
 <style type="text/css">
-.treeview ul { display:none; }
+.treeview ul { height:0; overflow:hidden; -webkit-transition:all 0.25s linear; }
+.treeview .show { height:auto; overflow: visible;}
 </style>
 
 <h2>Treeview</h2>
 <p>Treeview provides an expanding/collapsing tree-like structure. Useful for creating folder structures, or structures to help users navigate.</p>
 <p>Using Bootstrap as a base, it's easy to create a treeview using the existing collapse plugin.</p>
-<ul>
+<ul class="treeview">
 	<li>
-		<a href="#" data-toggle="collapse">Expando</a>
+		<a href="#">Expando</a>
 		<ul>
 			<li>
-				<a href="#" data-toggle="collapse">Level 2</a>
+				<a href="#">Level 2</a>
 				<ul>
-					<li><a href="#" data-toggle="collapse">No Children</a></li>
+					<li><span>No Children</span></li>
 				</ul>
 			</li>
 			<li>
-				<a href="#" data-toggle="collapse">Level 2</a>
+				<a href="#">Level 2</a>
 				<ul>
-					<li><a href="#" data-toggle="collapse">No Children</a></li>
+					<li><span>No Children</span></li>
 				</ul>
 			</li>
-			<li><a href="#" data-toggle="collapse">No Children</a></li>
+			<li><span>No Children</span></li>
 		</ul>
 	</li>
 	<li>
-		<a href="#" data-toggle="collapse">Another Item</a>
+		<a href="#">Another Item</a>
 		<ul>
 			<li>
-				<a href="#" data-toggle="collapse">Level 2</a>
+				<span>Level 2</span>
 			</li>
-			<li><a href="#" data-toggle="collapse">Level 2</a></li>
+			<li>
+				<span>Level 2</span>
+			</li>
 		</ul>
 	</li>
-	<li><a href="#" data-toggle="collapse">No Children</a></li>
+	<li><span>No Children</span></li>
 </ul>
-<script type="text/javascript" src="/nwt/plugins/bootstrap/collapse.js"></script>
+<script type="text/javascript" src="/nwt/plugins/bootstrap/treeview.js"></script>

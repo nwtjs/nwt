@@ -1,0 +1,118 @@
+---
+layout: example
+---
+
+<h2>Animation</h2>
+<p>NWT ships with a simple and easy to use animation mechanism. Modern browsers receive CSS transitions.</p>
+
+<style type="text/css">
+#movement a, #movement span { position:relative; }
+#anim2 { color:#0000FF; }
+#anim3 { color:#FF0000; }
+</style>
+
+<h3>Demo</h3>
+<div class="well anim_first">
+	<a href="#">Click Me!</a>
+</div>
+
+<h4>Usage</h4>
+{% highlight js %}
+	// Get the element
+	var el = n.one('.myel')
+
+	// Do the animation
+	el.anim({'margin-left':'600px', color:'#FF0000'}, 0.5)
+		.wait(1) // After the first step, wait for one second
+		.anim({'margin-left':'0px', color:'#000'}, 0.5) // Reset he animation  after 1 second
+{% endhighlight %}
+
+<script type="text/javascript">
+	n.one('.anim_first a').on('click', function(e) {
+		this.anim({'margin-left':'600px', color:'#FF0000'}, 0.5)
+			.wait(1)
+			.anim({'margin-left':'0px', color:'#000'}, 0.5)
+		e.stop()
+	})
+</script>
+
+<br><br>
+<h3>Reversing an applied animation</h3>
+<p>A common use case is to reverse an applied animation on click.</p>
+<div class="well anim_two">
+	<a href="#">Click Me!</a>
+</div>
+<script type="text/javascript">
+	n.one('.anim_two a').on('click', function(e) {
+		console.log('Got click event', this.popAnim)
+		this.popAnim() || this.anim({'margin-left':'600px', color:'#FF0000'}, 0.5)
+		e.stop()
+	})
+</script>
+<h4>Usage</h4>
+{% highlight js %}
+	// Get the element
+	var el = n.one('.myel')
+
+	// Do the animation
+	el.on('click', function(e) {
+		// PopAnim will either run the last animation in reverse and return true, or return false
+		this.popAnim() || this.anim({'margin-left':'600px', color:'#FF0000'}, 0.5)
+		e.stop()
+	})
+{% endhighlight %}
+
+<br><br>
+<h3>Demo 3</h3>
+<div id="movement">
+	<a href="#" id="anim1">Click me!</a>
+	<span id="anim2">Animate 2</span>
+	<span id="anim3">Animate 3</span>
+</div>
+
+<script type="text/javascript">
+nwt.one('#anim1').on('click', function(e) {
+	this.anim({left: 400})
+		.wait(1)
+		.anim({top: 400})
+		.wait(1)
+		.anim({left: 0})
+		.wait(1)
+		.anim({top: 0})
+		.wait(1)
+		.anim({left: 400})
+		.wait(1)
+		.anim({top: 400})
+		.wait(1)
+		.anim({left: 0})
+		.wait(1)
+		.anim({top: 0});
+
+	nwt.one('#anim2').anim({left: 400, top:400})
+		.wait(1)
+		.anim({top: 300, left:500})
+		.wait(1)
+		.anim({left: 300, top:500})
+		.wait(1)
+		.anim({top: 0, left:0})
+		.wait(1)
+		.anim({left: 400, top:400})
+		.wait(1)
+		.anim({top: 300, left:500})
+		.wait(1)
+		.anim({left: 300, top:500})
+		.wait(1)
+		.anim({top: 0, left:0});
+
+	nwt.one('#anim3').anim({left: 100, top:400})
+		.wait(1.5)
+		.anim({left: 400, top:100})
+		.wait(1.5)
+		.anim({top: 0, left:0})
+		.wait(1)
+		.anim({left: 100, top:400})
+		.wait(1.5)
+		.anim({left: 400, top:100})
+		.wait(1.5)
+		.anim({top: 0, left:0});
+});
