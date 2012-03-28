@@ -33,7 +33,7 @@ for( var i in packages ) {
 
 	// Finished a package
 	scriptContent = uglify(scriptContent, {mangle_options: {toplevel: true}});
-	fs.writeFileSync(__dirname + '/../nwt.' + i + '.min.js', scriptContent);
+	fs.writeFileSync(__dirname + '/../' + i + '.min.js', scriptContent);
 
 	console.log(scriptContent);
 }

@@ -10,46 +10,76 @@
 
 	<link href="/nwt/jekyll/site.css" rel="stylesheet">
 
-	<script type="text/javascript" src="/nwt/nwt.main.min.js"></script>
+	<script type="text/javascript" src="/nwt/nwt.min.js"></script>
 	<!--[if lte IE 9]>
-		<script type="text/javascript" src="/nwt/nwt.fallback.min.js"></script>
+		<script type="text/javascript" src="/nwt/nwtfallback.min.js"></script>
 	<![endif]-->
 </head>
 <body>
+	<header>
+		<div class="container">
+			<h1><a href="/nwt/index.html">nwt</a></h1>
+		</div>
+	</header>
+	<nav>
+		<div class="container">
+			<div class="navbar">
+				<div class="navbar-inner">
+					<a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+					</a>
+					<div class="nav-collapse">
+						<ul class="nav">
+							{% for link in site.navigation %}
+								{% assign active = nil %}
+								{% if page.url == link.url %}
+									{% assign active = 'active' %}
+								{% endif %}
 	
-	<div class="navbar navbar-fixed-top">
-		<div class="navbar-inner">
-			<div class="container">
-				<a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
-					<span class="icon-bar"></span>
-					<span class="icon-bar"></span>
-					<span class="icon-bar"></span>
-				</a>
-				<a class="brand" href="./index.html">nwt</a>
-				<div class="nav-collapse">
-					<ul class="nav">
-						{% for link in site.navigation %}
-							{% assign active = nil %}
-							{% if page.url == link.url %}
-								{% assign active = 'active' %}
-							{% endif %}
-
-							<li class="{% if forloop.first %}first{% endif %} {{ active }} {% if forloop.last %}last{% endif %}">
-								<a href="/nwt{{ link.url }}">{{ link.text }}</a>
+								<li class="{% if forloop.first %}first{% endif %} {{ active }} {% if forloop.last %}last{% endif %}">
+									<a href="/nwt{{ link.url }}">{{ link.text }}</a>
+								</li>
+							{% endfor %}
+							<li>
+								<a href="https://github.com/nwtjs/nwt">Github</a>
 							</li>
-						{% endfor %}
-						<li>
-							<a href="https://github.com/nwtjs/nwt">Github</a>
-						</li>
-					</ul>
-				</div>
+						</ul>
+					</div>
+				</div>			
 			</div>
 		</div>
+	</nav>
+	{% if page.heroUnit %}
+		<div class="hero-unit">
+			<div class="container">
+				{{page.heroUnit}}					
+			</div>
+		</div>
+	{% endif %}
+	<div id="main_outer">
+		<div class="container" id="main">
+			{{ content }}
+		</div>
 	</div>
-	<div class="container" id="main">
-		{{ content }}
-	</div>
-
+	<footer>
+		<p>© 2012 Node Web Toolkit</p>
+		<ul>
+			<li class="first active ">
+				<a href="/nwt/index.html">Home</a>
+			</li>
+			<li class="  ">
+				<a href="/nwt/manual.html">Manual</a>
+			</li>
+			<li class="  last">
+				<a href="/nwt/examples.html">Examples</a>
+			</li>
+			<li>
+				<a href="https://github.com/nwtjs/nwt">Github</a>
+			</li>
+		</ul>
+	</footer>
 <script type="text/javascript">
 var _gaq = _gaq || [];
 _gaq.push(['_setAccount', 'UA-29464080-1']);

@@ -1,4 +1,4 @@
-exports.main = [
+exports.nwt = [
 	'base/js/base.js',
 
 	'io/js/io.js',
@@ -11,7 +11,7 @@ exports.main = [
 	'event/js/event.js',
 ];
 
-exports.fallback = [
+exports.nwtfallback = [
 	'ie/js/sizzle.js',
 	'ie/js/node.js',
 	'ie/js/anim.js'
