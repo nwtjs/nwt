@@ -13,8 +13,24 @@ function NWTEventInstance (e, attrs) {
 		this[i] = attrs[i];
 	}
 }
+n.declare('Event', NWTEventInstance);
+
 
 NWTEventInstance.prototype = {
+
+/**
+ * Returns the pageX coordinate
+ */
+pageX: function() {
+	return this._e.pageX
+},
+
+/**
+ * Returns the pageY coordinate
+ */
+pageY: function() {
+	return this._e.pageY
+},
 
 /**
  * Interface to get the keycode

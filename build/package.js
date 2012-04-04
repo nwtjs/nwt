@@ -14,5 +14,6 @@ exports.nwt = [
 exports.nwtfallback = [
 	'ie/js/sizzle.js',
 	'ie/js/node.js',
+	'ie/js/event.js',
 	'ie/js/anim.js'
 ];
