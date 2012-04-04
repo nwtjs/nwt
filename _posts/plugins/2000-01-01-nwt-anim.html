@@ -11,7 +11,7 @@ layout: example
 #anim3 { color:#FF0000; }
 </style>
 
-<h3>Demo</h3>
+<h3>Demo 1: Standard Animation</h3>
 <div class="well anim_first">
 	<a href="#">Click Me!</a>
 </div>
@@ -24,7 +24,7 @@ layout: example
 	// Do the animation
 	el.anim({'margin-left':'600px', color:'#FF0000'}, 0.5)
 		.wait(1) // After the first step, wait for one second
-		.anim({'margin-left':'0px', color:'#000'}, 0.5) // Reset he animation  after 1 second
+		.anim({'margin-left':'0px', color:'#000'}, 0.5) // Reset the animation  after 1 second
 {% endhighlight %}
 
 <script type="text/javascript">
@@ -37,7 +37,7 @@ layout: example
 </script>
 
 <br><br>
-<h3>Reversing an applied animation</h3>
+<h3>Demo 2: Reversing an applied animation</h3>
 <p>A common use case is to reverse an applied animation on click.</p>
 <div class="well anim_two">
 	<a href="#">Click Me!</a>
@@ -63,7 +63,77 @@ layout: example
 {% endhighlight %}
 
 <br><br>
-<h3>Demo 3</h3>
+<h3>Demo 3: Events</h3>
+<div class="row">
+	<div class="span7">
+		<h4>Anim Events</h4>
+
+		<table class="table table-bordered table-striped table-condensed">
+			<thead>
+			 <tr>
+				 <th style="width: 150px;">Event</th>
+				 <th>Description</th>
+			 </tr>
+			</thead>
+			<tbody>
+			 <tr>
+				 <td>animstart</td>
+				 <td>This event fires immediately when the <code>anim</code> instance method is called.</td>
+			 </tr>
+			 <tr>
+				 <td>animdone</td>
+				 <td>This event is fired when the any animation is complete on the node.</td>
+			 </tr>
+			 <tr>
+				 <td>animpop</td>
+				 <td>This event is fired at the end of an animation reversal using <code>popAnim</code>.</td>
+			 </tr>
+			 <tr>
+				 <td>animppush</td>
+				 <td>This event fires whenever we push an animation onto the stack.</td>
+			 </tr>
+			</tbody>
+		</table>
+	</div>
+</div>
+<div class="well anim_three">
+	<a href="#">Click Me!</a>
+</div>
+<script type="text/javascript">
+	var log = nwt.one('#eventlog')
+
+	function logAppend(message) {
+		log.append(nwt.node.create('<div>' + message + '</div>'))
+		
+		log.set('scrollTop', log.get('scrollHeight'))
+	}
+
+	n.one('.anim_three a')
+		.on('click', function(e) {
+			logAppend('<hr>')
+			this.popAnim() || this.anim({'margin-left':'600px', color:'#FF0000'}, 0.5)
+			e.stop()
+		})
+		.on('animstart', function(){
+			logAppend('Anim START (animstart) event fired.')
+		})
+		.on('animdone', function(){
+			logAppend('Anim DONE (animdone) event fired.')
+		})
+		.on('animpop', function(){
+			logAppend('Anim POP (animpop) event fired.')
+		})
+		.on('animpush', function(){
+			logAppend('Anim PUSH (animpush) event fired.')
+		})
+</script>
+<h4>Event Log</h4>
+<div id="eventlog" style="width:400px; height:100px; overflow:auto; border:1px solid #000; padding:10px;">
+	<div>Click the animation link above to see events being fired.</div>
+</div>
+
+<br><br>
+<h3>Demo 4: Chaining</h3>
 <div id="movement">
 	<a href="#" id="anim1">Click me!</a>
 	<span id="anim2">Animate 2</span>
@@ -71,48 +141,56 @@ layout: example
 </div>
 
 <script type="text/javascript">
+
 nwt.one('#anim1').on('click', function(e) {
-	this.anim({left: 400})
-		.wait(1)
-		.anim({top: 400})
-		.wait(1)
-		.anim({left: 0})
-		.wait(1)
-		.anim({top: 0})
-		.wait(1)
-		.anim({left: 400})
-		.wait(1)
-		.anim({top: 400})
-		.wait(1)
-		.anim({left: 0})
-		.wait(1)
-		.anim({top: 0});
+	e.stop()
 
-	nwt.one('#anim2').anim({left: 400, top:400})
-		.wait(1)
-		.anim({top: 300, left:500})
-		.wait(1)
-		.anim({left: 300, top:500})
-		.wait(1)
-		.anim({top: 0, left:0})
-		.wait(1)
-		.anim({left: 400, top:400})
-		.wait(1)
-		.anim({top: 300, left:500})
-		.wait(1)
-		.anim({left: 300, top:500})
-		.wait(1)
-		.anim({top: 0, left:0});
+	nwt.one('#movement').anim({height: 270}).wait(10).anim({height: 0})
 
-	nwt.one('#anim3').anim({left: 100, top:400})
-		.wait(1.5)
-		.anim({left: 400, top:100})
-		.wait(1.5)
-		.anim({top: 0, left:0})
-		.wait(1)
-		.anim({left: 100, top:400})
-		.wait(1.5)
-		.anim({left: 400, top:100})
-		.wait(1.5)
-		.anim({top: 0, left:0});
+	setTimeout(function(){
+		nwt.one('#anim1').anim({left: 200})
+			.wait(1)
+			.anim({top: 200})
+			.wait(1)
+			.anim({left: 0})
+			.wait(1)
+			.anim({top: 0})
+			.wait(1)
+			.anim({left: 200})
+			.wait(1)
+			.anim({top: 200})
+			.wait(1)
+			.anim({left: 0})
+			.wait(1)
+			.anim({top: 0});
+	
+		nwt.one('#anim2').anim({left: 200, top:200})
+			.wait(1)
+			.anim({top: 150, left:250})
+			.wait(1)
+			.anim({left: 150, top:250})
+			.wait(1)
+			.anim({top: 0, left:0})
+			.wait(1)
+			.anim({left: 200, top:200})
+			.wait(1)
+			.anim({top: 150, left:250})
+			.wait(1)
+			.anim({left: 150, top:250})
+			.wait(1)
+			.anim({top: 0, left:0});
+	
+		nwt.one('#anim3').anim({left: 100, top:200})
+			.wait(1.5)
+			.anim({left: 200, top:100})
+			.wait(1.5)
+			.anim({top: 0, left:0})
+			.wait(1)
+			.anim({left: 100, top:200})
+			.wait(1.5)
+			.anim({left: 200, top:100})
+			.wait(1.5)
+			.anim({top: 0, left:0});
+	}, 1000)
 });
+</script>

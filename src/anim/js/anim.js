@@ -59,6 +59,12 @@ anim: function(node, styles, duration, easing) {
 
 	animation.init(duration, easing);
 
+	node.fire('animstart', [styles, duration, easing])
+
+	setTimeout(function(){
+		node.fire('animdone', [styles, duration, easing])
+	}, duration*1000)
+	
 	// Need to be sure to implement the transition function first
 	node.addClass(animation.animClass);
 	node.setStyles(styles);

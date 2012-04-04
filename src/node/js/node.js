@@ -739,16 +739,21 @@ anim: function(styles, duration, easing, pushState) {
 	if (!pushState) {
 
 		var computedStyles = document.defaultView.getComputedStyle(this._node),
-			defaultStyles = {}
+			defaultStyles = {},
+			animHistory
 
 		for (var i in styles) {
 			defaultStyles[i] = computedStyles[i] 
 		}
 
-		fxObj[this.uuid()] = {
+		animHistory = {
 			from: [defaultStyles, duration, easing, true /* This makes it so we do not push this again */],
 			to: [styles, duration, easing]
 		}
+		
+		fxObj[this.uuid()] = animHistory
+
+		this.fire('animpush', animHistory)
 	}
 
 	return nwt.anim(this, styles, duration, easing);
@@ -767,6 +772,8 @@ popAnim: function() {
 
 	delete fxObj[id]
 
+	this.fire('animpop', fx)
+	
 	return this.anim.apply(this, fx.from)
 },
 
