@@ -39,8 +39,9 @@ nwt.register({
 		 * Slides the carousel
 		 * Dispatched callback from nwt.event.live
 		 */
-		slide: function(el, action) {
-			var dir = action[1],
+		slide: function(origEl, el, matches) {
+
+			var dir = matches[1],
 
 				carouselEl = el.ancestor('.carousel'),
 
