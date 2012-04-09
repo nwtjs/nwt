@@ -90,9 +90,11 @@ nwt.register({
 						self.hide();
 					}
 				}, 50);
-
+	
 				return self.render(items);
 			});
+
+			nwt.one('body').on('cleanup', self.hide.bind(this))
 		},
 
 
@@ -116,6 +118,7 @@ nwt.register({
 		 */
 		hide: function(el) {
 
+			this.node.fire('typeahead:hide')
 			this.menu.setStyle('display', 'none')
 
 			return this;
@@ -144,6 +147,8 @@ nwt.register({
 				display:'block'
 			});
 
+			this.node.fire('typeahead:show')
+
 			return this;
 		},
 
@@ -163,6 +168,7 @@ nwt.register({
 		 */
 		select: function (el) {
 			el.set('value', this.menu.one('li.active a').getHtml());
+			this.node.fire('typeahead:select')
 			return this.hide();
 		}
 	}
