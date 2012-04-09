@@ -77,15 +77,15 @@ layout: example
 			</thead>
 			<tbody>
 			 <tr>
-				 <td>animstart</td>
+				 <td>anim:start</td>
 				 <td>This event fires immediately when the <code>anim</code> instance method is called.</td>
 			 </tr>
 			 <tr>
-				 <td>animdone</td>
+				 <td>anim:done</td>
 				 <td>This event is fired when the any animation is complete on the node.</td>
 			 </tr>
 			 <tr>
-				 <td>animpop</td>
+				 <td>anim:pop</td>
 				 <td>This event is fired at the end of an animation reversal using <code>popAnim</code>.</td>
 			 </tr>
 			 <tr>
@@ -114,17 +114,17 @@ layout: example
 			this.popAnim() || this.anim({'margin-left':'600px', color:'#FF0000'}, 0.5)
 			e.stop()
 		})
-		.on('animstart', function(){
-			logAppend('Anim START (animstart) event fired.')
+		.on('anim:start', function(){
+			logAppend('Anim START (anim:start) event fired.')
 		})
-		.on('animdone', function(){
-			logAppend('Anim DONE (animdone) event fired.')
+		.on('anim:done', function(){
+			logAppend('Anim DONE (anim:done) event fired.')
 		})
-		.on('animpop', function(){
-			logAppend('Anim POP (animpop) event fired.')
+		.on('anim:pop', function(){
+			logAppend('Anim POP (anim:pop) event fired.')
 		})
-		.on('animpush', function(){
-			logAppend('Anim PUSH (animpush) event fired.')
+		.on('anim:push', function(){
+			logAppend('Anim PUSH (anim:push) event fired.')
 		})
 </script>
 <h4>Event Log</h4>
