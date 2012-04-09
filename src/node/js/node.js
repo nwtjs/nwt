@@ -753,7 +753,7 @@ anim: function(styles, duration, easing, pushState) {
 		
 		fxObj[this.uuid()] = animHistory
 
-		this.fire('animpush', animHistory)
+		this.fire('anim:push', animHistory)
 	}
 
 	return nwt.anim(this, styles, duration, easing);
@@ -772,7 +772,7 @@ popAnim: function() {
 
 	delete fxObj[id]
 
-	this.fire('animpop', fx)
+	this.fire('anim:pop', fx)
 	
 	return this.anim.apply(this, fx.from)
 },

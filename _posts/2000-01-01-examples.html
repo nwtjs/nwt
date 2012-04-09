@@ -49,6 +49,7 @@ title: Examples
 
 		n.io(src).success(function(o){
 			n.one('#ExampleMenu').fire('pluginexit');
+			n.one('body').fire('cleanup');
 			n.one('body').purge(null, null, true);
 			n.one('#ExampleMenu').once('click', loadSection, 'a');
 

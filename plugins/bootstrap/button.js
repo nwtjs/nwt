@@ -7,7 +7,7 @@ nwt.register({
 			nwt.event.live('data-toggle', /(button-state|buttons-checkbox|buttons-radio|button)/, this.toggle);
 		},
 
-		toggle: function(el, action) {
+		toggle: function(el,target, action) {
 			var togglers = {
 				'button-state' : function(){
 					el.setData('original-text', el.getHtml());
@@ -29,6 +29,7 @@ nwt.register({
 					}
 				}
 			};
+			console.log('Performing action', action[1])
 			togglers[action[1]]();
 		}
 	}

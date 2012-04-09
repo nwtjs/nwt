@@ -4,6 +4,61 @@ layout: example
 
 <h2>Typeahead</h2>
 <div class="well">
-	<input type="text" class="span3" data-provide="typeahead" data-items="4" data-source="[&quot;Alabama&quot;,&quot;Alaska&quot;,&quot;Arizona&quot;,&quot;Arkansas&quot;,&quot;California&quot;,&quot;Colorado&quot;,&quot;Connecticut&quot;,&quot;Delaware&quot;,&quot;Florida&quot;,&quot;Georgia&quot;,&quot;Hawaii&quot;,&quot;Idaho&quot;,&quot;Illinois&quot;,&quot;Indiana&quot;,&quot;Iowa&quot;,&quot;Kansas&quot;,&quot;Kentucky&quot;,&quot;Louisiana&quot;,&quot;Maine&quot;,&quot;Maryland&quot;,&quot;Massachusetts&quot;,&quot;Michigan&quot;,&quot;Minnesota&quot;,&quot;Mississippi&quot;,&quot;Missouri&quot;,&quot;Montana&quot;,&quot;Nebraska&quot;,&quot;Nevada&quot;,&quot;New Hampshire&quot;,&quot;New Jersey&quot;,&quot;New Mexico&quot;,&quot;New York&quot;,&quot;North Dakota&quot;,&quot;North Carolina&quot;,&quot;Ohio&quot;,&quot;Oklahoma&quot;,&quot;Oregon&quot;,&quot;Pennsylvania&quot;,&quot;Rhode Island&quot;,&quot;South Carolina&quot;,&quot;South Dakota&quot;,&quot;Tennessee&quot;,&quot;Texas&quot;,&quot;Utah&quot;,&quot;Vermont&quot;,&quot;Virginia&quot;,&quot;Washington&quot;,&quot;West Virginia&quot;,&quot;Wisconsin&quot;,&quot;Wyoming&quot;]">
+	<input type="text" class="span3 typeaheadexample" data-provide="typeahead" data-items="4" data-source="[&quot;Alabama&quot;,&quot;Alaska&quot;,&quot;Arizona&quot;,&quot;Arkansas&quot;,&quot;California&quot;,&quot;Colorado&quot;,&quot;Connecticut&quot;,&quot;Delaware&quot;,&quot;Florida&quot;,&quot;Georgia&quot;,&quot;Hawaii&quot;,&quot;Idaho&quot;,&quot;Illinois&quot;,&quot;Indiana&quot;,&quot;Iowa&quot;,&quot;Kansas&quot;,&quot;Kentucky&quot;,&quot;Louisiana&quot;,&quot;Maine&quot;,&quot;Maryland&quot;,&quot;Massachusetts&quot;,&quot;Michigan&quot;,&quot;Minnesota&quot;,&quot;Mississippi&quot;,&quot;Missouri&quot;,&quot;Montana&quot;,&quot;Nebraska&quot;,&quot;Nevada&quot;,&quot;New Hampshire&quot;,&quot;New Jersey&quot;,&quot;New Mexico&quot;,&quot;New York&quot;,&quot;North Dakota&quot;,&quot;North Carolina&quot;,&quot;Ohio&quot;,&quot;Oklahoma&quot;,&quot;Oregon&quot;,&quot;Pennsylvania&quot;,&quot;Rhode Island&quot;,&quot;South Carolina&quot;,&quot;South Dakota&quot;,&quot;Tennessee&quot;,&quot;Texas&quot;,&quot;Utah&quot;,&quot;Vermont&quot;,&quot;Virginia&quot;,&quot;Washington&quot;,&quot;West Virginia&quot;,&quot;Wisconsin&quot;,&quot;Wyoming&quot;]">
 </div>
 <script type="text/javascript" src="/nwt/plugins/bootstrap/typeahead.js"></script>
+
+<h3>Events</h3>
+<div class="row">
+	<div class="span7">
+		<h4>Typeahead Events</h4>
+
+		<table class="table table-bordered table-striped table-condensed">
+			<thead>
+			 <tr>
+				 <th style="width: 150px;">Event</th>
+				 <th>Description</th>
+			 </tr>
+			</thead>
+			<tbody>
+			 <tr>
+				 <td>typeahead:show</td>
+				 <td>This event fires immediately when the typeahead options are shown.</td>
+			 </tr>
+			 <tr>
+				 <td>typeahead:hide</td>
+				 <td>This event is fired when the typeahead options are hidden.</td>
+			 </tr>
+			 <tr>
+				 <td>typeahead:select</td>
+				 <td>This event is fired when an option is selected from the typeahead menu.</td>
+			 </tr>
+			</tbody>
+		</table>
+	</div>
+</div>
+<div id="eventlog" style="width:400px; height:100px; overflow:auto; border:1px solid #000; padding:10px;">
+	<div>Click the animation link above to see events being fired.</div>
+	<hr>
+</div>
+<script type="text/javascript">
+	var log = nwt.one('#eventlog')
+
+	function logAppend(message) {
+		log.append(nwt.node.create('<div>' + message + '</div>'))
+		
+		log.set('scrollTop', log.get('scrollHeight'))
+	}
+
+	n.one('.typeaheadexample')
+		.on('typeahead:show', function(e) {
+			logAppend('Showing typeahead options.')
+		})
+		.on('typeahead:hide', function(e) {
+			logAppend('Hiding typeahead options.')
+		})
+		.on('typeahead:select', function(e) {
+			logAppend('Selecting typeahead option.')
+		})
+</script>
+<p>By listening on the "cleanup" event fired on the body, we can programitically close all typeahead dialogs.</p>
