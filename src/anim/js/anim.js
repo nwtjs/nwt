@@ -12,14 +12,10 @@ NWTAnimate.prototype = {
  * Initializes CSS for transforms
  */
 init: function(duration, easing) {
-
-	if (nwt.one('#nwt-anim-styles')) {
-		nwt.one('#nwt-anim-styles').remove();
-	}
 	
-	var newStylesheet = nwt.node.create('<style type="text/css" id="nwt-anim-styles"></style>');
+	var newStylesheet = nwt.node.create('<style type="text/css"></style>');
 
-	easing = easing || 'ease-in-out';
+	easing = easing || 'ease-in';
 	duration = duration || 1;
 
 	var trail = ' ' + duration + 's ' + easing,
@@ -33,18 +29,19 @@ init: function(duration, easing) {
 			'transition': ' all' + trail
 		},
 
-		// Array of attributes to clean
-		cleanThese = [],
-
 		newContent = '';
 
 	for (i in cssTransitionProperties) {
-		cleanThese.push(i);
 		newContent += i + ': ' + cssTransitionProperties[i] + ';';
 	}
 	newStylesheet.setHtml('.' + this.animClass + '{' + newContent + '}');
 
 	nwt.one('head').append(newStylesheet);
+
+	setTimeout(function(){
+		newStylesheet.remove()
+	}, 
+	duration*1001)
 },
 
 
@@ -64,10 +61,12 @@ anim: function(node, styles, duration, easing) {
 	setTimeout(function(){
 		node.fire('anim:done', [styles, duration, easing])
 	}, duration*1000)
-	
+
 	// Need to be sure to implement the transition function first
 	node.addClass(animation.animClass);
+	
 	node.setStyles(styles);
+
 
 	return node;
 }

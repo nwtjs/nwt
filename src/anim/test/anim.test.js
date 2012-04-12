@@ -1,34 +1,61 @@
 nwt.unit
 .describe('Tests nwt.anim().')
-.equal(
-	function () {
+.run(function(unit) {
 
-		var animContent = [
-		'<div class="container">',
-	        '<div id="anim" style="position:absolute;top:0px;left:0px;">linear</div>',
-    	    '<div id="anim2" style="position:absolute;top:20px;left:0px;">ease</div>',
-	        '<div id="anim3" style="position:absolute;top:40px;left:0px;">ease-in</div>',
-	        '<div id="anim4" style="position:absolute;top:60px;left:0px;">ease-out</div>',
-        	'<div id="anim5" style="position:absolute;top:80px;left:0px;">ease-out-in</div>',
-    	    '<div id="anim6" style="position:absolute;top:100px;left:0px;">cubic-bezier</div>',
+	// Create animation elements
+	n.one('body').append(n.node.create([
+		'<div id="anims">',
+			'<div id="animleft" style="position:absolute;top:0;left:0;">.</div>',
+			'<div id="animtop" style="position:absolute;top:0;left:0;">.</div>',
+			'<div id="animwidth" style="width:100px;background:#0000FF;">.</div>',
+			'<div id="animheight" style="height:100px;background:#FF0000;">.</div>',
 		'</div>'
-        ].join(''),
+	].join('')))
 
-		animNode = nwt.node.create(animContent);
-		nwt.one('body').append(animNode);
-
-		nwt.one('#anim').anim({left:400, opacity:0}, 2, 'linear').wait(4).anim({left:0, opacity:1}, 2, 'linear');
-		nwt.one('#anim2').anim({left:400, color:'#FF0000'}, 2, 'ease').wait(4).anim({left:0, color:'#00FF00'}, 2, 'ease');
-		nwt.one('#anim3').anim({left:400, background:'#0000FF'}, 2, 'ease-in').wait(4).anim({left:0}, 2, 'ease-in');
-		nwt.one('#anim4').anim({left:400}, 2, 'ease-out').wait(4).anim({left:0}, 2, 'ease-out');
-		nwt.one('#anim5').anim({left:400}, 2, 'ease-in-out').wait(4).anim({left:0}, 2, 'ease-in-out');
-		nwt.one('#anim6').anim({left:400}, 2, 'cubic-bezier(1,0,1,0)').wait(4).anim({left:0}, 2, 'cubic-bezier(1,0,1,0)');
-		
-		setTimeout(function() { animNode.remove(); }, 10000);
-
-		return true;
-	},
-	function () {
-		return true;
+	var animTests = {
+		animleft: ['left', 0, 100],
+		animtop: ['top', 0, 100],
+		animwidth: ['width', 100, 200],
+		animheight: ['height', 100, 200]
 	}
-);
+
+	// Tests a node animation value after animation has ended
+	, getCompleteTester = function(test, el, idx) {
+		return function() {
+			unit.equal(test[idx], parseInt(el.getStyle(test[0]), 10))
+		}
+	},
+
+	// Tests an animation during the transition
+	// The test value should be between the two ends
+	getTransitionTester = function(test, el) {
+		return function() {
+			var region = el.region()
+
+			console.log(region[test[0]], test[1], test[2])
+
+			unit.equal(true, parseInt(region[test[0]], 10) > test[1])
+			unit.equal(true, parseInt(region[test[0]], 10) < test[2])
+		}
+	}
+
+	for (var i in animTests) {
+		var animProp = {}
+			, test = animTests[i]
+
+		animProp[test[0]] = test[2] 
+
+		var el = n.one('#' + i)
+
+		el.anim(animProp, 0.05).wait(0.06).popAnim()
+
+		setTimeout(getCompleteTester(test, el, 2), 50)
+		setTimeout(getTransitionTester(test, el), 8)
+		setTimeout(getCompleteTester(test, el, 1), 110)
+	}
+
+	setTimeout(function() {
+		unit.report()
+		n.one('#anims').remove()
+	}, 200)
+})

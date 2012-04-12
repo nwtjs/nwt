@@ -22,16 +22,16 @@ layout: example
 	var el = n.one('.myel')
 
 	// Do the animation
-	el.anim({'margin-left':'600px', color:'#FF0000'}, 0.5)
+	el.anim({'marginLeft':'600px', color:'#FF0000'}, 0.5)
 		.wait(1) // After the first step, wait for one second
-		.anim({'margin-left':'0px', color:'#000'}, 0.5) // Reset the animation  after 1 second
+		.anim({'marginLeft':'0px', color:'#000'}, 0.5) // Reset the animation  after 1 second
 {% endhighlight %}
 
 <script type="text/javascript">
 	n.one('.anim_first a').on('click', function(e) {
-		this.anim({'margin-left':'600px', color:'#FF0000'}, 0.5)
+		this.anim({'marginLeft':'600px', color:'#FF0000'}, 0.5)
 			.wait(1)
-			.anim({'margin-left':'0px', color:'#000'}, 0.5)
+			.anim({'marginLeft':'0px', color:'#000'}, 0.5)
 		e.stop()
 	})
 </script>
@@ -45,7 +45,7 @@ layout: example
 <script type="text/javascript">
 	n.one('.anim_two a').on('click', function(e) {
 		console.log('Got click event', this.popAnim)
-		this.popAnim() || this.anim({'margin-left':'600px', color:'#FF0000'}, 0.5)
+		this.popAnim() || this.anim({'marginLeft':'600px', color:'#FF0000'}, 0.5)
 		e.stop()
 	})
 </script>
@@ -57,7 +57,7 @@ layout: example
 	// Do the animation
 	el.on('click', function(e) {
 		// PopAnim will either run the last animation in reverse and return true, or return false
-		this.popAnim() || this.anim({'margin-left':'600px', color:'#FF0000'}, 0.5)
+		this.popAnim() || this.anim({'marginLeft':'600px', color:'#FF0000'}, 0.5)
 		e.stop()
 	})
 {% endhighlight %}
@@ -111,7 +111,7 @@ layout: example
 	n.one('.anim_three a')
 		.on('click', function(e) {
 			logAppend('<hr>')
-			this.popAnim() || this.anim({'margin-left':'600px', color:'#FF0000'}, 0.5)
+			this.popAnim() || this.anim({'marginLeft':'600px', color:'#FF0000'}, 0.5)
 			e.stop()
 		})
 		.on('anim:start', function(){
