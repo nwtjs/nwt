@@ -32,8 +32,6 @@ nwt.unit
 		return function() {
 			var region = el.region()
 
-			console.log(region[test[0]], test[1], test[2])
-
 			unit.equal(true, parseInt(region[test[0]], 10) > test[1])
 			unit.equal(true, parseInt(region[test[0]], 10) < test[2])
 		}
@@ -50,8 +48,12 @@ nwt.unit
 		el.anim(animProp, 0.05).wait(0.06).popAnim()
 
 		setTimeout(getCompleteTester(test, el, 2), 50)
-		setTimeout(getTransitionTester(test, el), 8)
 		setTimeout(getCompleteTester(test, el, 1), 110)
+		
+		// Can not check transition support in firefox
+		if ( !(/Firefox[\/\s](\d+\.\d+)/.test(navigator.userAgent)) ){
+			setTimeout(getTransitionTester(test, el), 8)
+		}
 	}
 
 	setTimeout(function() {
