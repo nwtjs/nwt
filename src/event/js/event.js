@@ -104,7 +104,7 @@ live: function(attribute, pattern, callback, interaction) {
 
 		dispatcher,
 
-		body = nwt.one('body');
+		body = localnwt.one('body');
 
 	// Currently only search one level for a mouse listener for performance reasons
 	if (interaction == 'click') {
@@ -126,7 +126,7 @@ live: function(attribute, pattern, callback, interaction) {
 
 		while(target._node && target._node.parentNode) {
 
-			if (target._node == nwt.one('body')._node || depthSearched >= maxSearch) { break; }
+			if (target._node == localnwt.one('body')._node || depthSearched >= maxSearch) { break; }
 
 			if (target.hasAttribute(attribute)) {
 
@@ -163,7 +163,7 @@ live: function(attribute, pattern, callback, interaction) {
 		// Disable mouseover listeners on scroll
 		var timer = false;
 
-		nwt.one(document).on('scroll', function() {
+		localnwt.one(document).on('scroll', function() {
 
 			body.off(interaction, dispatcher);
 
@@ -194,9 +194,9 @@ _getEventCallback: function(implementOn, event, callback, selector, context, onc
 		returnControl = function() {
 			// Call the callback
 			// Prepend the wrapped event onto the argument list so we can expect what arguments we get
-			nwt.event._eventData.unshift(eventWrapper);
-			callback.apply(implementOn, nwt.event._eventData);
-			nwt.event._eventData = [];
+			localnwt.event._eventData.unshift(eventWrapper);
+			callback.apply(implementOn, localnwt.event._eventData);
+			localnwt.event._eventData = [];
 
 			if (once) {
 				implementOn.removeEventListener(event, selfCallee);
@@ -316,6 +316,6 @@ ready: function(fn) {
 };
 
 
-nwt.event = new NWTEvent();
+localnwt.event = new NWTEvent();
 
-nwt.ready = nwt.event.ready;
+localnwt.ready = localnwt.event.ready;

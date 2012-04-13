@@ -23,7 +23,7 @@ for( var i in packages ) {
 		//uglify(thisScript, {mangle_options: {toplevel: true}});
 		
 	}
-
+	
 	// Wrap every file in an anonymous function
 	// Uglify-js is not rewriting my window/document names for some reason, so just do it manually for now
 	scriptContent = scriptContent.join('')

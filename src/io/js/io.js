@@ -159,6 +159,6 @@ abort: function() {
 };
 
 
-nwt.io = function() {
+localnwt.io = function() {
 	return new NWTIO(arguments);
 };

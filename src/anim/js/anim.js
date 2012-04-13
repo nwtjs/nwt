@@ -13,7 +13,7 @@ NWTAnimate.prototype = {
  */
 init: function(duration, easing) {
 	
-	var newStylesheet = nwt.node.create('<style type="text/css"></style>');
+	var newStylesheet = localnwt.node.create('<style type="text/css"></style>');
 
 	easing = easing || 'ease-in';
 	duration = duration || 1;
@@ -36,7 +36,7 @@ init: function(duration, easing) {
 	}
 	newStylesheet.setHtml('.' + this.animClass + '{' + newContent + '}');
 
-	nwt.one('head').append(newStylesheet);
+	localnwt.one('head').append(newStylesheet);
 
 	setTimeout(function(){
 		newStylesheet.remove()
@@ -73,4 +73,4 @@ anim: function(node, styles, duration, easing) {
 };
 
 var animation = new NWTAnimate();
-nwt.anim = animation.anim;
+localnwt.anim = animation.anim;

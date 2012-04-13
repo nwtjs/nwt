@@ -6,14 +6,14 @@ var pluginMap = {};
  * Registers a plugin
  * @param object Definition of the plugin
  */
-nwt.register = function(definition) {
+localnwt.register = function(definition) {
 	pluginMap[definition.name] = definition;
 };
 
 /**
  * Instantiates a plugin
  */
-nwt.plugin = function(plugin) {
+localnwt.plugin = function(plugin) {
 	var params = Array.prototype.slice.call(arguments),
 
 		i,
@@ -48,7 +48,7 @@ nwt.plugin = function(plugin) {
 	}
 
 	// Init plugins on dom ready
-	nwt.ready(function(){
+	localnwt.ready(function(){
 		myPluginClass = new tempHolder();
 		myPluginClass.init.apply(myPluginClass, params);
 	});

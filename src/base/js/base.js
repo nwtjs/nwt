@@ -122,15 +122,15 @@ implement: function(implClass, modClass) {
  * This allows us to play with the prototype and do other things later
  */
 declare: function(name, clazz) {
-	nwt._lib = nwt._lib || {}
-	nwt._lib[name] = clazz
+	localnwt._lib = localnwt._lib || {}
+	localnwt._lib[name] = clazz
 },
 
 /**
  * Augments a class namespaced on n._lib
  */
 augment: function(name, fnName, fn) {
-	nwt._lib[name].prototype[fnName] = fn; 
+	localnwt._lib[name].prototype[fnName] = fn; 
 },
 
 
@@ -147,4 +147,5 @@ uuid: function() {
 }()
 };
 
-window.nwt = window.n = new NWT();
+var localnwt = new NWT()
+window.nwt = window.n = localnwt

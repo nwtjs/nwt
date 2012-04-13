@@ -7,7 +7,7 @@ var fxObj = {
  * @constructor
  */
 function NWTNodeInstance(node) {
-	nwt.implement('DelayableQueue', this);
+	localnwt.implement('DelayableQueue', this);
 	this._node = node;
 }
 n.declare('Node', NWTNodeInstance);
@@ -74,7 +74,7 @@ intersects: function(other) {
  */
 ancestor: function(selector) {
 
-	var allMatches = nwt.all(selector),
+	var allMatches = localnwt.all(selector),
 		testNode = this._node,
 		ancestor = null,
 		maxDepth = 0;
@@ -443,7 +443,8 @@ setHtml: function(html) {
 
 			self._node.appendChild(newScript);
 		} else if (rawEl.get('text')){
-			eval(rawEl.get('text'));
+			var evalRef = eval
+			evalRef(rawEl.get('text'));
 			processScripts();
 		}
 	}
@@ -570,7 +571,7 @@ append: function(node) {
  */
 appendTo: function(node) {
 
-	var newParent = ( node instanceof NWTNodeInstance ) ? node : nwt.one(node);
+	var newParent = ( node instanceof NWTNodeInstance ) ? node : localnwt.one(node);
 
 	newParent.append(this);
 
@@ -603,7 +604,7 @@ prepend: function(node) {
  */
 insertTo: function(node, position) {
 
-	var newParent = ( node instanceof NWTNodeInstance ) ? node : nwt.one(node);
+	var newParent = ( node instanceof NWTNodeInstance ) ? node : localnwt.one(node);
 
 	newParent.insert(this, position);
 
@@ -662,7 +663,7 @@ removeEventListener: function(ev, fn) {
  * @see NWTEvent::on
  */
 on: function(event, fn, selector, context) {	
-	return nwt.event.on(this, event, fn, selector,context);
+	return localnwt.event.on(this, event, fn, selector,context);
 },
 
 
@@ -671,7 +672,7 @@ on: function(event, fn, selector, context) {
  * @see NWTEvent::once
  */
 once: function(event, fn, selector, context) {
-	return nwt.event.on(this, event, fn, selector, context, true);
+	return localnwt.event.on(this, event, fn, selector, context, true);
 },
 
 
@@ -680,7 +681,7 @@ once: function(event, fn, selector, context) {
  * @see NWTEvent::off
  */
 off: function(event, fn) {
-	return nwt.event.off(this, event, fn);
+	return localnwt.event.off(this, event, fn);
 },
 
 
@@ -691,7 +692,7 @@ off: function(event, fn) {
  * @param bool If true, purges children
  */
 purge: function(type, callback, recurse) {
-	var evt = nwt.event;
+	var evt = localnwt.event;
 
 	for (var i in evt._cached) {
 		for(var j=0,numCbs=evt._cached[i].length; j < numCbs; j++) {
@@ -716,7 +717,7 @@ purge: function(type, callback, recurse) {
 fire: function(event, callback) {	
 	var args = Array.prototype.slice.call(arguments, 1);
 
-	nwt.event._eventData = args;
+	localnwt.event._eventData = args;
 
 	var customEvt = document.createEvent("UIEvents");
 	customEvt.initEvent(event, true, false);
@@ -725,7 +726,7 @@ fire: function(event, callback) {
 
 uuid: function() {
 	if (!this._node.id) {
-		this._node.id = 'n' + nwt.uuid()
+		this._node.id = 'n' + localnwt.uuid()
 	}
 	return this._node.id
 },
@@ -756,7 +757,7 @@ anim: function(styles, duration, easing, pushState) {
 		this.fire('anim:push', animHistory)
 	}
 
-	return nwt.anim(this, styles, duration, easing);
+	return localnwt.anim(this, styles, duration, easing);
 },
 
 /**
@@ -779,12 +780,12 @@ popAnim: function() {
 
 /**
  * Implement a node API for plugins
- * @see nwt.plugin
+ * @see localnwt.plugin
  */
 plug: function(plugin, config) {	
 	config = config || {};
 	config.node = this;
-	return nwt.plugin(plugin, config);
+	return localnwt.plugin(plugin, config);
 }
 };
 
@@ -844,5 +845,5 @@ all: function(selector) {
 };
 
 
-nwt.node = new NWTNode();
-nwt.one = nwt.node.one;
+localnwt.node = new NWTNode();
+localnwt.one = localnwt.node.one;

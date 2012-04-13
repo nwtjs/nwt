@@ -4,7 +4,7 @@
  */
 function NWTNodeList(nodes) {
 
-	nwt.implement('DelayableQueue', this);
+	localnwt.implement('DelayableQueue', this);
 
 	var wrappedNodes = [];
 
@@ -64,4 +64,4 @@ size: function() {
 }
 };
 
-nwt.all = nwt.node.all;
+localnwt.all = localnwt.node.all;
