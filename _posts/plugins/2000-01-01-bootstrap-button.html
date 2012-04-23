@@ -5,7 +5,7 @@ layout: example
 
 <script type="text/javascript" src="/nwt/plugins/bootstrap/button.js"></script>
 <h2>Buttons</h2>
-<table class="table table-bordered table-striped">
+<table class="table table-bordered table-striped" id="allbuttons">
 	<tbody>
 	 <tr>
 		 <td>Stateful</td>
@@ -43,3 +43,32 @@ layout: example
 	 </tr>
 	</tbody>
 </table>
+
+<div id="eventlog" style="width:400px; height:100px; overflow:auto; border:1px solid #000; padding:10px;">
+	<div>Click buttons above to test the click event.</div>
+	<hr>
+</div>
+
+<script type="text/javascript">
+	var log = nwt.one('#eventlog')
+
+	function logAppend(message) {
+		log.append(nwt.node.create('<div>' + message + '</div>'))
+		
+		log.set('scrollTop', log.get('scrollHeight'))
+	}
+
+	n.one('#allbuttons').on('click', function(e) {
+
+		logAppend('Click event fired, button contents: ' + e.target.getHtml())
+
+		setTimeout(function() {
+			var loadingText = this.data('loading-text')
+			if (loadingText) {
+				this.setData('original-text', this.getHtml());
+				this.setHtml(loadingText);
+				this.set('disabled', false);
+			}
+		}.bind(e.target), 1000)
+	}, 'button')
+</script>
