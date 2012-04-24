@@ -4,10 +4,10 @@ nwt.register({
 
 	methods: {
 		init: function () {
-			nwt.event.live('data-tooltip', /(.*)/, this.show, 'mousemove');
+			nwt.event.live('data-tooltip', /(.*)/, this.show, 'mousemove', 2);
 		},
 
-		show: function(el, action) {
+		show: function(target, el, action) {
 
 			if (el.hasClass('tooltip-shown') ) {
 
