@@ -277,6 +277,7 @@ nwt.register({
 					e.stop();
 				}
 			});
+			this.node.fire('render')
 		}
 	}
 });

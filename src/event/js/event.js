@@ -94,8 +94,9 @@ NWTEvent.prototype = {
  * @param regex Pattern to match against the string
  * @param function callback if matched
  * @param string Type of listener to use, one of: click | mousemove | mouseout
+ * @param integer Max depth to search. Defaults to 1 for a mouseover action
  */
-live: function(attribute, pattern, callback, interaction) {
+live: function(attribute, pattern, callback, interaction, maxDepth) {
 	var classPattern = new RegExp(pattern),
 
 		interaction = interaction || 'click',
@@ -110,7 +111,7 @@ live: function(attribute, pattern, callback, interaction) {
 	if (interaction == 'click') {
 		maxSearch = 100;
 	} else {
-		maxSearch = 1;
+		maxSearch = maxDepth || 1;
 	}
 
 	dispatcher = 
