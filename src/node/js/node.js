@@ -732,6 +732,28 @@ uuid: function() {
 },
 
 /**
+ * Returns the computed CSS for a given style(s)
+ * @param String|Array List of styles to compute. If multiple styles are passed in, an object map is returned 
+ */
+computeCss: function(styles) {
+
+	var computedStyles = document.defaultView.getComputedStyle(this._node),
+		i,
+		eachStyle,
+		cssMap = {}
+
+	// String case, just return the correct style
+	if (typeof styles == "string") {
+		return computedStyles[styles]
+	}
+
+	for (i=0; eachStyle = styles[i]; i++) {
+		cssMap[eachStyle] = computedStyles[eachStyle]
+	}
+	return cssMap
+},
+
+/**
  * Implement a node API to animate
  * Takes an additional argument, pushState which signals whether or not to push this anim state onto fxStack
  * @see NWTAnimate::anin
@@ -739,13 +761,15 @@ uuid: function() {
 anim: function(styles, duration, easing, pushState) {
 	if (!pushState) {
 
-		var computedStyles = document.defaultView.getComputedStyle(this._node),
-			defaultStyles = {},
-			animHistory
+		var styleAttrs = [],
+			defaultStyles,
+			animHistory,
+			i
 
-		for (var i in styles) {
-			defaultStyles[i] = computedStyles[i] 
+		for (i in styles) {
+			styleAttrs.push(i) 
 		}
+		defaultStyles = this.computeCss(styleAttrs)
 
 		animHistory = {
 			from: [defaultStyles, duration, easing, true /* This makes it so we do not push this again */],

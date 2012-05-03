@@ -469,3 +469,16 @@ nwt.unit
 		return '<div style=""></div>';
 	}
 );
+
+
+nwt.unit
+.describe('Tests Node.computeCss (String).')
+.setup('<div id="id1"><div style="position:relative; top:100px;left:120px;"></div></div>')
+.equal(
+	function() {
+		return parseInt(nwt.one('#id1 div').computeCss('top'), 10)
+	},
+	function() {
+		return 100
+	}
+);
