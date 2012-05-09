@@ -1,6 +1,6 @@
 document.querySelectorAll = document.querySelectorAll || Sizzle;
 
-if (!Element.prototype.addEventListener) {
+//if (!Element.prototype.addEventListener) {
 	var oListeners = {};
 	function runListeners(oEvent) {
 		if (!oEvent) { oEvent = window.event; }
@@ -63,7 +63,7 @@ if (!Element.prototype.addEventListener) {
 			if (aElListeners[iLstId] === fListener) { aElListeners.splice(iLstId, 1); }
 		}
 	};
-}
+//}
 
 /**
  * Resolves JS Styles
@@ -74,3 +74,28 @@ nwt.augment('Node', '_jsStyle', function (name) {
 	if (lookupMap[name]) name = lookupMap[name];
 	return name;
 });
+
+
+
+/**
+ * Simulates a click event on a node
+ */
+nwt.augment('Node', 'click', function () {
+	var evt = document.createEventObject();
+	return !this._node.fireOnThis.fireEvent( 'onclick', evt );
+});
+
+/**
+ * Fires an event on a node
+ */
+nwt.augment('Node', 'fire', function (event, callback) {
+	var testEvt = {
+		srcElement : this._node,
+		type : event	
+	}
+
+	runListeners(testEvt)
+});
+
+
+
