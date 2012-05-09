@@ -5,6 +5,7 @@ document.querySelectorAll = document.querySelectorAll || Sizzle;
 	function runListeners(oEvent) {
 		if (!oEvent) { oEvent = window.event; }
 		for (var iLstId = 0, iElId = 0, oEvtListeners = oListeners[oEvent.type]; iElId < oEvtListeners.aEls.length; iElId++) {
+
 			if (oEvtListeners.aEls[iElId] === this) {
 
 				// Normalize the target and methods
@@ -25,10 +26,12 @@ document.querySelectorAll = document.querySelectorAll || Sizzle;
 	}
 	document.addEventListener = Element.prototype.addEventListener = function (sEventType, fListener /*, useCapture (will be ignored!) */) {
 		if (oListeners.hasOwnProperty(sEventType)) {
+
 			var oEvtListeners = oListeners[sEventType];
 			for (var nElIdx = -1, iElId = 0; iElId < oEvtListeners.aEls.length; iElId++) {
 				if (oEvtListeners.aEls[iElId] === this) { nElIdx = iElId; break; }
 			}
+
 			if (nElIdx === -1) {
 				oEvtListeners.aEls.push(this);
 				oEvtListeners.aEvts.push([fListener]);
@@ -41,7 +44,7 @@ document.querySelectorAll = document.querySelectorAll || Sizzle;
 				}
 				for (var iLstId = 0; iLstId < aElListeners.length; iLstId++) {
 					if (aElListeners[iLstId] === fListener) { return; }
-				}		 
+				}
 				aElListeners.push(fListener);
 			}
 		} else {
@@ -94,7 +97,7 @@ nwt.augment('Node', 'fire', function (event, callback) {
 		type : event	
 	}
 
-	runListeners(testEvt)
+	runListeners.call(this._node, testEvt)
 });
 
 
