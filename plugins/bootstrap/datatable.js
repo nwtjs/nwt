@@ -251,7 +251,7 @@ nwt.register({
 					sortContent = '<i class="icon-chevron-' + (colDir == 'asc' ? 'up' : 'down') + '">' + (colDir == 'asc' ? '&#9650;' : '&#9660;') + '</i>';
 				}
 				
-				content.push('<th class="row-' + i + '"><a data-col-idx="' + i + '" data-sort="sort" href="#">' + this.source.columns[i].name + ' ' + sortContent + '</a></th>');
+				content.push('<th class="row-' + i + '"><a data-col-idx="' + i + '" data-sort="sort" href="#" title="' + this.source.columns[i].name +'">' + this.source.columns[i].name + ' ' + sortContent + '</a></th>');
 			}
 
 			content.push('</tr></thead><tbody>');

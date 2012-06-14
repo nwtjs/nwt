@@ -822,7 +822,7 @@ plug: function(plugin, config) {
 function NWTNode() {
 	
 }
-
+n.declare('NodeMgr', NWTNode);
 
 NWTNode.prototype = {
 /**

@@ -1,4 +1,4 @@
-document.querySelectorAll = document.querySelectorAll || Sizzle;
+var ieVersion = parseFloat(navigator.appVersion.split("MSIE")[1]);
 
 //if (!Element.prototype.addEventListener) {
 	var oListeners = {};
@@ -24,7 +24,7 @@ document.querySelectorAll = document.querySelectorAll || Sizzle;
 			}
 		}
 	}
-	document.addEventListener = Element.prototype.addEventListener = function (sEventType, fListener /*, useCapture (will be ignored!) */) {
+	document.addEventListener = function (sEventType, fListener /*, useCapture (will be ignored!) */) {
 		if (oListeners.hasOwnProperty(sEventType)) {
 
 			var oEvtListeners = oListeners[sEventType];
@@ -52,7 +52,7 @@ document.querySelectorAll = document.querySelectorAll || Sizzle;
 			this["on" + sEventType] = runListeners;
 		}
 	};
-	document.removeEventListener = Element.prototype.removeEventListener = function (sEventType, fListener /*, useCapture (will be ignored!) */) {
+	document.removeEventListener = function (sEventType, fListener /*, useCapture (will be ignored!) */) {
 
 		if (!oListeners.hasOwnProperty(sEventType)) { return; }
 
@@ -66,6 +66,12 @@ document.querySelectorAll = document.querySelectorAll || Sizzle;
 			if (aElListeners[iLstId] === fListener) { aElListeners.splice(iLstId, 1); }
 		}
 	};
+	
+	try {
+		Element.prototype.addEventListener = document.addEventListener
+		Element.prototype.removeEventListener = document.removeEventListener		
+	}catch(e){
+	}
 //}
 
 /**
@@ -101,4 +107,39 @@ nwt.augment('Node', 'fire', function (event, callback) {
 });
 
 
+if (ieVersion < 8) {
+	nwt.augment('Node', 'addEventListener', function(ev, fn) {
+		return document.addEventListener.call(this, ev, fn)
+	})
+}
 
+if (!document.querySelectorAll) {
+	nwt.augment('Node', 'one', function(selector) {
+		var node = Sizzle(selector, this._node);
+		return new nwt._lib.Node(node);
+	})
+
+	nwt.augment('Node', 'all', function(selector) {
+		var nodelist = Sizzle(selector, this._node);
+		return new nwt._lib.NodeMgr(nodelist);
+	})
+
+	nwt.node.one = nwt.one = function(selector) {
+		if( typeof selector == 'string' ) {
+			var node = Sizzle(selector);
+
+			if( node.length == 0 ) {
+				return null;
+			}
+
+			return new nwt._lib.Node(node[0]);
+		} else {
+			return new nwt._lib.Node(selector);
+		}
+	}
+
+	nwt.node.all = nwt.all = function(selector) {
+		var nodelist = Sizzle(selector);
+		return new nwt._lib.NodeMgr(nodelist);
+	}
+}
