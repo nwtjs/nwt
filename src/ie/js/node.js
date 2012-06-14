@@ -102,24 +102,36 @@ nwt.augment('Node', 'fire', function (event, callback) {
 	}
 
 	runListeners.call(this._node, testEvt)
-});
+})
 
-
-if (ieVersion < 8) {
+if (ieVersion <= 8) {
 	nwt.augment('Node', 'addEventListener', function(ev, fn) {
-		return addEventListener.call(this, ev, fn)
+		addEventListener.call(this._node, ev, fn)
+		return this
+	})
+
+	nwt.augment('Node', 'removeEventListener', function(ev, fn) {
+		removeEventListener.call(this._node, ev, fn)
+		return this
+	})
+
+	nwt.augment('Node', 'hasAttribute', function(prop) {
+		if (this._node.getAttribute(prop)) {
+			return true
+		}
+		return false
 	})
 }
 
 if (!document.querySelectorAll) {
 	nwt.augment('Node', 'one', function(selector) {
-		var node = Sizzle(selector, this._node);
+		var node = Sizzle(selector, ' ' , this._node);
 		return new nwt._lib.Node(node);
 	})
 
 	nwt.augment('Node', 'all', function(selector) {
 		var nodelist = Sizzle(selector, this._node);
-		return new nwt._lib.NodeMgr(nodelist);
+		return new nwt._lib.NodeList(nodelist);
 	})
 
 	nwt.node.one = nwt.one = function(selector) {
