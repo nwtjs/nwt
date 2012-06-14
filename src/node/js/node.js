@@ -448,7 +448,9 @@ setHtml: function(html) {
 			processScripts();
 		}
 	}
-	processScripts();
+	try {
+		processScripts();
+	}catch(e){}
 
 	return this;
 },

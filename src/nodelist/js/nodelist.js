@@ -32,7 +32,7 @@ function NWTNodeList(nodes) {
 		this[func] = getIteratedCallback(func);
 	}
 }
-
+n.declare('NodeList', NWTNodeList);
 
 NWTNodeList.prototype = {
 /**
