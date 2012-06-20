@@ -115,7 +115,8 @@ parent: function() {
  * Returns true if the class exists on the node, false if not
  */
 hasClass: function(className) {
-	return (this._node.className && this._node.className.indexOf(className) !== -1);
+	var regex = new RegExp('\\b' + className + '\\b')
+    return regex.test(this._node.className)
 },
 
 
