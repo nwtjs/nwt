@@ -125,8 +125,13 @@ if (ieVersion <= 8) {
 
 if (!document.querySelectorAll) {
 	nwt.augment('Node', 'one', function(selector) {
-		var node = Sizzle(selector, ' ' , this._node);
-		return new nwt._lib.Node(node);
+		var node = Sizzle(selector, this._node);
+		
+		if( node.length == 0 ) {
+			return null;
+		}
+		
+		return new nwt._lib.Node(node[0]);
 	})
 
 	nwt.augment('Node', 'all', function(selector) {
@@ -135,17 +140,13 @@ if (!document.querySelectorAll) {
 	})
 
 	nwt.node.one = nwt.one = function(selector) {
-		if( typeof selector == 'string' ) {
-			var node = Sizzle(selector);
+		var node = Sizzle(selector);
 
-			if( node.length == 0 ) {
-				return null;
-			}
-
-			return new nwt._lib.Node(node[0]);
-		} else {
-			return new nwt._lib.Node(selector);
+		if( node.length == 0 ) {
+			return null;
 		}
+
+		return new nwt._lib.Node(node[0]);
 	}
 
 	nwt.node.all = nwt.all = function(selector) {

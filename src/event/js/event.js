@@ -298,7 +298,11 @@ ready: function(fn) {
 		},
 	
 		poll = function() {
-			try { root.doScroll('left'); } catch(e) { setTimeout(poll, 50); return; }
+			try { 
+				if(!root.doScroll('left')){ 
+					setTimeout(poll, 50); return;
+				} 
+			} catch(e) { setTimeout(poll, 50); return; }
 			init('poll');
 		};
 
