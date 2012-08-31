@@ -325,9 +325,16 @@ nwt.register({
 				if (isNaN(dayNumber)) {
 					return
 				}
-	
-				var formattedDate = this.format(new Date(this.year, this.month, dayNumber).getTime())
-				console.log('Date is:', formattedDate)
+
+				var dateObj = new Date(this.year, this.month, dayNumber).getTime()
+
+				this.el.fire('pick', {
+					year: this.year,
+					month: this.month,
+					day: dayNumber,
+					formatted: this.format(dateObj),
+					date: dateObj
+				})
 			}.bind(this))
 		}
 	}
