@@ -66,7 +66,7 @@ function standardizeCols(columns) {
  */
 function JSONDataSource(config) {
 	// Default to the first col ASC for sorting
-	this.colSortIdx = -1;
+	this.colSortIdx = config.defaultSortCol || -1
 
 	this.data = config.data;
 	this.columns = standardizeCols(config.columns);
@@ -101,7 +101,7 @@ function IODataSource(config) {
 	}
 
 	// Default to the first col ASC for sorting
-	this.colSortIdx = 0;
+	this.colSortIdx = config.defaultSortCol || -1
 }
 
 /**
@@ -167,6 +167,7 @@ nwt.register({
 		 * Sets up listeners, etc
 		 * @param object Receives a config object with the following:
 		 * - node: String or node object, where to render the table
+		 * - defaultSortCol: Column index to use as the default sort. Defaults to 0.
 		 * - data: Data to use. Can be a JSON object, table, or nwt.io instance
 		 * For JSON or IO datatable you need to specify a columns object, like so:
 		 *  columns: [
