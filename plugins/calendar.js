@@ -11,8 +11,9 @@ nwt.register({
 		 */
 		init: function (config) {			
 
+			this.panes = config.panes || 1
 			this.dateFormat = config.format || 'F jS, Y'
-		
+
 			this.weekdays = ['Sun', 'Mon', 'Tues', 'Wednes', 'Thurs', 'Fri', 'Satur']
 			this.months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
 			this.daysInMonth = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]
@@ -21,7 +22,7 @@ nwt.register({
 			this.currentDate = new Date()
 		
 			this.month = this.currentDate.getMonth()
-			this.year = this.currentYear()
+			this.year = this.currentDate.getFullYear()
 		
 			this.el = config.node
 
@@ -97,22 +98,59 @@ nwt.register({
 		_convertMonthIdx: function(date, full) {
 			return ((full == true) ? this.months[date] : ((this.months[date].length > 3) ? this.months[date].substring(0, 3) : this.months[date]))
 		},
-	
-	
+
 		/**
-		 * Returns the current year
+		 * Returns the year based on month offset
+		 * The year only changes if the month wraps to the next year
+		 * @param integer month offset
 		 */
-		currentMonth: function() {
-			var date = this.currentDate.getMonth()
-			return this._convertMonthIdx(date, true)
+		getOffsetYear: function(offset) {
+			offset = offset || 0
+			var year = this.year
+
+			var monthNum = this.month
+			monthNum += offset
+			if(monthNum < 0) { year-- }
+			if(monthNum > 11) { year++ }
+			
+			return year
 		},
-	
-	
+		
+		/**
+		 * Returns the month based on offset
+		 * (Months after index of 11 return 0)
+		 * @param integer month offset
+		 */
+		getOffsetMonth: function(offset) {
+			var monthNum = this.month	
+
+			offset = offset || 0
+
+			monthNum += offset
+
+			if(monthNum < 0) { monthNum = 11 }
+			if(monthNum > 11) { monthNum = 0 }
+
+			return monthNum
+		},
+
+		/**
+		 * Renders the month based on current month +- offset
+		 * @param integer offset month to add to the current
+		 */
+		renderMonth: function(offset) {
+			var monthNum = this.getOffsetMonth(offset)
+			return this._convertMonthIdx(monthNum, true)
+		},
+
+
 		/**
 		 * Returns the current year
+		 * @param integer offset in months to add/subtract from the the current date
 		 */
-		currentYear: function() {
-			return this.currentDate.getFullYear()
+		renderYear: function(offset) {
+			var year = this.getOffsetYear(offset)
+			return year
 		},
 	
 		/**
@@ -139,15 +177,13 @@ nwt.register({
 			// if we go too far into the future
 			if(this.month > 11) {
 				this.year++
-				
+
 				// restart our month count (0 = january)
 				this.month = 0
 			}
-	
-			this.calendarEl.one('.current-month').setHtml(this._convertMonthIdx(this.month, true) + ' ' + this.year)
-	
+
 			// rebuild the calendar
-			this.calendarEl.one('tbody').setHtml(this.calendarMarkup())
+			this.build()
 		},
 		
 	
@@ -162,13 +198,25 @@ nwt.register({
 			}
 			return html
 		},
-	
+
+
 		/**
 		 * Builds calendar markup
+		 * @param integer month offset
 		 */
-		calendarMarkup: function() {
+		calendarMarkup: function(offset) {
+
+			var monthNum = this.month
+			offset = offset || 0
+			monthNum += offset
+
+			if(monthNum < 0) { monthNum = 11 }
+			if(monthNum > 11) { monthNum = 0 }
+			var month = this.getOffsetMonth(offset)
+				, year = this.getOffsetYear(offset)
+
 			// get the first day of the month we are currently viewing
-			var firstOfMonth = new Date(this.year, this.currentDate.getMonth(), 1).getDay(),
+			var firstOfMonth = new Date(year, month, 1).getDay(),
 	
 			// get the total number of days in the month we are currently viewing
 			numDays = this.currentNumDaysInMonth(),
@@ -197,7 +245,7 @@ nwt.register({
 	
 				// output the text that goes inside each td
 				// if the day is the current day, add a class of "today"
-				row += '<td class="' + ((i == this.currentDate.getDate() && this.month == this.currentDate.getMonth() && this.year == this.currentYear()) ? 'today' : '') + '"><a href="#">' + i + '</a></td>'
+				row += '<td class="' + ((i == this.currentDate.getDate() && month == this.currentDate.getMonth() && year == this.renderYear(offset)) ? 'today' : '') + '"><a href="#">' + i + '</a></td>'
 				dayCount++
 			}
 			
@@ -216,39 +264,57 @@ nwt.register({
 		 * Creates the calendar element
 		 */
 		build: function() {
-	
+
+			// Remove any existing calendar (only one instance per node is allowed)
+			var existing = this.el.one('.calendar')
+			if (existing._node) {
+				existing.remove()
+			}
+
 			this.calendarEl = n.node.create('<div class="calendar"></div>')
-	
-			var content
-	
-			content = [
-				'<div class="months">',
-					'<span class="prev-month"><a href="#">&lt;</a></span>',
-					'<span class="next-month"><a href="#">&gt;</a></span>',
-					'<span class="current-month">' + this.currentMonth() + ' ' + this.currentYear() + '</span>',
-				'</div>',
-				'<table><thead><tr class="weekdays">' + this.weekdayHeaderMarkup() + '</tr></thead>',
-				'<tbody>' + this.calendarMarkup() + '</tbody>',
-				'</table>'
-			]
-	
+
+			var content = []
+
+			for (var i=0;i<this.panes;i++) {
+				var prevLink = ''
+					, nextLink = ''
+
+				if (i==0) {
+					prevLink = '<span class="prev-month"><a href="#">&lt;</a></span>'
+				}
+				
+				if (i+1 == this.panes) {
+					nextLink = '<span class="next-month"><a href="#">&gt;</a></span>'
+				}
+
+				content = content.concat([
+					'<div class="pane">',
+						'<div class="months">',
+							prevLink,
+							'<span class="current-month">' + this.renderMonth(i) + ' ' + this.renderYear(i) + '</span>',
+							nextLink,
+						'</div>',
+						'<div class="days">',
+							'<table><thead><tr class="weekdays">' + this.weekdayHeaderMarkup() + '</tr></thead>',
+								'<tbody>' + this.calendarMarkup(i) + '</tbody>',
+							'</table>',
+						'</div>',
+					'</div>'
+				])
+			}
+
 			this.calendarEl.setHtml(content.join(''))
-	
-			this.calendarEl.setStyles({
-				height:'200px',
-				width: '200px'
-			})
-			
+
 			// Position the calendar
 			//calendarEl.setStyles() 'display: none; position: absolute; top: ' + (element.offsetTop + element.offsetHeight) + 'px; left: ' + element.offsetLeft + 'px;'
 			this.calendarEl.appendTo(this.el)
-	
-			n.one('.prev-month').on('click', function(e){
+
+			this.calendarEl.one('.prev-month').on('click', function(e){
 				this.month--
 				this.loadMonth()
 			}.bind(this))
 	
-			n.one('.next-month').on('click', function(e){
+			this.calendarEl.one('.next-month').on('click', function(e){
 				this.month++
 				this.loadMonth()
 			}.bind(this))
@@ -266,104 +332,3 @@ nwt.register({
 		}
 	}
 })
-
-/*
-// Sample CSS from: http://www.joshsalverda.com/sandbox/date_pick/datePick.html
-  	.calendar {
-				font-family: 'Trebuchet MS', Tahoma, Verdana, Arial, sans-serif;
-				font-size: 0.9em;
-				background-color: #EEE;
-				color: #333;
-				border: 1px solid #DDD;
-				-moz-border-radius: 4px;
-				-webkit-border-radius: 4px;
-				border-radius: 4px;
-				padding: 0.2em;
-				width: 14em;
-			}
-			
-			.calendar a {
-				outline: none;
-			}
-			
-			.calendar .months {
-				background-color: #F6AF3A;
-				border: 1px solid #E78F08;
-				-moz-border-radius: 4px;
-				-webkit-border-radius: 4px;
-				border-radius: 4px;
-				color: #FFF;
-				padding: 0.2em;
-				text-align: center;
-			}
-			
-			.calendar .prev-month,
-			.calendar .next-month {
-				padding: 0;
-			}
-			
-			.calendar .prev-month {
-				float: left;
-			}
-			
-			.calendar .next-month {
-				float: right;
-			}
-			
-			.calendar .current-month {
-				margin: 0 auto;
-			}
-			
-			.calendar .months a {
-				color: #FFF;
-				text-decoration: none;
-				padding: 0 0.4em;
-				-moz-border-radius: 4px;
-				-webkit-border-radius: 4px;
-				border-radius: 4px;
-			}
-			
-			.calendar .months a:hover {
-				background-color: #FDF5CE;
-				color: #C77405;
-			}
-			
-			.calendar table {
-				border-collapse: collapse;
-				padding: 0;
-				font-size: 0.8em;
-				width: 100%;
-			}
-			
-			.calendar th {
-				text-align: center;
-			}
-			
-			.calendar td {
-				text-align: right;
-				padding: 1px;
-				width: 14.3%;
-			}
-			
-			.calendar td a {
-				display: block;
-				color: #1C94C4;
-				background-color: #F6F6F6;
-				border: 1px solid #CCC;
-				text-decoration: none;
-				padding: 0.2em;
-			}
-			
-			.calendar td a:hover {
-				color: #C77405;
-				background-color: #FDF5CE;
-				border: 1px solid #FBCB09;
-			}
-			
-			.calendar td.today a {
-				background-color: #FFF0A5;
-				border: 1px solid #FED22F;
-				color: #363636;
-			}
-			
- */
