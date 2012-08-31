@@ -275,7 +275,8 @@ nwt.register({
 			this.node.one('table thead').on('click', function(e) {
 				if (e.target.data('sort')) {
 					self.sort(e.target);
-					e.target._node.focus();
+
+					self.node.all('th a').item(e.target.data('col-idx'))._node.focus()
 					e.stop();
 				}
 			});
