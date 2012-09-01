@@ -55,8 +55,8 @@ layout: example
 }
 
 .calendar .months a:hover {
-	background-color: #FDF5CE;
-	color: #C77405;
+	background-color: #FFF;
+	color: #08C;
 }
 
 .calendar .days {
@@ -133,7 +133,8 @@ layout: example
 
 <script type="text/javascript">
 	n.one('#calendar2').plug('Calendar', {
-		panes: 3
+		panes: 3,
+		mode: 'multiple'
 	})
 </script>
 
@@ -143,7 +144,8 @@ layout: example
 <div class="calendar2"></div>
 <script type="text/javascript">
 	n.one('#calendar1').plug('Calendar', {
-		panes: 3
+		panes: 3,
+		mode: 'multiple' // Select a range of dates
 	})
 </script>
 {% endhighlight %}

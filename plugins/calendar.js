@@ -19,6 +19,9 @@ nwt.register({
 			this.mode = config.mode || 'single'
 			this.dateFormat = config.format || 'F jS, Y'
 
+			// From -> to range to select days
+			this.selected = []
+
 			this.weekdays = ['Sun', 'Mon', 'Tues', 'Wednes', 'Thurs', 'Fri', 'Satur']
 			this.months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
 			this.daysInMonth = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]
@@ -30,6 +33,11 @@ nwt.register({
 			this.year = this.currentDate.getFullYear()
 		
 			this.el = config.node
+
+			// Default the selected day to be today if we're in 'single' mode
+			if (this.mode == 'single') {
+				this.selected = [{day:this.currentDate.getDate(), month: this.month, year: this.year}]
+			}
 
 			this.build()
 		},
@@ -247,10 +255,11 @@ nwt.register({
 					row = '<tr>'
 					dayCount = 0
 				}
-	
+
 				// output the text that goes inside each td
 				// if the day is the current day, add a class of "selected"
-				row += '<td data-day="' + i + '" class="' + ((i == this.currentDate.getDate() && month == this.currentDate.getMonth() && year == this.renderYear(offset)) ? 'selected' : '') + '"><a href="#">' + i + '</a></td>'
+				// Only show a default date if the selection mode is 'single'
+				row += '<td data-day="' + i + '" class=""><a href="#">' + i + '</a></td>'
 				dayCount++
 			}
 			
@@ -264,6 +273,21 @@ nwt.register({
 			return html
 		},
 	
+	
+		/**
+		 * Selects all cells in this.selection
+		 */
+		doSelection: function() {
+			// First deselect everything
+			this.el.all('td.selected').removeClass('selected')
+			
+			for (var i=0,date;date=this.selected[i];i++) {
+				var cell = this.el.one('.pane[data-month="' + date.month + '"][data-year="' + date.year + '"] td[data-day="' + date.day + '"]')
+				if (cell._node) {
+					cell.addClass('selected')
+				}
+			}
+		},
 	
 		/**
 		 * Creates the calendar element
@@ -313,6 +337,8 @@ nwt.register({
 			// Position the calendar
 			this.calendarEl.appendTo(this.el)
 
+			this.doSelection()
+
 			this.calendarEl.one('.prev-month').on('click', function(e){
 				this.month--
 				this.loadMonth()
@@ -325,28 +351,107 @@ nwt.register({
 				e.stop()
 			}.bind(this))
 	
-			this.calendarEl.one('tbody').on('click', function(e) {
-				var dayNumber = e.target.getHtml()
+			this.calendarEl.on('click', function(e) {
+				var dayNumber = parseInt(e.target.getHtml(), 10)
 	
 				if (isNaN(dayNumber)) {
 					return
 				}
 
-				var dateObj = new Date(this.year, this.month, dayNumber).getTime()
+				var paneEl = e.target.ancestor('.pane')
+
+					, month = parseInt(paneEl.data('month'), 10)
+					, year = parseInt(paneEl.data('year'), 10)
+
+					, dateObj = new Date(year, month, dayNumber).getTime()
+					, self = this
+
+				function getdPickedDayEl() {
+					return self.el.one('.pane[data-month="' + month + '"]').one('td[data-day="' + dayNumber + '"]')
+				}
 
 				// Handle single selection
 				if (this.mode == 'single') {
-					this.el.all('td.selected').removeClass('selected')
-					this.el.one('.pane[data-month="' + this.month + '"]').one('td[data-day="' + dayNumber + '"]').addClass('selected')
+					this.selected = [{year:year, month:month, day:dayNumber}]
+					this.doSelection()
+				}
+
+				// Handle multiple selections
+				if (this.mode == 'multiple') {
+
+					if (this.selected.length > 1) {
+						// Reset all nodes
+						this.selected = [{year:year, month:month, day:dayNumber}]
+
+					} else if (this.selected.length == 1 && this.selected[0].month == month && this.selected[0].year == year && this.selected[0].day == dayNumber ){
+						// If the clicked square is the one in the selection, just clear the selection
+						this.selected = []
+						this.el.fire('pickClear')
+
+					} else if (this.selected.length == 1){
+
+						// Populate the selected array
+						var dayI = this.selected[0].day+1,
+							monthI = this.selected[0].month,
+							yearI = this.selected[0].year
+
+						// Swap values if the clicked day is before the start date
+						if (dayI-1 > dayNumber || (monthI > month || yearI > year)) {
+							var temp = {year:year, month:month, day:dayNumber}
+
+							dayNumber = dayI-1
+							month = monthI
+							year = yearI
+							
+							this.selected = [temp]
+							dayI = temp.day
+							monthI = temp.month
+							yearI = temp.year
+						}
+
+
+						while(true) {
+
+							this.selected.push({year:yearI, month:monthI, day:dayI})
+
+							if (dayI >= dayNumber && monthI >= month && yearI >= year) { break }
+
+							if (dayI >= this.daysInMonth[monthI]) {
+								dayI=0
+								monthI++
+							}
+							if (monthI==11) {
+								monthI=0
+								yearI++
+							}
+							dayI++
+						}
+
+						this.el.fire('rangePick', {
+							from: this.selected[0],
+							to: {
+								year: year,
+								month: month,
+								day: dayNumber
+							}
+						})
+
+					} else {
+						// First selection, so push something onto the selection stack
+						this.selected.push({year:year, month:month, day:dayNumber})
+					}
+
+					this.doSelection()
 				}
 
 				this.el.fire('pick', {
-					year: this.year,
-					month: this.month,
+					year: year,
+					month: month,
 					day: dayNumber,
 					formatted: this.format(dateObj),
 					date: dateObj
 				})
+				e.stop()
 			}.bind(this))
 		}
 	}
