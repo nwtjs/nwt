@@ -8,10 +8,15 @@ nwt.register({
 		 * Initializes the calendar plugin.
 		 * You can plug a calendar into any DOM node.
 		 * E.g., n.one('#mynode').plug('Calendar', {format: 'F jS, Y'})
+		 * Possible config options:
+		 *   panes - Number of month panes to show
+		 *   format - Format string to return the date
+		 *   mode - A string 'single', or 'multiple'. Whether the user should select one or multiple days. Defaults to single.
 		 */
 		init: function (config) {			
 
 			this.panes = config.panes || 1
+			this.mode = config.mode || 'single'
 			this.dateFormat = config.format || 'F jS, Y'
 
 			this.weekdays = ['Sun', 'Mon', 'Tues', 'Wednes', 'Thurs', 'Fri', 'Satur']
@@ -244,8 +249,8 @@ nwt.register({
 				}
 	
 				// output the text that goes inside each td
-				// if the day is the current day, add a class of "today"
-				row += '<td class="' + ((i == this.currentDate.getDate() && month == this.currentDate.getMonth() && year == this.renderYear(offset)) ? 'today' : '') + '"><a href="#">' + i + '</a></td>'
+				// if the day is the current day, add a class of "selected"
+				row += '<td data-day="' + i + '" class="' + ((i == this.currentDate.getDate() && month == this.currentDate.getMonth() && year == this.renderYear(offset)) ? 'selected' : '') + '"><a href="#">' + i + '</a></td>'
 				dayCount++
 			}
 			
@@ -288,7 +293,7 @@ nwt.register({
 				}
 
 				content = content.concat([
-					'<div class="pane">',
+					'<div class="pane" data-month="', this.getOffsetMonth(i) ,'" data-year="', this.getOffsetYear(i), '">',
 						'<div class="months">',
 							prevLink,
 							'<span class="current-month">' + this.renderMonth(i) + ' ' + this.renderYear(i) + '</span>',
@@ -306,7 +311,6 @@ nwt.register({
 			this.calendarEl.setHtml(content.join(''))
 
 			// Position the calendar
-			//calendarEl.setStyles() 'display: none; position: absolute; top: ' + (element.offsetTop + element.offsetHeight) + 'px; left: ' + element.offsetLeft + 'px;'
 			this.calendarEl.appendTo(this.el)
 
 			this.calendarEl.one('.prev-month').on('click', function(e){
@@ -329,6 +333,12 @@ nwt.register({
 				}
 
 				var dateObj = new Date(this.year, this.month, dayNumber).getTime()
+
+				// Handle single selection
+				if (this.mode == 'single') {
+					this.el.all('td.selected').removeClass('selected')
+					this.el.one('.pane[data-month="' + this.month + '"]').one('td[data-day="' + dayNumber + '"]').addClass('selected')
+				}
 
 				this.el.fire('pick', {
 					year: this.year,
