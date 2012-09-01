@@ -312,11 +312,13 @@ nwt.register({
 			this.calendarEl.one('.prev-month').on('click', function(e){
 				this.month--
 				this.loadMonth()
+				e.stop()
 			}.bind(this))
 	
 			this.calendarEl.one('.next-month').on('click', function(e){
 				this.month++
 				this.loadMonth()
+				e.stop()
 			}.bind(this))
 	
 			this.calendarEl.one('tbody').on('click', function(e) {
