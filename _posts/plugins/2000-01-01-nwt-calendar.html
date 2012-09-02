@@ -129,6 +129,7 @@ layout: example
 {% endhighlight %}
 
 <h3>Multi-pane</h3>
+<p>Display several panes at once with the "panes" configuration value. Date selection will persist during calendar navigation. In this example we also use the 'multiple' mode to select a range of dates.</p>
 <div id="calendar2"></div><br>
 
 <script type="text/javascript">
@@ -175,3 +176,37 @@ layout: example
 		</table>
 	</div>
 </div>
+
+<h2>CalendarPicker Plugin</h2>
+<p>The Calendar plugin also ships with a 'CalendarPicker' plugin which plugs into an input or DOM node and renders when the user interacts with that node.</p>
+
+<h3>Example Calendar Picker</h3>
+<label for="datepicker1">Pick a start date:</label>
+<input type="text" id="datepicker1">
+<label for="datepicker2">Pick an end date:</label>
+<input type="text" id="datepicker2">
+
+<script type="text/javascript">
+	n.one('#datepicker1').plug('CalendarPicker')
+	n.one('#datepicker2').plug('CalendarPicker', {
+		calendar: {
+			panes:2
+		}
+	})
+</script>
+
+<h4>Usage</h4>
+<p>Simple calendar from markup:</p>
+
+{% highlight html %}
+<input type="text" id="datepicker1">
+<input type="text" id="datepicker2">
+<script type="text/javascript">
+	n.one('#datepicker1').plug('CalendarPicker')
+	n.one('#datepicker2').plug('CalendarPicker', {
+		calendar: {
+			panes:2
+		}
+	})
+</script>
+{% endhighlight %}
