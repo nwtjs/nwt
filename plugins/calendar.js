@@ -142,7 +142,7 @@ nwt.register({
 			monthNum += offset
 
 			if(monthNum < 0) { monthNum = 11 }
-			if(monthNum > 11) { monthNum = 0 }
+			if(monthNum > 11) { monthNum = monthNum - 12 }
 
 			return monthNum
 		},
@@ -168,10 +168,14 @@ nwt.register({
 	
 		/**
 		 * Returns the current number of days in the month
+		 * @param integer Month offset for multi-pane implementation
 		 */
-		currentNumDaysInMonth: function() {
+		offsetDaysInMonth: function(offset) {
+			var month = this.getOffsetMonth(offset)
+			  , year = this.getOffsetYear(offset)
+
 			// checks to see if february is a leap year otherwise return the respective # of days
-			return (this.month == 1 && !(this.year & 3) && (this.year % 1e2 || !(this.year % 4e2))) ? 29 : this.daysInMonth[this.month]
+			return (month == 1 && !(year & 3) && (year % 1e2 || !(year % 4e2))) ? 29 : this.daysInMonth[month]
 		},
 	
 	
@@ -186,7 +190,7 @@ nwt.register({
 				// start our month count at 11 (11 = december)
 				this.month = 11
 			}
-			
+
 			// if we go too far into the future
 			if(this.month > 11) {
 				this.year++
@@ -232,7 +236,7 @@ nwt.register({
 			var firstOfMonth = new Date(year, month, 1).getDay(),
 	
 			// get the total number of days in the month we are currently viewing
-			numDays = this.currentNumDaysInMonth(),
+			numDays = this.offsetDaysInMonth(offset),
 	
 			// declare our day counter
 			dayCount = 0,
