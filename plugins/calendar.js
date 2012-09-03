@@ -474,21 +474,26 @@ nwt.register({
 		init: function (config) {
 
 			var self = this
+				, instanceId = 'calendar-popover-' + config.node.get('id')
 
+			config.node.on('close', function() {
+				n.one('#' + instanceId).remove()
+			})
+				
 			config.node.on('focus', function() {
 
 				var region = config.node.region()
 				  , top = region.top -100
 				  , left = region.right
-				  , instanceId = 'calendar-popover-' + config.node.get('id')
 				  , existingInstance = n.one('#' + instanceId)
 
 				// If the picker is already displayed, return
 				if (existingInstance) {
+					console.log('returning')
 					return
 				}
 				
-				self.popover = n.node.create('<div class="popover calendar-popover"><div class="popover-inner" style="width:auto;"><h3 class="popover-title">Select a date</h3><div class="popover-content"></div></div></div>')
+				self.popover = n.node.create('<div id="' + instanceId + '" class="popover calendar-popover"><div class="popover-inner" style="width:auto;"><h3 class="popover-title">Select a date</h3><div class="popover-content"></div></div></div>')
 				
 				self.popover.setStyles({
 					display: 'block',
@@ -501,21 +506,27 @@ nwt.register({
 				var contentEl = self.popover.one('.popover-content')
 				
 				contentEl.plug('Calendar', config.calendar)
-				
+
+				// Proxy events through the node that we had a plugin for 
 				contentEl.on('pick', function(e, o){
-					config.node.set('value', o.formatted)
+					config.node.fire('pick', o)
+				})
+				contentEl.on('rangePick', function(e, o){
+					config.node.fire('rangePick', o)
 				})
 
-				setTimeout(function() {
-					var removePopover = function(e) {
-						var ancestor = e.target.ancestor('.popover')
-						if (!ancestor || !ancestor._node || ancestor._node != self.popover._node) {
-							self.popover.remove()
-							n.one('body').off('click', removePopover)
+				setTimeout(function(instanceId) {
+					return function() {
+						var removePopover = function(e) {
+							var ancestor = e.target.ancestor('.popover')
+							if ((!ancestor || !ancestor._node || ancestor.get('id') !== instanceId) && e.target._node != config.node._node) {
+								n.one('#' + instanceId).remove()
+								n.one('body').off('click', removePopover)
+							}
 						}
+						n.one('body').on('click', removePopover)
 					}
-					n.one('body').on('click', removePopover)
-				},500)
+				}(instanceId),500)
 			})
 		}
 	}

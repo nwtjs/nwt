@@ -187,8 +187,24 @@ layout: example
 <input type="text" id="datepicker2">
 
 <script type="text/javascript">
-	n.one('#datepicker1').plug('CalendarPicker')
-	n.one('#datepicker2').plug('CalendarPicker', {
+	var startDatePicker = n.one('#datepicker1'),
+		endDatePicker = n.one('#datepicker2')
+
+	startDatePicker.on('pick', function(e, o){
+		startDatePicker.set('value', o.formatted)
+		// Fire the close event to close the calendar
+		startDatePicker.fire('close')
+	})
+
+	startDatePicker.plug('CalendarPicker')
+
+	endDatePicker.on('pick', function(e, o){
+		endDatePicker.set('value', o.day + '-' + o.month + '-' + o.year)
+		// Fire the close event to close the calendar
+		endDatePicker.fire('close')
+	})
+
+	endDatePicker.plug('CalendarPicker', {
 		calendar: {
 			panes:2
 		}
@@ -202,10 +218,65 @@ layout: example
 <input type="text" id="datepicker1">
 <input type="text" id="datepicker2">
 <script type="text/javascript">
-	n.one('#datepicker1').plug('CalendarPicker')
-	n.one('#datepicker2').plug('CalendarPicker', {
+	var startDatePicker = n.one('#datepicker1'),
+		endDatePicker = n.one('#datepicker2')
+
+	startDatePicker.on('pick', function(e, o){
+		startDatePicker.set('value', o.formatted)
+		// Fire the close event to close the calendar
+		startDatePicker.fire('close')
+	})
+
+	startDatePicker.plug('CalendarPicker')
+
+	endDatePicker.on('pick', function(e, o){
+		endDatePicker.set('value', o.day + '-' + o.month + '-' + o.year)
+		// Fire the close event to close the calendar
+		endDatePicker.fire('close')
+	})
+
+	endDatePicker.plug('CalendarPicker', {
 		calendar: {
 			panes:2
+		}
+	})
+</script>
+{% endhighlight %}
+
+<h3>Using Calendar Picker With a Range Selection</h3>
+<label for="datepicker3">Select a range:</label>
+<textarea id="datepicker3" rows="5"></textarea>
+<script type="text/javascript">
+	var trigger = n.one('#datepicker3')
+
+	trigger.on('rangePick', function(e, o){
+		trigger.set('value', 'JSON is:' + JSON.stringify(o))
+		trigger.fire('close')
+	})
+
+	trigger.plug('CalendarPicker', {
+		calendar: {
+			panes:3,
+			mode:'multiple'
+		}
+	})
+</script>
+
+{% highlight html %}
+<label for="datepicker3">Select a range:</label>
+<textarea id="datepicker3"></textarea>
+<script type="text/javascript">
+	var trigger = n.one('#datepicker3')
+
+	trigger.on('rangePick', function(e, o){
+		trigger.set('value', 'JSON is:' + JSON.stringify(o))
+		trigger.fire('close')
+	})
+
+	trigger.plug('CalendarPicker', {
+		calendar: {
+			panes:3,
+			mode:'multiple'
 		}
 	})
 </script>
