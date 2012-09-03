@@ -7,3 +7,40 @@ navigation:
   url: /manual.html
 - text: Examples
   url: /examples.html
+examples:
+- text: Home
+  url: /example-intro.html
+- text: Bootstrap Components
+- text: Dropdown
+  url: /bootstrap-dropdown.html
+- text: Tabview
+  url: /bootstrap-tabview.html
+- text: Collapse
+  url: /bootstrap-collapse.html
+- text: Buttons
+  url: /bootstrap-button.html
+- text: Overlays
+  url: /bootstrap-overlay.html
+- text: Tooltips
+  url: /bootstrap-tooltip.html
+- text: Carousel
+  url: /bootstrap-carousel.html
+- text: Alerts
+  url: /bootstrap-alert.html
+- text: Typeahead
+  url: /bootstrap-typeahead.html
+- text: Scrollspy
+  url: /bootstrap-scrollspy.html
+- text: Bootstrap Extensions
+- text: Datatable
+  url: /bootstrap-datatable.html
+- text: Treeview
+  url: /bootstrap-treeview.html
+- text: NWT Core
+- text: Animation Chaining
+  url: /nwt-anim.html
+- text: NWT Plugins
+- text: Calendar
+  url: /nwt-calendar.html
+- text: Scroller
+  url: /nwt-scroller.html
