@@ -252,17 +252,17 @@ nwt.register({
 					sortContent = '<i class="icon-chevron-' + (colDir == 'asc' ? 'up' : 'down') + '">' + (colDir == 'asc' ? '&#9650;' : '&#9660;') + '</i>';
 				}
 				
-				content.push('<th class="row-' + i + '"><a data-col-idx="' + i + '" data-sort="sort" href="#" title="' + this.source.columns[i].name +'">' + this.source.columns[i].name + ' ' + sortContent + '</a></th>');
+				content.push('<th class="col-' + i + '"><a data-col-idx="' + i + '" data-sort="sort" href="#" title="' + this.source.columns[i].name +'">' + this.source.columns[i].name + ' ' + sortContent + '</a></th>');
 			}
 
 			content.push('</tr></thead><tbody>');
 
 			for (var i = 0, rows = this.source.data.length; i < rows; i++) {
 				var datum = this.source.data[i];
-				content.push('<tr>');
+				content.push('<tr class="row-' + i + '"">');
 
 				for (var j in this.source.columns) {
-					content.push('<td class="row-' + j +'">' + this.source.columns[j].formatter(datum) + '</td>');
+					content.push('<td class="col-' + j +'">' + this.source.columns[j].formatter(datum) + '</td>');
 				}
 
 				content.push('</tr>');
