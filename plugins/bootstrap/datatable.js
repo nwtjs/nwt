@@ -199,6 +199,12 @@ nwt.register({
 			// Set the node to render to
 			this.node = typeof config.node == 'string' ? nwt.one(config.node) : config.node;
 
+			// Default the header sort formatter
+			this.formatSortHeader = config.formatSortHeader || function(name, dir) {
+				var content = '<i class="icon-chevron-' + (dir == 'asc' ? 'up' : 'down') + '">' + (dir == 'asc' ? '&#9650;' : '&#9660;') + '</i>'
+				return name  + ' ' + content	
+			}
+
 			// Determine the datasource
 			if (typeof config.data == 'string' || typeof config.data == 'object' && config.data._node) {
 				// Query selector
@@ -245,14 +251,14 @@ nwt.register({
 
 			for (var i in this.source.columns) {
 
-				var sortContent = '<i class="icon-placeholder"></i>',
+				var sortContent = this.source.columns[i].name,
 					colDir = self.source.columns[i].dir;
 
 				if (self.source.colSortIdx == i) {
-					sortContent = '<i class="icon-chevron-' + (colDir == 'asc' ? 'up' : 'down') + '">' + (colDir == 'asc' ? '&#9650;' : '&#9660;') + '</i>';
+					sortContent = self.formatSortHeader(this.source.columns[i].name, colDir)
 				}
 				
-				content.push('<th class="col-' + i + '"><a data-col-idx="' + i + '" data-sort="sort" href="#" title="' + this.source.columns[i].name +'">' + this.source.columns[i].name + ' ' + sortContent + '</a></th>');
+				content.push('<th class="col-' + i + '"><a data-col-idx="' + i + '" data-sort="sort" href="#" title="' + this.source.columns[i].name +'">' + sortContent + '</a></th>');
 			}
 
 			content.push('</tr></thead><tbody>');
