@@ -8,6 +8,9 @@
 
 !function() {
 
+// Lookups data by table instance/row count
+var dataLookup = []
+
 /**
  * Standardizes the column definitions 
  * E.g., if the user passes a string for a column def, fill out the defaults
@@ -190,6 +193,9 @@ nwt.register({
 
 			var mythis = this;
 
+			this.instanceCount = dataLookup.length
+			dataLookup[this.instanceCount] = []
+
 			// If there is no data, default to the node
 			config.data = config.data || config.node;
 
@@ -246,7 +252,7 @@ nwt.register({
 			var self = this;
 
 			// Populate table html
-			var content = ['<table class="' + this.tableClass + '"><thead>',
+			var content = ['<table class="' + this.tableClass + '" data-instance="' + this.instanceCount + '"><thead>',
 				'<tr>'];
 
 			for (var i in this.source.columns) {
@@ -265,6 +271,10 @@ nwt.register({
 
 			for (var i = 0, rows = this.source.data.length; i < rows; i++) {
 				var datum = this.source.data[i];
+
+				// Add in a reference to the data
+				dataLookup[this.instanceCount][i] = datum
+
 				content.push('<tr class="row-' + i + '"">');
 
 				for (var j in this.source.columns) {
@@ -290,5 +300,18 @@ nwt.register({
 		}
 	}
 });
+
+
+/**
+ * Returns the data record for the data table row which is an ancestor of this row
+ */
+nwt.augment('Node', 'getPluginData', function() {
+	var row = this.ancestor('tr')
+		, className = row._node.className
+		, idx = className.match(/row-([0-9]*)/)[1]
+		, tableIdx = this.ancestor('table').data('instance')
+
+	return dataLookup[tableIdx][idx]
+})
 
 }();

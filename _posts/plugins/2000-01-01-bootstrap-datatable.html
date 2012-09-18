@@ -69,7 +69,12 @@ nwt.one('#mytable2').plug('Datatable', {
 		{one: 'dog', two: 'cat', three: 'raining'},
 		{one: 'Dave', two: 'Logan', three: 'Tony'}
 	]
-});
+})
+
+// Click on a row to retreive the data that populated it
+nwt.one('#mytable2').on('click', function(e){
+		alert('Row data: ' + JSON.stringify(e.target.getPluginData()))
+}, 'td')
 {% endhighlight %}
 
 <br><br>
@@ -111,7 +116,11 @@ n.ready(function(){
 			{one: 'Dave', two: 'Logan', three: 'Tony'}
 		]
 	});
-	
+
+	nwt.one('#mytable2').on('click', function(e){
+		alert('Row data: ' + JSON.stringify(e.target.getPluginData()))
+	}, 'td')
+
 	nwt.one('#mytable3').plug('Datatable', {
 		columns: ['one', 'two', 'three'],
 		data: nwt.io('/nwt/jekyll/jsondata.txt'),
