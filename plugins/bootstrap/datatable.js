@@ -8,6 +8,9 @@
 
 !function() {
 
+// Lookups data by table instance/row count
+var dataLookup = []
+
 /**
  * Standardizes the column definitions 
  * E.g., if the user passes a string for a column def, fill out the defaults
@@ -190,6 +193,9 @@ nwt.register({
 
 			var mythis = this;
 
+			this.instanceCount = dataLookup.length
+			dataLookup[this.instanceCount] = []
+
 			// If there is no data, default to the node
 			config.data = config.data || config.node;
 
@@ -198,6 +204,12 @@ nwt.register({
 
 			// Set the node to render to
 			this.node = typeof config.node == 'string' ? nwt.one(config.node) : config.node;
+
+			// Default the header sort formatter
+			this.formatSortHeader = config.formatSortHeader || function(name, dir) {
+				var content = '<i class="icon-chevron-' + (dir == 'asc' ? 'up' : 'down') + '">' + (dir == 'asc' ? '&#9650;' : '&#9660;') + '</i>'
+				return name  + ' ' + content	
+			}
 
 			// Determine the datasource
 			if (typeof config.data == 'string' || typeof config.data == 'object' && config.data._node) {
@@ -240,29 +252,33 @@ nwt.register({
 			var self = this;
 
 			// Populate table html
-			var content = ['<table class="' + this.tableClass + '"><thead>',
+			var content = ['<table class="' + this.tableClass + '" data-instance="' + this.instanceCount + '"><thead>',
 				'<tr>'];
 
 			for (var i in this.source.columns) {
 
-				var sortContent = '<i class="icon-placeholder"></i>',
+				var sortContent = this.source.columns[i].name,
 					colDir = self.source.columns[i].dir;
 
 				if (self.source.colSortIdx == i) {
-					sortContent = '<i class="icon-chevron-' + (colDir == 'asc' ? 'up' : 'down') + '">' + (colDir == 'asc' ? '&#9650;' : '&#9660;') + '</i>';
+					sortContent = self.formatSortHeader(this.source.columns[i].name, colDir)
 				}
 				
-				content.push('<th class="row-' + i + '"><a data-col-idx="' + i + '" data-sort="sort" href="#" title="' + this.source.columns[i].name +'">' + this.source.columns[i].name + ' ' + sortContent + '</a></th>');
+				content.push('<th class="col-' + i + '"><a data-col-idx="' + i + '" data-sort="sort" href="#" title="' + this.source.columns[i].name +'">' + sortContent + '</a></th>');
 			}
 
 			content.push('</tr></thead><tbody>');
 
 			for (var i = 0, rows = this.source.data.length; i < rows; i++) {
 				var datum = this.source.data[i];
-				content.push('<tr>');
+
+				// Add in a reference to the data
+				dataLookup[this.instanceCount][i] = datum
+
+				content.push('<tr class="row-' + i + '"">');
 
 				for (var j in this.source.columns) {
-					content.push('<td class="row-' + j +'">' + this.source.columns[j].formatter(datum) + '</td>');
+					content.push('<td class="col-' + j +'">' + this.source.columns[j].formatter(datum) + '</td>');
 				}
 
 				content.push('</tr>');
@@ -284,5 +300,18 @@ nwt.register({
 		}
 	}
 });
+
+
+/**
+ * Returns the data record for the data table row which is an ancestor of this row
+ */
+nwt.augment('Node', 'getTableData', function() {
+	var row = this.ancestor('tr')
+		, className = row._node.className
+		, idx = className.match(/row-([0-9]*)/)[1]
+		, tableIdx = this.ancestor('table').data('instance')
+	
+	return dataLookup[tableIdx][idx]
+})
 
 }();
