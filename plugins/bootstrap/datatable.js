@@ -310,7 +310,7 @@ nwt.augment('Node', 'getPluginData', function() {
 		, className = row._node.className
 		, idx = className.match(/row-([0-9]*)/)[1]
 		, tableIdx = this.ancestor('table').data('instance')
-
+	
 	return dataLookup[tableIdx][idx]
 })
 
