@@ -1,4 +1,4 @@
-/*!
+/**
  * NWT primary entry point
  * @constructor
  */
@@ -15,12 +15,11 @@ implement: function(implClass, modClass) {
 
 	var impls = {
 		DelayableQueue : [
+
 			/**
 			 * Returns a queueable interface to the original object
-			 * This allows us to insert delays between chainable method calls
-			 * Methods outside the scope of the chain are not delayed
-			 * E.g. if a method performs setTimeout, followed by a wait, 
-			 * methods in the setTimeout call are not delayed.
+			 * This allows us to insert delays between chainable method calls using the .wait() method
+			 * Currently this is only implemented for the node class, but it should be possible to use this with any object.
 			 */
 			'wait', function () {
 
@@ -31,7 +30,7 @@ implement: function(implClass, modClass) {
 				function QueueableObject(context) {
 					this.queue = [];
 					this.context = context;
-					this.inProgress = false;
+					this.inWork = false;
 				}
 				
 				QueueableObject.prototype = {
@@ -40,7 +39,7 @@ implement: function(implClass, modClass) {
 						var self = this;
 
 						self.queue.push({type: 'chain', func: func, args: args});
-						if (!self.inProgress) {
+						if (!self.inWork) {
 							return self._process();
 						}
 					},
@@ -53,7 +52,7 @@ implement: function(implClass, modClass) {
 
 						var self = this, item;
 
-						self.inProgress = true;
+						self.inWork = true;
 						
 						if (!self.queue.length) {
 							return;
@@ -147,5 +146,9 @@ uuid: function() {
 }()
 };
 
+// localnwt variable used for minification.
+// We should reference localnwt wherever needed inside of our source scripts.
 var localnwt = new NWT()
+
+// Window namespaces
 window.nwt = window.n = localnwt

@@ -16,7 +16,7 @@ for( var i in packages ) {
 
 	for( var j = 0, file; file = packages[i][j] ; j++ ) {
 		console.log('Compressing file file:', file);
-		var thisScript = fs.readFileSync(__dirname + '/../src/' + file, 'utf8');
+		var thisScript = fs.readFileSync(__dirname + '/../src/' + file, 'utf8') + "\n";
 		scriptContent.push(thisScript);
 
 		// Uncomment to see what's breaking the build
@@ -29,9 +29,12 @@ for( var i in packages ) {
 	scriptContent = scriptContent.join('')
 	scriptContent = scriptContent.replace(/window/g, 'z');
 	scriptContent = scriptContent.replace(/document(?!Element)/g, 'y');
-	scriptContent = '!function(z,y){' + scriptContent + '}(window, document)';
+	scriptContent = "!function(z,y){\n" + scriptContent + '\n}(window, document)';
 
-	// Finished a package
+	// Write the non-minified package
+	fs.writeFileSync(__dirname + '/../' + i + '.js', scriptContent);
+
+	// Write the minified package
 	scriptContent = uglify(scriptContent, {mangle_options: {toplevel: true}});
 	fs.writeFileSync(__dirname + '/../' + i + '.min.js', scriptContent);
 
