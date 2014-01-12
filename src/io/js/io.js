@@ -62,19 +62,17 @@ NWTIO.prototype = {
  */
 _run: function() {
 	var mythis = this;
-	this.req.onreadystatechange = function() {		
-		var callback,
-			state = mythis.req.readyState;
-
-		if (state == 4 && mythis.req.status == 200) {
-			callback = 'success';
-		} else if (state == 4) {
-			callback = 'failure';
-		}
-
-		if (callback && mythis.config[callback]) {
+	this.req.onload = function() {
+		if (mythis.config.success) {
 			var response = new NWTIOResponse(mythis.req);
-			mythis.config[callback](response);
+			mythis.config.success(response);
+		}
+	};
+
+	this.req.onerror = function() {
+		if (mythis.config.failure) {
+			var response = new NWTIOResponse(mythis.req);
+			mythis.config.failure(response);
 		}
 	};
 

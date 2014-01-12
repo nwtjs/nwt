@@ -115,8 +115,7 @@ parent: function() {
  * Returns true if the class exists on the node, false if not
  */
 hasClass: function(className) {
-	var regex = new RegExp('\\b' + className + '\\b')
-    return regex.test(this._node.className)
+	return this._node.classList.contains(className);
 },
 
 
@@ -124,9 +123,7 @@ hasClass: function(className) {
  * Adds a class to the node
  */
 addClass: function(className) {
-	if( !this.hasClass(className)  ) {
-		this._node.className = this._node.className +  ' ' + className;
-	}
+	this._node.classList.add(className);
 	return this;
 },
 
